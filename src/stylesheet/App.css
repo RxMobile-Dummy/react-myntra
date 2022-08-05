@@ -1,3 +1,42 @@
+:root
+{
+    --borderPink: #FF3E6B;
+    --buttonPink: #ff3f6c;
+    --lightGray : #f8f9fa;
+    --black : #242D49;
+    --gray : #788097;
+    --gray2 : #F5F5F6;
+    --borderGray : #bfc0c6;
+    --darkBlue : #282c3f;
+    --borderColor : #D4D5D9;
+    --blueColor : #6178D4;
+    --textGray : #8D919A;
+    --focusGreen : #14CDA8;
+    --orangeColor : #FF905A;
+    --purple: rgb(238 210 255);
+    --boxShadow : 0px 19px 60px rgb(0 0 0 / 8%);
+    --orangeCard: rgba(252, 166, 31, 0.45);
+    --smboxShadow: -79px 51px 60px rgba(0, 0, 0, 0.08);
+}
+
 .App {
   text-align: center;
+}
+body {
+  font-family: "Work Sans", sans-serif;
+}
+a {
+  text-decoration: none;
+}
+
+.deals_header {
+  font-weight: 500;
+  font-size: 30px;
+  letter-spacing: 5px;
+}
+
+@media screen and (max-width: 980px){
+  .deals_header {
+    font-size: 16px;
+  }
 }

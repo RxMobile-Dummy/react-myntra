@@ -1,0 +1,18 @@
+.cus-btn{
+    background-color: var(--borderPink);
+    border-radius: 1px;
+    border: 0px;
+    width: 50%;
+    padding: 10px 0;
+    color: white;
+    cursor: pointer;
+}
+.btn-primary:hover{
+    background-color: var(--borderPink);
+}
+
+@media only screen and (max-width:1080px) {
+    .cus-btn{
+        width: 100%;
+    }
+}

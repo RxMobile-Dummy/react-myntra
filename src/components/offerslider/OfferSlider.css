@@ -1,0 +1,33 @@
+.t-wrapper{
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+ }
+.offer-div{
+    display: flex;
+}
+
+.offer-div>img{
+    width: 100%;
+    height: 60%;
+}
+
+.t-wrapper .swiper{
+    width: 100%;
+    height: 100%;
+}
+.t-wrapper .swiper-slide{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.t-wrapper .swiper-pagination-bullet-active{
+    background: violet;
+}
+
+@media screen and (max-width: 980px){
+    .t-wrapper{
+        height: 30vh;
+    }
+  }
