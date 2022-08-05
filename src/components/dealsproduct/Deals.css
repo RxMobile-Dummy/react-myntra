@@ -1,0 +1,28 @@
+.card-row{
+    flex-direction: row;
+    display: flex;
+    margin-top: 20px;
+    padding-bottom: 5px;
+    margin-bottom: 40px;
+}
+.card{
+    border-radius: 0px;
+    border-color: 0.1px solid navajowhite;
+}
+@media screen and (max-width: 980px){
+    .card-body>*{
+        font-size: 10px;
+    }
+    .card-body{
+        padding: 10px 0.5rem 10px 0.5rem;
+    }
+}
+@media screen and (max-width: 710px){
+    .card-body>*{
+        font-size: 6px;
+        margin: 0;
+    }
+    .card-body{
+        padding: 10px 0.1rem 10px 0.1rem;
+    }
+}
