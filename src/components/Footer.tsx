@@ -200,7 +200,7 @@ export default function Footer() {
                 style={{ width: "48px", height: "49px", marginRight: "7px" }}
               />
               <span className="font-weight-bold">Returning within 30days</span>
-              <span className="text-muted"> of receiving your order</span>
+              <span className="text-muted"> of receiving your order </span>
             </div>
             <div className="pb-3 text-justify">
               <img

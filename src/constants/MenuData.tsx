@@ -4,7 +4,7 @@ export const MenuData = [
     link: "/",
     subMenuList: [
       {
-        subMenuName: "Shirt",
+        subMenuName: "Shirt ",
         link: "/main-category/men/shirt",
       },
       {

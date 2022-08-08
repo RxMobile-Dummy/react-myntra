@@ -3,7 +3,7 @@ export const Categories = [
     categoryName: "CATEGORIES",
     categoriesData: [
       {
-        name: "Tshirts",
+        name: "Tshirts ",
         quantity: 4932,
       },
       {
