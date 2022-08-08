@@ -1,16 +1,15 @@
 import React from "react";
-import offerImg1 from "./../assets/images/wrogn-img.jpg";
-import offerImg2 from "./../assets/images/saree-img.jpg";
+import { images } from "../assets/images";
 
 export const offers = [
   {
-    image: offerImg1,
+    image: images.offerImg1,
   },
   {
-    image: offerImg2,
+    image: images.offerImg2,
   },
   {
-    image: offerImg1,
+    image: images.offerImg1,
   },
 ];
 
