@@ -1,0 +1,39 @@
+.ad-c-container{
+    flex: 1;
+    justify-content: center;
+    display: flex;
+}
+.form-con{
+    width: 50%;
+}
+.ac-bottom-button{
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.ac-bottom-button button:nth-of-type(1){
+    background: transparent;
+    border: 1px solid var(--borderGray);
+    font-size: 13px;
+    padding: 12px 0;
+    flex: 1;
+    border-radius: 4px;
+}
+.ac-bottom-button button:nth-of-type(2){
+    background: var(--focusGreen);
+    border: none;
+    font-size: 13px;
+    padding: 12px 0;
+    flex: 2;
+    color: white;
+    border-radius: 4px;
+}
+
+@media only screen and (max-width:1024px) {
+    .form-con{
+        width: 100%;
+    }
+}

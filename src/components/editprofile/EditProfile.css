@@ -1,0 +1,91 @@
+.edit-container{
+    padding: 2rem 6rem;
+    justify-content: center;
+    flex: 1;
+    margin: 20px;
+    border: 1px solid var(--borderGray);
+}
+.profile-data{
+    flex: 1;
+}
+.fw-light{
+    font-size: 10px;
+}
+.mobile-div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.change-btn{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.gender-div{
+    display: flex;
+}
+.gender-div > *{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.material-textfield {
+    position: relative;
+  }
+  
+  .edit-container label {
+    position: absolute;
+    font-size: 1rem;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: white;
+    color: gray;
+    padding: 0 0.3rem;
+    margin: 0 0.5rem;
+    transition: .1s ease-out;
+    transform-origin: left top;
+    pointer-events: none;
+  }
+  .edit-container input {
+    font-size: 1rem;
+    outline: none;
+    border: 1px solid var(--borderColor);
+    padding: 0.8rem 0.7rem;
+    color: gray;
+    width: 100%;
+    transition: 0.1s ease-out;
+  }
+  .edit-container input:focus {
+    border-color: var(--black);  
+  }
+  .edit-container input:focus + label {
+    color: var(--black);  
+    top: 0;
+    transform: translateY(-50%) scale(.9);
+  }
+  .edit-container input:not(:placeholder-shown) + label {
+    top: 0;
+    transform: translateY(-50%) scale(.9);
+  }
+
+  @media only screen and (max-width:1080px) {
+    .edit-container{
+      padding: 2rem 0.5rem;
+      justify-content: center;
+      align-items: center;
+      flex: 1;
+      margin: 0px;
+    }
+    .change-btn{
+      width: 100%;
+    }
+    .mobile-div{
+      flex-direction: column;
+    }
+}
+

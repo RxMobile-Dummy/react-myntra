@@ -1,0 +1,11 @@
+.profile-container{
+    padding: 2rem 6rem;
+    justify-content: center;
+    flex: 1;
+    margin: 20px;
+    border: 1px solid var(--borderGray);
+}
+
+table{
+    font-weight: 200;
+}
