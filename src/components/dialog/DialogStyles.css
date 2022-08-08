@@ -1,0 +1,172 @@
+/* edit address dialog */
+
+/* input fields and model */
+
+.ad-inp{
+    display: flex;
+    justify-content: space-between;
+}
+
+select,
+textarea,
+input {
+	max-width: 100%;
+	padding: 0;
+	margin: 0;
+	font-family: inherit;
+	font-weight: inherit;
+	font-size: inherit;
+	color: inherit;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid var(--borderGray);
+    background-color: transparent;
+}
+
+input:focus{
+    border-bottom: 1px solid var(--focusGreen);
+    outline: none;
+}
+
+input[type=submit] {
+	border: none;
+	cursor: pointer;
+}
+
+.form-row {
+	position: relative;
+	margin-top: 30px;
+}
+
+.form-label {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	color: #999;
+	cursor: text;
+    font-size: 12px;
+	transition: all .15s ease-in-out 0s;
+}
+
+.form-textbox,
+.form-submit {
+	width: 100%;
+	padding: 5px 5px;
+}
+
+.form-textbox:focus ~ .form-label,
+.form-textbox:valid ~ .form-label {
+	top: -1.5em;
+	left: 0;
+	font-size: .8em;
+	color: var(--focusGreen);
+	cursor: pointer;
+}
+
+.ad-footer{
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ad-footer button{
+    justify-content: center;
+    flex: 1;
+    align-items: center;
+    display: flex;
+    padding: 13px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+}
+
+.ad-footer button:nth-of-type(2){
+    background-color: var(--borderPink);
+    color: white;
+}
+
+/* rremove address dialog */
+.ra-body{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.ra-body span:nth-of-type(1){
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.ra-body span:nth-of-type(2){
+    font-weight: 100;
+    font-size: 14px;
+    color: var(--textGray);
+}
+
+.ra-footer{
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ra-footer span{
+    cursor: pointer;
+    justify-content: center;
+    flex: 1;
+    align-items: center;
+    display: flex;
+    margin: 12px;
+    color: var(--blueColor);
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.ra-footer span:nth-of-type(1){
+    border-right: 1px solid var(--borderGray);
+}
+
+.ra-footer span:nth-of-type(2){
+    color: var(--borderPink);
+}
+
+/* change password dialog */
+
+
+.model-change-btn{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    background-color: var(--borderPink);
+  }
+
+  .model-change-btn>*{
+    color: white;
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  .model-cancel-btn{
+    border: 1px solid var(--borderPink);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+  }
+
+  .model-cancel-btn>*{
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--borderPink);
+  }
+
+  @media only screen and (max-width:1024px) {
+    .form-label{
+        font-size: 10px;
+    }
+}

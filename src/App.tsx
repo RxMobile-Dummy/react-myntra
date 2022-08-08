@@ -8,6 +8,12 @@ import MainCategoryWiseProductPage from "./pages/categoryproduct/MainCategoryWis
 import LoginPage from "./pages/Login/LoginPage";
 import RegisterPage from "./pages/Register/RegisterPage";
 import WishlistPage from "./pages/wishlist/WishlistPage";
+import AccountPage from "./pages/account/AccountPage";
+import Addresses from "./components/addresses/Addresses";
+import Profile from "./components/profile/Profile";
+import EditProfile from "./components/editprofile/EditProfile";
+import SavedCards from "./components/cards/SavedCards";
+import AddCard from "./components/cards/addcard/AddCard";
 
 function App() {
   return (
@@ -22,6 +28,13 @@ function App() {
           element={<MainCategoryWiseProductPage />}
         />
         <Route path="/wishlist" element={<WishlistPage />} />
+        <Route path="/profile" element={<AccountPage />}>
+          <Route index element={<Profile />} />
+          <Route path="addresses" element={<Addresses />} />
+          <Route path="editprofile" element={<EditProfile />} />
+          <Route path="cards" element={<SavedCards />} />
+          <Route path="cards/addcard/:id" element={<AddCard />} />
+        </Route>
       </Routes>
       <Footer />
     </Router>

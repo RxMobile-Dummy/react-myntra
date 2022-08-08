@@ -1,0 +1,36 @@
+.parent-container{
+    margin-top: 5rem;
+    padding: 0 10rem 0 10rem;
+}
+.main-container{
+    display: flex;
+    flex-direction: row;
+}
+.menu-container{
+    border-right: 1px solid var(--borderColor);
+    padding-right: 20px;
+}
+.menu{
+    padding: 20px 20px;
+    gap: 50px;
+}
+.menu >:first-child{
+    font-size: 12px;
+    font-weight: 200;
+    margin-bottom: 15px;
+    color: var(--gray);
+}
+.menu-div{
+    cursor: pointer;
+}
+
+@media only screen and (max-width:768px) {
+    .parent-container{
+        padding: 0 1rem 0 1rem;
+    }
+
+    .menu-container{
+        border-right: 1px solid var(--borderColor);
+        padding-right: 5px;
+    }
+}
