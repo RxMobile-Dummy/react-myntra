@@ -1,0 +1,34 @@
+
+/* Font */@import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
+
+/* Design */
+
+html {
+  background-color: #ecf9ff;
+}
+
+body {
+  color: #272727;
+  font-family: 'Quicksand', serif;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0;
+  padding: 1rem;
+}
+.main{
+  margin: 0 auto;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.wl-listdata {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
