@@ -17,6 +17,7 @@ import AddCard from "./components/cards/addcard/AddCard";
 import BagPage from "./pages/bag/BagPage";
 import AddressPage from "./pages/selectaddress/AddressPage";
 import PaymentPage from "./pages/payment/PaymentPage";
+import ProductDetails from "./pages/productdetails/ProductDetails";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/bag" element={<BagPage />}></Route>
         <Route path="/select-address" element={<AddressPage />} />
         <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/product-details/:id" element={<ProductDetails />} />
 
         <Route
           path="/main-category/:mainCategory/:category"

@@ -18,6 +18,8 @@ An e-commerce website
   - We have Added Account feature where you can add or edit your addresses, You can add your card to checkout fast, you can edit your account details.
 - Bag screen
   - We have Added Bag screen, where we can checkout our product which we have added to bag from wishlist or product details.
+- Product details screen
+  - We have Added Product details screen, Where we will see the full product description and can add to bag from here.
 
 # Folder Structure
 
