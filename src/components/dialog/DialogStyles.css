@@ -165,6 +165,61 @@ input[type=submit] {
     color: var(--borderPink);
   }
 
+  /* Change address dialog */
+  
+  .pin-div{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .pin-input{
+    width: 100%;
+    border-top: 1px solid var(--borderGray);
+    border-left: 1px solid var(--borderGray);
+    border-bottom: 1px solid var(--borderGray);
+    padding: 10px;
+    border-radius: 5px 0 0 5px;
+    font-weight: 200;
+  }
+
+  .pin-input:focus{
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+  }
+
+  .pin-input:focus + .check-btn{
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+  }
+
+  .check-btn{
+    background: none;
+    border: none;
+    border-top: 1px solid var(--borderGray);
+    border-right: 1px solid var(--borderGray);
+    border-bottom: 1px solid var(--borderGray);
+  }
+
+  .div-or{
+    height: 45px;
+    background-color: #F5F5F6;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--borderGray);
+  }
+
+  .form-check-label{
+    font-weight: 600;
+  }
+  .address-label{
+    font-weight: 200;
+    font-size: 14px;
+  }
+
   @media only screen and (max-width:1024px) {
     .form-label{
         font-size: 10px;

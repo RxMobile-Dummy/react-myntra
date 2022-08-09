@@ -22,7 +22,11 @@ const CheckBox = (props: Props) => {
           console.log("checkbox e :: ", (e.target as HTMLInputElement).value);
         }}
       />
-      <label className="form-check-label" htmlFor="flexCheckDefault">
+      <label
+        className="form-check-label custom-label"
+        htmlFor="flexCheckDefault"
+        style={{ fontWeight: 200 }}
+      >
         {`${name} (${quantity})`}
       </label>
     </div>

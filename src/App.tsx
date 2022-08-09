@@ -14,6 +14,9 @@ import Profile from "./components/profile/Profile";
 import EditProfile from "./components/editprofile/EditProfile";
 import SavedCards from "./components/cards/SavedCards";
 import AddCard from "./components/cards/addcard/AddCard";
+import BagPage from "./pages/bag/BagPage";
+import AddressPage from "./pages/selectaddress/AddressPage";
+import PaymentPage from "./pages/payment/PaymentPage";
 
 function App() {
   return (
@@ -23,6 +26,10 @@ function App() {
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/register" element={<RegisterPage />}></Route>
+        <Route path="/bag" element={<BagPage />}></Route>
+        <Route path="/select-address" element={<AddressPage />} />
+        <Route path="/payment" element={<PaymentPage />} />
+
         <Route
           path="/main-category/:mainCategory/:category"
           element={<MainCategoryWiseProductPage />}

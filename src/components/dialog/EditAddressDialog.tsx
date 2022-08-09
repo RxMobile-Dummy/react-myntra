@@ -1,6 +1,11 @@
 import React from "react";
 
-const EditAddressDialog = () => {
+interface Props {
+  dialogTitle?: string;
+}
+
+const EditAddressDialog = (props: Props) => {
+  const { dialogTitle = "ADD NEW ADDRESS" } = props;
   return (
     <div
       className="modal fade"
@@ -15,7 +20,7 @@ const EditAddressDialog = () => {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="staticBackdropLabel">
-              Edit Address
+              {dialogTitle}
             </h5>
             <button
               type="button"

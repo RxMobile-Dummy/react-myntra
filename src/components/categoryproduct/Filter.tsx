@@ -57,32 +57,7 @@ export default function Filter(props: Props) {
         </ul>
       </div>
       <div className="border-top"></div>
-      <div className="my-4">
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="sortOrder"
-            value="ascending"
-            onChange={handleChange}
-          />
-          <label htmlFor="sortOrderAscending" className="form-check-label">
-            Low to High
-          </label>
-        </div>
-        <div className="form-check mt-2">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="sortOrder"
-            value="descending"
-            onChange={handleChange}
-          />
-          <label htmlFor="sortOrderDescending" className="form-check-label">
-            High to Low
-          </label>
-        </div>
-      </div>
+
       {brands.length !== 0 && <div className="border-top"></div>}
       <div className="my-4">
         {brands.map((brand: any, index: number) => {
