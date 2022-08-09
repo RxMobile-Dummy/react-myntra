@@ -1,0 +1,39 @@
+.left-container{
+    width: 60%;
+    padding-left: 8rem;
+}
+.left-header-div{
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+}
+.left-address-div{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.btn-add-address{
+    background: none;
+    border: 1px solid var(--black);
+    border-radius: 5px;
+    padding: 8px 12px;
+}
+
+.rac-add-address-btn{
+    padding: 20px;
+    border: 1px solid var(--borderGray);
+    border-style: dashed;
+    border-radius: 5px;
+    font-size: 16px;
+    color: var(--buttonPink);
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px){
+    .left-container{
+        width: auto;
+        padding-left: 1rem;
+    }
+}

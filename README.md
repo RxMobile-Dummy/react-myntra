@@ -16,6 +16,8 @@ An e-commerce website
   - We have Added to add the item in wishlist, for that need to login first.
 - Account screen
   - We have Added Account feature where you can add or edit your addresses, You can add your card to checkout fast, you can edit your account details.
+- Bag screen
+  - We have Added Bag screen, where we can checkout our product which we have added to bag from wishlist or product details.
 
 # Folder Structure
 
@@ -38,6 +40,7 @@ An e-commerce website
 │          |── register
 │          |── wishlist
 │          |── account
+│          |── bag
 │    ├── redux
 │    ├── App.js
 │    ├── index.js

@@ -6,4 +6,8 @@ export const images = {
   ShirtDummy: require("./shirtDummy.png"),
   offerImg1: require("./wrogn-img.jpg"),
   offerImg2: require("./saree-img.jpg"),
+  TruckImage: require("./truck.webp"),
+  AllPaymentImg: require("./allpaymentimage.png"),
+  MyntraLogo: require("./myntra-logo.png"),
+  SecureImg: require("./secure.png"),
 };

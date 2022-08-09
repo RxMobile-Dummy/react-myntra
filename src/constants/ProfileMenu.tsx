@@ -1,56 +1,39 @@
 export const ProfileMenu = [
-  {
-    menuTitle: "",
-    menus: [
-      {
-        menuName: "Overview",
-        menuLink: "/profile/overview",
-      },
-    ],
-  },
-  {
-    menuTitle: "ORDERS",
-    menus: [
-      {
-        menuName: "Orders & Returns",
-        menuLink: "/profile/orders",
-      },
-    ],
-  },
-  {
-    menuTitle: "CREDITS",
-    menus: [
-      {
-        menuName: "Coupons",
-        menuLink: "/profile/coupans",
-      },
-      {
-        menuName: "Myntra Credit",
-        menuLink: "/profile/myntra-credit",
-      },
-      {
-        menuName: "MynCash",
-        menuLink: "/profile/myncash",
-      },
-    ],
-  },
-  {
-    menuTitle: "CREDITS",
-    menus: [
-      {
-        menuName: "Coupons",
-        menuLink: "/profile/coupans",
-      },
-      {
-        menuName: "Myntra Credit",
-        menuLink: "/profile/myntra-credit",
-      },
-      {
-        menuName: "MynCash",
-        menuLink: "/profile/myncash",
-      },
-    ],
-  },
+  // {
+  //   menuTitle: "",
+  //   menus: [
+  //     {
+  //       menuName: "Overview",
+  //       menuLink: "/profile/overview",
+  //     },
+  //   ],
+  // },
+  // {
+  //   menuTitle: "ORDERS",
+  //   menus: [
+  //     {
+  //       menuName: "Orders & Returns",
+  //       menuLink: "/profile/orders",
+  //     },
+  //   ],
+  // },
+  // {
+  //   menuTitle: "CREDITS",
+  //   menus: [
+  //     {
+  //       menuName: "Coupons",
+  //       menuLink: "/profile/coupans",
+  //     },
+  //     {
+  //       menuName: "Myntra Credit",
+  //       menuLink: "/profile/myntra-credit",
+  //     },
+  //     {
+  //       menuName: "MynCash",
+  //       menuLink: "/profile/myncash",
+  //     },
+  //   ],
+  // },
   {
     menuTitle: "ACCOUNT",
     menus: [
