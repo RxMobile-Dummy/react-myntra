@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Component, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Product from "../../components/categoryproduct/Product";
 import { FaSlidersH, FaTimes } from "react-icons/fa";
 import Filter from "../../components/categoryproduct/Filter";
@@ -17,6 +17,12 @@ const MainCategoryWiseProductPage = () => {
   const [sortOrder, setSortOrder] = useState("");
   const [brands, setBrands] = useState([]);
   const [isFiltershow, setFiltershow] = useState(false);
+  const navigate = useNavigate();
+
+  const handleMove = () => {
+    navigate(`/product-details/12`);
+    // console.log(ele)
+  };
 
   const getData = async () => {
     try {
@@ -179,7 +185,13 @@ const MainCategoryWiseProductPage = () => {
                   </div> */}
             <div className="row margin-on-md">
               {bestProducts.map((product) => {
-                return <Product key={product.id} product={product} />;
+                return (
+                  <Product
+                    key={product.id}
+                    product={product}
+                    onProductClick={handleMove}
+                  />
+                );
               })}
             </div>
           </div>
