@@ -1,5 +1,5 @@
 # React-myntra-ecommerce
-- We have made this Application/website to shop the product, add to favorite.
+- We have made this Application/website to purchase products.
 - We can buy product online through our website or Mobile Application
 
 # React Clean Architecture
