@@ -1,56 +1,24 @@
 {
-  "name": "react-myntra",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@emotion/react": "^11.10.0",
-    "@emotion/styled": "^11.10.0",
-    "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.9.3",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^28.1.6",
-    "@types/node": "^18.6.4",
-    "@types/react": "^18.0.16",
-    "@types/react-dom": "^18.0.6",
-    "bootstrap": "^5.2.0",
-    "react": "^18.2.0",
-    "react-bootstrap": "^2.4.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^4.4.0",
-    "react-notifications": "^1.7.3",
-    "react-router-dom": "^6.3.0",
-    "react-scripts": "5.0.1",
-    "react-spinners": "^0.13.4",
-    "react-toastify": "^9.0.8",
-    "styled-components": "^5.3.5",
-    "swiper": "^8.3.2",
-    "typescript": "^4.7.4",
-    "web-vitals": "^2.1.4"
+  "description": "Working example to apply clean architecture to react codebases",
+  "name": "react-clean-architecture",
+  "version": "1.0.0",
+  "author": "eduardomoroni",
+  "license": "MIT",
+  "homepage": "https://github.com/eduardomoroni/react-clean-architecture#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eduardomoroni/react-clean-architecture.git"
   },
+  "keywords": [
+    "react",
+    "react-native",
+    "clean-architecture",
+    "boilerplate"
+  ],
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "prettier": "prettier --write '**/src/**/*.ts?(x)'"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "prettier": "2.3.2"
   }
 }

@@ -1,52 +1,62 @@
 import React, { useState } from "react";
 import "./LoginPage.css";
 import { Link } from "react-router-dom";
-// import { setUserSession } from "../utils/Storage";
-// import LoginService from "../services/LoginService";
-// import { NotificationManager } from "react-notifications";
 
+import {
+  Credential,
+  signInAction,
+  signOutAction,
+  StateType,
+  User,
+  userSelector,
+  signUpAction,
+} from "core";
+import { connect } from "react-redux";
+
+// interface Props {
+//   props?: any;
+// }
 interface Props {
-  props?: any;
+  user: User | null;
+  dispatchSignIn: (credential: Credential) => void;
+  dispatchSignUp: (
+    firstName: string,
+    lastName: string,
+    credential: Credential
+  ) => void;
+  dispatchSignOut: () => void;
 }
-export default function LoginPage(props: Props) {
+
+// export default function LoginPage(props: Props) {
+export const AppModel = (props: Props) => {
+  const onSignIn = (email: string, password: string) =>
+    props.dispatchSignIn(new Credential(email, password));
+  const onSignUp = (
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string
+  ) =>
+    props.dispatchSignUp(firstName, lastName, new Credential(email, password));
+
   const [user, setUser] = useState({
     role: "customer",
     email: "",
     password: "",
   });
-  const [error, setError] = useState(null);
+
+  console.log("User ::: ", props.user);
 
   const handleChange = (event: any) => {
+    event.preventDefault();
     setUser({ ...user, [event.target.name]: event.target.value });
   };
 
-  // const checkLogin = (event) => {
-  //   event.preventDefault();
-  //   LoginService.login({ ...user })
-  //     .then((res) => {
-  //       // console.log(res);
-  //       let token = res.data.jwtoken;
-  //       let userId = res.data.userId;
-  //       let isAdmin = res.data.isAdmin;
-  //       setUserSession(token, userId, isAdmin);
-  //       if (isAdmin) {
-  //         props.history.push("/dashboard/products");
-  //       } else {
-  //         NotificationManager.success("Logged in successfully", "", 2000);
-  //         props.history.push("/");
-  //       }
-
-  //       // props.history.push(props.location.state.from.pathname);
-  //     })
-  //     .catch((error) => {
-  //       // console.error(error.response.data);
-  //       if (error.response.status === 400) {
-  //         setError("Invalid Email or Password");
-  //       } else {
-  //         setError("Something went wrong. Please try again later.");
-  //       }
-  //     });
-  // };
+  const handleSubmit = (event: any) => {
+    console.log("handleSubmit called");
+    event.preventDefault();
+    onSignIn("email@email.com", "abc123");
+  };
 
   return (
     <>
@@ -64,7 +74,7 @@ export default function LoginPage(props: Props) {
             >
               <span>Login</span>
             </div>
-            <form className="form-cus" onSubmit={() => {}}>
+            <form className="form-cus" onSubmit={handleSubmit}>
               {/* <div className="form-group mt-4">
                 <label className="form-control-label " htmlFor="usertype">
                   Select User Type
@@ -108,11 +118,6 @@ export default function LoginPage(props: Props) {
                   required
                 />
               </div>
-              {error && (
-                <span className="text-danger text-capitalize font-weight-bold">
-                  {error}
-                </span>
-              )}
               <div className="text-muted mt-4">
                 By Continuing, I agree to the{" "}
                 <span className="text-highlighted">Terms of Usage</span> &#38;{" "}
@@ -147,4 +152,15 @@ export default function LoginPage(props: Props) {
       </div>
     </>
   );
-}
+};
+const mapStateToProps = (state: StateType) => ({
+  user: userSelector(state),
+});
+
+const mapDispatchToProps = {
+  dispatchSignIn: signInAction,
+  dispatchSignUp: signUpAction,
+  dispatchSignOut: signOutAction,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppModel);
