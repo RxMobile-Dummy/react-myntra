@@ -1,3 +1,7 @@
+# React-myntra-ecommerce
+- We have made this Application/website to shop the product, add to favorite.
+- We can buy product online through our website or Mobile Application
+
 # React Clean Architecture
 Applying clean architecture to a react codebase brings lots of benefits, most of them you can find by simply googling what's clean architecture and what should we adopt architectural patterns.
 One advantage that strikes me is having business rules isolated from framework-specific things. This means that our core logic is not coupled to React, React Native, Express, etc...  
