@@ -1,58 +1,44 @@
-# react-myntra
+# React Clean Architecture
+Applying clean architecture to a react codebase brings lots of benefits, most of them you can find by simply googling what's clean architecture and what should we adopt architectural patterns.
+One advantage that strikes me is having business rules isolated from framework-specific things. This means that our core logic is not coupled to React, React Native, Express, etc...  
+This gives you enough flexibility to, for example, move specific parts of the application to a backend, change libraries without too much pain, test once and reuse as many times as you want, share code between React and React Native applications, among others.   
+This is a realistic approach, what I mean by that is: It's simple enough to be applicable and Robust enough to have it in a production environment.
+Although I have greatly simplified it, for educational purposes, I believe that this example is of great value to get you started with applying architectural patterns and adapting them to your own needs.    
 
-An e-commerce website
+## Communication flow
+![communication-flow-diagram](https://github.com/eduardomoroni/react-clean-architecture/blob/master/docs/images/communication-flow.jpg)  
 
-## Features
+### A brief explanation of each responsibility
+- **Entity**: Application independent business rules
+- **Interactor**: Application-specific business rules
+- **Adapter**: Glue code from/to *Interactors* and *Presenter*, most of the time implementing a framework-specific behaviour.
+  e. g.: We have to connect *Interactor* with react container, to do so, we have to connect *Interactor* with redux (framework) and then connect redux to container components.
+- **Presenter**: Maps data from/to *Adapter* to/from *Components*.
+- **Components**: Simplest possible unit of presentation. Any mapping, conversion, MUST be done by the *Presenter*.
+---  
 
-- Home screen
-  - We have Added the home default screen which will show the products list like - DEALS OF THE DAY, BEST OF MYNTRA EXCLUSIVE BRANDS, TOP PICKS.
-- Category product screen
-  - We have Added the screen which will open on menu item click and show ths list acroding the menu selected.
-- Login screen
-  - We have Added to login in to your account, need to login to purchase the product.
-- Register screen
-  - We have Added to register the account using the unique email and mobile number.
-- Wishlist screen
-  - We have Added to add the item in wishlist, for that need to login first.
-- Account screen
-  - We have Added Account feature where you can add or edit your addresses, You can add your card to checkout fast, you can edit your account details.
-- Bag screen
-  - We have Added Bag screen, where we can checkout our product which we have added to bag from wishlist or product details.
-- Product details screen
-  - We have Added Product details screen, Where we will see the full product description and can add to bag from here.
-
-# Folder Structure
-
+## Folder Structure
+This repository contains 2 examples of how to implement react following clean architecture, represented by the [diagram](#philosophy) above, and both follow the same folder structure:
 ```
-./react-myntra
-├── public
-│    ├── index.html
-│    ├── manifest.json
-│
-├── src
-│    ├── assets
-│    ├── fonts
-│    ├── images
-│    ├── components
-│    ├── stylesheets
-│    ├── pages
-│          |── home
-│          |── categoryproduct
-│          |── login
-│          |── register
-│          |── wishlist
-│          |── account
-│          |── bag
-│    ├── redux
-│    ├── App.js
-│    ├── index.js
-
+./counter
+├── core
+│   └── lib
+│       ├── adapters
+│       │   └── redux
+│       ├── entities
+│       ├── frameworks
+│       └── useCases
+├── native
+│   └── src
+│       ├── components
+│       └── stylesheets
+└── web
+    └── src
+        ├── assets
+        ├── components
+        └── stylesheets
 ```
+*Note:* the `frameworks` folder comprises framework-specific setups to have it available to the adapters.  
 
-# Tech components
-
-- TypeScript
-  - TypeScript Code is converted into Plain JavaScript Code: TypeScript code can’t be natively interpreted by browsers. So if the code was written in TypeScript, it gets compiled and converted into JavaScript. This process is known as Trans-piled. With the help of JavaScript code, browsers are able to read the code and display it.
-  - JavaScript is TypeScript: Whatever code is written in JavaScript can be converted to TypeScript by changing the extension from .js to .ts.
-  - Use TypeScript anywhere: TypeScript can be compiled to run on any browser, device, or operating system. TypeScript is not specific to any single environment.
-  - TypeScript supports JS libraries: With TypeScript, developers can use already existing JavaScript code, incorporate popular JavaScript libraries, or call the TS Code from native JavaScript code.
+## Running the apps
+run `npm install` under the project you'd like to run, and then run `npm start`.
