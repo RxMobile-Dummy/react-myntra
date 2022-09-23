@@ -1,32 +1,32 @@
 import React from "react";
+import Select from 'react-select';
+
 
 interface Props {
   customer: any;
   errors: any;
-  countries: any;
-  states: any;
-  cities: any;
   handleChange: any;
   handleBlur: any;
   register?: any;
   countryChange?: any;
   stateChange?: any;
   isBtnDisable: boolean;
+  countryChangeHandler: any;
+  countries: any;
+  countryValue: any;
 }
 
 export default function RegisterForm(props: Props) {
   const {
     customer,
     errors,
-    countries,
-    states,
-    cities,
     handleChange,
     handleBlur,
     register,
-    countryChange,
-    stateChange,
     isBtnDisable,
+    countryChangeHandler,
+    countries,
+    countryValue
   } = props;
   // ********** DESTRUCTRING OF CUSTOMER **********
   const {
@@ -37,13 +37,19 @@ export default function RegisterForm(props: Props) {
     gender,
     password,
     confirmPassword,
-    addressLine1,
-    addressLine2,
-    pincode,
     country,
-    state,
-    city,
   } = customer;
+
+  const customStyles = {
+    menu: (provided, state) => ({
+      ...provided,
+      color: "red",
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      color: state.isSelected ? 'white' : '#ff3f6c',
+    }),
+  }
 
   return (
     <>
@@ -100,7 +106,6 @@ export default function RegisterForm(props: Props) {
                       value={email}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      disabled
                     />
                     <p className="text-danger mb-0 font-weight-bold">
                       {errors.email}
@@ -108,6 +113,24 @@ export default function RegisterForm(props: Props) {
                   </div>
                 </div>
                 {/* ********** */}
+                <div className="row mt-4">
+                  <div className="col-md-3">
+                    <label
+                      className="register-form-control-label"
+                      htmlFor="country"
+                    >
+                      Country
+                    </label>
+                  </div>
+                  <div className="col-md-9 register-form-control-container">
+                    <Select
+                    styles={customStyles} options={countries} value={countryValue} onChange={countryChangeHandler} />
+
+                    <p className="text-danger mb-0 font-weight-bold">
+                      {errors.country}
+                    </p>
+                  </div>
+                </div>
                 {/* ********** */}
                 <div className="row mt-4">
                   <div className="col-md-3">
@@ -115,7 +138,7 @@ export default function RegisterForm(props: Props) {
                       className="register-form-control-label"
                       htmlFor="contactNumber"
                     >
-                      Number
+                      Mobile Number
                     </label>
                   </div>
                   <div className="col-md-9 register-form-control-container">
@@ -248,198 +271,6 @@ export default function RegisterForm(props: Props) {
                     />
                     <p className="text-danger mb-0 font-weight-bold">
                       {errors.confirmPassword}
-                    </p>
-                  </div>
-                </div>
-                {/* ********** */}
-                {/* ********** */}
-                <div className="row mt-4">
-                  <div className="col-md-3">
-                    <label
-                      className="register-form-control-label"
-                      htmlFor="addressLine1"
-                    >
-                      AddressLine1
-                    </label>
-                  </div>
-                  <div className="col-md-9 register-form-control-container">
-                    <input
-                      className="form-control register-form-control"
-                      type="text"
-                      id="addressLine1"
-                      name="addressLine1"
-                      value={addressLine1}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                    <p className="text-danger mb-0 font-weight-bold">
-                      {errors.addressLine1}
-                    </p>
-                  </div>
-                </div>
-                {/* ********** */}
-                {/* ********** */}
-                <div className="row mt-4">
-                  <div className="col-md-3">
-                    <label
-                      className="register-form-control-label"
-                      htmlFor="addressLine2"
-                    >
-                      AddressLine2
-                    </label>
-                  </div>
-                  <div className="col-md-9 register-form-control-container">
-                    <input
-                      className="form-control register-form-control"
-                      type="text"
-                      id="addressLine2"
-                      name="addressLine2"
-                      value={addressLine2}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                    <p className="text-danger mb-0 font-weight-bold">
-                      {errors.addressLine2}
-                    </p>
-                  </div>
-                </div>
-                {/* ********** */}
-                {/* ********** */}
-                <div className="row mt-4">
-                  <div className="col-md-3">
-                    <label
-                      className="register-form-control-label"
-                      htmlFor="pincode"
-                    >
-                      Pincode
-                    </label>
-                  </div>
-                  <div className="col-md-9 register-form-control-container">
-                    <input
-                      className="form-control register-form-control"
-                      type="text"
-                      id="pincode"
-                      name="pincode"
-                      value={pincode}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                    <p className="text-danger mb-0 font-weight-bold">
-                      {errors.pincode}
-                    </p>
-                  </div>
-                </div>
-                {/* ********** */}
-                {/* ********** */}
-                <div className="row mt-4">
-                  <div className="col-md-3">
-                    <label
-                      className="register-form-control-label"
-                      htmlFor="country"
-                    >
-                      Country
-                    </label>
-                  </div>
-                  <div className="col-md-9 register-form-control-container">
-                    <select
-                      name="country"
-                      id="country"
-                      className="form-control register-form-control"
-                      value={country}
-                      onChange={countryChange}
-                      onBlur={handleBlur}
-                    >
-                      <option value="select">Select</option>
-                      {countries.map((country: any, index: number) => {
-                        return (
-                          <option
-                            value={country.countryName.toLowerCase()}
-                            key={index}
-                            className="text-capitalize"
-                          >
-                            {country.countryName}
-                          </option>
-                        );
-                      })}
-                    </select>
-                    <p className="text-danger mb-0 font-weight-bold">
-                      {errors.country}
-                    </p>
-                  </div>
-                </div>
-                {/* ********** */}
-                {/* ********** */}
-                <div className="row mt-4">
-                  <div className="col-md-3">
-                    <label
-                      className="register-form-control-label"
-                      htmlFor="state"
-                    >
-                      State
-                    </label>
-                  </div>
-                  <div className="col-md-9 register-form-control-container">
-                    <select
-                      name="state"
-                      id="state"
-                      className="form-control register-form-control"
-                      value={state}
-                      onChange={stateChange}
-                      onBlur={handleBlur}
-                    >
-                      <option value="select">Select</option>
-                      {states.map((state: any, index: number) => {
-                        return (
-                          <option
-                            value={state.stateName.toLowerCase()}
-                            key={index}
-                            className="text-capitalize"
-                          >
-                            {state.stateName}
-                          </option>
-                        );
-                      })}
-                    </select>
-                    <p className="text-danger mb-0 font-weight-bold">
-                      {errors.state}
-                    </p>
-                  </div>
-                </div>
-                {/* ********** */}
-                {/* ********** */}
-                <div className="row mt-4">
-                  <div className="col-md-3">
-                    <label
-                      className="register-form-control-label"
-                      htmlFor="city"
-                    >
-                      City
-                    </label>
-                  </div>
-                  <div className="col-md-9 register-form-control-container">
-                    <select
-                      name="city"
-                      id="city"
-                      className="form-control register-form-control"
-                      value={city}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    >
-                      <option value="select">Select</option>
-                      {cities.map((city: any, index: number) => {
-                        return (
-                          <option
-                            value={city.cityName.toLowerCase()}
-                            key={index}
-                            className="text-capitalize"
-                          >
-                            {city.cityName}
-                          </option>
-                        );
-                      })}
-                    </select>
-                    <p className="text-danger mb-0 font-weight-bold">
-                      {errors.city}
                     </p>
                   </div>
                 </div>

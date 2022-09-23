@@ -1,5 +1,5 @@
 import React from "react";
-import { configureStore } from "core";
+import { store } from "core";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import App from "./App";
@@ -8,7 +8,7 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 const ConnectedApp = (
-  <Provider store={configureStore()}>
+  <Provider store={store}>
     <React.StrictMode>
       <App />
     </React.StrictMode>

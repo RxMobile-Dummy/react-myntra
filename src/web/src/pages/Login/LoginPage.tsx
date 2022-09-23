@@ -1,51 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./LoginPage.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 import {
-  Credential,
-  signInAction,
-  signOutAction,
-  StateType,
-  User,
-  userSelector,
-  signUpAction,
+  Login,
+  RootState
 } from "core";
-import { connect } from "react-redux";
+import {useDispatch, useSelector } from "react-redux";
+import { isUserSessions } from "../../utils/Storage";
 
-// interface Props {
-//   props?: any;
-// }
-interface Props {
-  user: User | null;
-  dispatchSignIn: (credential: Credential) => void;
-  dispatchSignUp: (
-    firstName: string,
-    lastName: string,
-    credential: Credential
-  ) => void;
-  dispatchSignOut: () => void;
-}
+export default function LoginPage() {
+  let navigate = useNavigate();
 
-// export default function LoginPage(props: Props) {
-export const AppModel = (props: Props) => {
-  const onSignIn = (email: string, password: string) =>
-    props.dispatchSignIn(new Credential(email, password));
-  const onSignUp = (
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string
-  ) =>
-    props.dispatchSignUp(firstName, lastName, new Credential(email, password));
+  useEffect(() => {
+    if(isUserSessions()){
+      navigate("/");
+    }
+  });
+
+
+  const dispatch = useDispatch()
+
+  const { loginData, error } = useSelector(
+    (state: RootState) => state.auth
+  );
+
+  console.log("data:::", loginData);
+  console.log("error:::", error);
+
+  useEffect(() => {
+    if(loginData){
+    console.log("data:::us: ", loginData);
+    }
+  }, [loginData]);
+
 
   const [user, setUser] = useState({
     role: "customer",
     email: "",
     password: "",
   });
-
-  console.log("User ::: ", props.user);
 
   const handleChange = (event: any) => {
     event.preventDefault();
@@ -55,7 +50,13 @@ export const AppModel = (props: Props) => {
   const handleSubmit = (event: any) => {
     console.log("handleSubmit called");
     event.preventDefault();
-    onSignIn("email@email.com", "abc123");
+    // onSignIn("email@email.com", "abc123");
+
+    const paramData = {
+      email: "hitesh.kanjani@radixweb.com",
+      password: "123456",
+    };
+     dispatch<any>(Login(paramData))
   };
 
   return (
@@ -153,14 +154,3 @@ export const AppModel = (props: Props) => {
     </>
   );
 };
-const mapStateToProps = (state: StateType) => ({
-  user: userSelector(state),
-});
-
-const mapDispatchToProps = {
-  dispatchSignIn: signInAction,
-  dispatchSignUp: signUpAction,
-  dispatchSignOut: signOutAction,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AppModel);

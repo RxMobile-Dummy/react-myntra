@@ -1,14 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { MenuData } from "../../constants/MenuData";
 import "./Navbar.css";
 import { FaUser, FaBookmark, FaShoppingBag } from "react-icons/fa";
+import { isUserSessions, removeUserSession } from "../../utils/Storage";
+import { useNavigate } from 'react-router-dom';
 
 const Navbaar = () => {
+  let navigate = useNavigate();
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [navExpanded, setNavExpanded] = useState(false);
   const [bagItems, setBagItems] = useState(0);
+
+  useEffect(() => {
+    if(isUserSessions()){
+      setIsLoggedIn(true)
+    }
+  });
+
+  const onLogoutPress = () => {
+    removeUserSession()
+    navigate("/login")
+  }
+
 
   const setNewNavExpanded = (expanded: any) => {
     setNavExpanded(expanded);
@@ -120,12 +136,12 @@ const Navbaar = () => {
                         <div className="dropdown-hr"></div>
                         <div className="dropdown-item">
                           {isLoggedIn ? (
-                            <Link
-                              to="/logout"
+                            <button
+                            onClick={onLogoutPress}
                               className="btn btn-sm navbar-login-btn"
                             >
                               Logout
-                            </Link>
+                            </button>
                           ) : (
                             <Link
                               to="/login"
@@ -205,12 +221,12 @@ const Navbaar = () => {
                     <div className="dropdown-hr"></div>
                     <div className="dropdown-item">
                       {isLoggedIn ? (
-                        <Link
-                          to="/logout"
+                        <button
+                        onClick={onLogoutPress}
                           className="btn btn-sm navbar-login-btn"
                         >
                           Logout
-                        </Link>
+                        </button>
                       ) : (
                         <Link
                           to="/login"
