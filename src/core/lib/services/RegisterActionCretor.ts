@@ -1,12 +1,22 @@
 import { Dispatch } from "redux";
 import { RegisterActionType } from "../adapters/actionType/registerActionType";
 import { RegisterAction } from "../useCases/registerAction";
-import  {PostApi, postRequest, postRequestGraphQL}  from "../network/ApiCall";
+import  {postRequestGraphQL}  from "../network/ApiCall";
 
-import axios from "axios";
-import URL from "../network/URL";
+interface Props {
+  customerName: string;
+  email: string;
+  contactNumber: string;
+  gender: string;
+  dob: string;
+  country: string;
+  password: string;
+  fcmToken: string;
+  deviceId: string;
+  platform: string;
+}
 
-export const Register = (user : any) => {
+export const Register = (user : Props) => {
 
   const query = `mutation registerUserCall($fullName: String!, $email: String!, $mobileNo: String!, $gender: String!, $dob: String!, $country: String!, $password: String!, $role: String!, $isVerified: Boolean!, $fcmToken: String!, $deviceId: String!, $platform: String!) {
     registerUser(fullName: $fullName, email: $email, mobileNo: $mobileNo, gender: $gender, dob: $dob, country: $country, password: $password, role: $role, isVerified: $isVerified, fcmToken: $fcmToken, deviceId: $deviceId, platform: $platform) {
@@ -35,20 +45,6 @@ export const Register = (user : any) => {
     "platform": user.platform,
   }
 
-  // const reqData = {
-  //   "fullName": "test",
-  //   "email": "test1@example.com",
-  //   "mobileNo": "324543534",
-  //   "gender": "male",
-  //   "dob": "12312312",
-  //   "country": "india",
-  //   "password": "12345678",
-  //   "role": "user",
-  //   "isVerified": false,
-  //   "fcmToken": "jsad89d8asd",
-  //   "deviceId": "324234234",
-  //   "platform": "web"
-  // }
   return async (dispatch: Dispatch<RegisterAction>) => {
     console.log("Register called .....");
     try {

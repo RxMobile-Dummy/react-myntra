@@ -60,30 +60,7 @@ export default function RegisterPage(props: Props) {
         fcmToken: "3243242asdsa",
         deviceId: "348723784238"
       };
-
-      // let reqData = {
-      //   customerName: "test",
-      //   email: "test1q@example.com",
-      //   contactNumber: "1234567875",
-      //   dob: "12345678",
-      //   gender: 'male',
-      //   password: "arjun@123",
-      //   country: "india",
-      //   platform: "web"
-      // };
-
       await dispatch<any>(Register(reqData))
-
-      // setCustomer({
-      //   name: "",
-      //   email: "",
-      //   contactNumber: "",
-      //   dob: "",
-      //   gender: "male",
-      //   password: "",
-      //   confirmPassword: "",
-      //   country: "",
-      // });
 
     } catch (error: any) {
       console.error(error.message);
@@ -103,6 +80,10 @@ export default function RegisterPage(props: Props) {
   console.log("data:::", data);
   console.log("error:::", error);
 
+  if(error){
+    NotificationManager.error(error,"", 2000);
+  }
+
   useEffect(() => {
     if(isUserSessions()){
       navigate("/");
@@ -118,7 +99,6 @@ export default function RegisterPage(props: Props) {
     navigate("/");
     }else if(error){
       console.log("error:::us: ", error);
-      NotificationManager.error(error,"", 2000);
       error = undefined;
     }
   }, [data, error]);

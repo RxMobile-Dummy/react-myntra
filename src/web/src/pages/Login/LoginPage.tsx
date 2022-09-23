@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./LoginPage.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import { NotificationManager } from "react-notifications"
 
 import {
   Login,
   RootState
 } from "core";
 import {useDispatch, useSelector } from "react-redux";
-import { isUserSessions } from "../../utils/Storage";
+import { isUserSessions, setUserData, setUserSession } from "../../utils/Storage";
 
 export default function LoginPage() {
   let navigate = useNavigate();
@@ -22,24 +23,36 @@ export default function LoginPage() {
 
   const dispatch = useDispatch()
 
-  const { loginData, error } = useSelector(
+  let { loginData, error } = useSelector(
     (state: RootState) => state.auth
   );
 
   console.log("data:::", loginData);
   console.log("error:::", error);
 
+  if(error) {
+    NotificationManager.error(error,"", 2000);
+  }
+
   useEffect(() => {
     if(loginData){
     console.log("data:::us: ", loginData);
+    setUserSession(loginData.token, loginData._id)
+    setUserData(loginData)
+    navigate("/");
+    }else if(error){
+      console.log("error:::us: ", error);
+      error = undefined;
     }
-  }, [loginData]);
+  }, [loginData, error]);
 
 
   const [user, setUser] = useState({
-    role: "customer",
     email: "",
     password: "",
+    fcmToken: "werwer4324",
+    deviceId: "234423423",
+    role: "user"
   });
 
   const handleChange = (event: any) => {
@@ -50,13 +63,7 @@ export default function LoginPage() {
   const handleSubmit = (event: any) => {
     console.log("handleSubmit called");
     event.preventDefault();
-    // onSignIn("email@email.com", "abc123");
-
-    const paramData = {
-      email: "hitesh.kanjani@radixweb.com",
-      password: "123456",
-    };
-     dispatch<any>(Login(paramData))
+     dispatch<any>(Login(user))
   };
 
   return (
@@ -76,21 +83,6 @@ export default function LoginPage() {
               <span>Login</span>
             </div>
             <form className="form-cus" onSubmit={handleSubmit}>
-              {/* <div className="form-group mt-4">
-                <label className="form-control-label " htmlFor="usertype">
-                  Select User Type
-                </label>
-                <select
-                  className="form-control login-form-control"
-                  name="role"
-                  id="role"
-                  value={user.role}
-                  onChange={handleChange}
-                >
-                  <option value="seller">Admin</option>
-                  <option value="customer">User</option>
-                </select>
-              </div> */}
               <div className="form-group mt-3">
                 <label className="form-control-label" htmlFor="email">
                   Email
