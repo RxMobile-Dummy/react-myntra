@@ -18,10 +18,18 @@ import BagPage from "./pages/bag/BagPage";
 import AddressPage from "./pages/selectaddress/AddressPage";
 import PaymentPage from "./pages/payment/PaymentPage";
 import ProductDetails from "./pages/productdetails/ProductDetails";
+import { NotificationContainer } from "react-notifications";
+import "react-notifications/lib/notifications.css";
+import { ApolloProvider } from '@apollo/client';
+import { client } from "./apollo_client/client";
+
 
 function App() {
   return (
+    // <ApolloProvider client={client}>
+
     <Router>
+      <NotificationContainer />
       <Navbaar />
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
@@ -47,6 +55,7 @@ function App() {
       </Routes>
       <Footer />
     </Router>
+    // </ApolloProvider>
   );
 }
 export default App;

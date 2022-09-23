@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import "./Address.css";
 import {
   AddAddressButton,
@@ -89,7 +87,7 @@ const Address = () => {
   };
   const addAddress = (e: any) => {
     e.preventDefault();
-    toast.success("Address Added SuccessFully");
+    // toast.success("Address Added SuccessFully");
   };
 
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -209,7 +207,6 @@ const Address = () => {
         </FormRightDiv>
       </AddressFormDiv>
       <CartFoot />
-      <ToastContainer />
       <EditAddressDialog />
     </Container>
   );

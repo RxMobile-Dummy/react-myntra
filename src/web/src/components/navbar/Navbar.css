@@ -148,6 +148,7 @@ body {
   }
   
   .login-btn:hover {
+    background-color: var(--borderPink);
     color: #fff;
     box-shadow: 1px 1px 10px grey;
   }
