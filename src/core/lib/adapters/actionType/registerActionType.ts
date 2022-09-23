@@ -1,0 +1,4 @@
+export enum RegisterActionType {
+  REGISTER = "REGISTER_SUCCESS",
+  REGISTER_FAILED = "REGISTER_FAILED",
+}
