@@ -30,10 +30,6 @@ export default function LoginPage() {
   console.log("data:::", loginData);
   console.log("error:::", error);
 
-  if(error) {
-    NotificationManager.error(error,"", 2000);
-  }
-
   useEffect(() => {
     if(loginData){
     console.log("data:::us: ", loginData);
@@ -42,6 +38,7 @@ export default function LoginPage() {
     navigate("/");
     }else if(error){
       console.log("error:::us: ", error);
+      NotificationManager.error(error,"", 2000);
       error = undefined;
     }
   }, [loginData, error]);

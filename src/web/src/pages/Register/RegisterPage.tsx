@@ -80,10 +80,6 @@ export default function RegisterPage(props: Props) {
   console.log("data:::", data);
   console.log("error:::", error);
 
-  if(error){
-    NotificationManager.error(error,"", 2000);
-  }
-
   useEffect(() => {
     if(isUserSessions()){
       navigate("/");
@@ -99,6 +95,7 @@ export default function RegisterPage(props: Props) {
     navigate("/");
     }else if(error){
       console.log("error:::us: ", error);
+      NotificationManager.error(error,"", 2000);
       error = undefined;
     }
   }, [data, error]);

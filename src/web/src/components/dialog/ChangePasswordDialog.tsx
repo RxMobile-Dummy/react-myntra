@@ -1,7 +1,19 @@
 import React from "react";
 import "./DialogStyles.css";
 
-const ChangePasswordDialog = () => {
+interface Props {
+  onClickChange: any;
+  onClickCancel: any;
+  handleChange: any;
+  apiError: any;
+  errors: any;
+  handleBlur: any;
+  hideDialog: boolean;
+}
+
+const ChangePasswordDialog = (props: Props) => {
+
+  const { onClickChange, onClickCancel, handleChange, handleBlur, apiError, errors, hideDialog } = props
   return (
     <div
       className="modal fade"
@@ -12,6 +24,7 @@ const ChangePasswordDialog = () => {
       aria-labelledby="staticBackdropLabel"
       aria-hidden="true"
     >
+    
       <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
           <div className="modal-header">
@@ -25,20 +38,39 @@ const ChangePasswordDialog = () => {
               aria-label="Close"
             ></button>
           </div>
-          <div className="modal-body">
+          <div className="modal-body" onSubmit={onClickChange}>
             <form id="change-form">
               <div className="material-textfield mt-4">
-                <input placeholder=" " type="password" required />
+                <input placeholder=" " type="password"
+                  name="oldPassword"
+                  id="oldPassword"
+                  onBlur={handleBlur}
+                  onChange={handleChange} required />
                 <label>Old Password*</label>
               </div>
+              <p className="text-danger mb-0 font-weight-bold">
+                {errors.oldPassword}
+              </p>
               <div className="material-textfield mt-4">
-                <input placeholder=" " type="password" required />
+                <input placeholder=" " type="password"
+                  name="newPassword"
+                  id="newPassword"
+                  onBlur={handleBlur}
+                  onChange={handleChange} required />
                 <label>New Password*</label>
               </div>
+              <p className="text-danger mb-0 font-weight-bold">
+                {errors.newPassword}
+              </p>
               <div className="material-textfield mt-4">
-                <input placeholder=" " type="password" required />
+                <input placeholder=" " type="password" name="confirmPassword" id="confirmPassword"
+                  onBlur={handleBlur}
+                  onChange={handleChange} required />
                 <label>Confirm Password*</label>
               </div>
+              <p className="text-danger mb-0 font-weight-bold">
+                {errors.confirmPassword ? errors.confirmPassword : apiError}
+              </p>
               <button
                 className="model-change-btn mt-4"
                 form="change-form"
@@ -48,6 +80,7 @@ const ChangePasswordDialog = () => {
                 <p className="fw-normal py-2 mb-1">CHANGE</p>
               </button>
               <div
+                id="close-button"
                 className="model-cancel-btn mt-4"
                 data-bs-toggle="modal"
                 data-bs-target="#staticBackdrop"

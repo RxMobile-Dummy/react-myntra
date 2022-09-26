@@ -73,7 +73,7 @@ export const postRequest = async (endpoint: any, body: any) => {
 };
 
 export const postRequestGraphQL = async (query: any, body: any) =>{
-    const data = await axios.post("http://localhost:4002/react-myntra", {
+    const data = await axios.post(URL.BASE_URL, {
       query: query,
       variables: body
     }, {
@@ -83,4 +83,18 @@ export const postRequestGraphQL = async (query: any, body: any) =>{
       })
     console.log("res ::::::" , JSON.stringify(data.data.data));
     return data.data.data;
+}
+
+export const postRequestGraphQLAuth = async (query: any, body: any, token: string) =>{
+  const data = await axios.post(URL.BASE_URL, {
+    query: query,
+    variables: body
+  }, {
+      headers: {
+        Authorization: 'Bearer '+token,
+        'Content-Type': 'application/json'
+      }
+    })
+  console.log("res ::::::" , JSON.stringify(data.data.data));
+  return data.data.data;
 }
