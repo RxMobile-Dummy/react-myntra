@@ -1,11 +1,137 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../button/Button";
 import MenuText from "../text/MenuText";
 import "./EditProfile.css";
 import { MdDone } from "react-icons/md";
 import ChangePasswordDialog from "../dialog/ChangePasswordDialog";
 
+import {useDispatch, useSelector } from "react-redux";
+import {getToken, getUserId, isUserSessions } from "../../utils/Storage";
+import { NotificationManager } from "react-notifications"
+
+import {
+  ChangePassword,
+  confirmPasswordValidation,
+  passwordValidation,
+  RootState
+} from "core";
+import { useNavigate } from "react-router-dom";
+
 const EditProfile = () => {
+  let navigate = useNavigate();
+
+  const [inputData, setInputData] = useState({
+    oldPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
+
+  const [hideDialog, setHideDialog] = useState(false);
+  
+  useEffect(() => {
+    if(!isUserSessions()){
+      navigate("/login");
+    }
+  });
+
+  const dispatch = useDispatch()
+
+  let { data, error } = useSelector(
+    (state: RootState) => state.changePasswordReducer
+  );
+
+  console.log("data:::", data);
+  console.log("error:::", error);
+
+  useEffect(() => {
+    if(data){
+    console.log("data:::us: ", data);
+    setInputData({
+      oldPassword: "",
+      newPassword: "",
+      confirmPassword: "",
+    })
+    const closeButton = document.getElementById("close-button") as HTMLElement
+    closeButton.click();
+
+    NotificationManager.success(data,"", 2000);
+    // navigate("/");
+    }else if(error){
+      console.log("error:::us: ", error);
+      NotificationManager.error(error,"", 2000);
+      error = undefined;
+    }
+  }, [data, error]);
+
+  const handleChange = (event: any) => {
+    event.preventDefault();
+    setInputData({ ...inputData, [event.target.name]: event.target.value });
+  };
+
+  const onClickPasswordChange = async (event) => {
+    event.preventDefault();
+
+    const isValid = validateForm()
+    if(isValid){
+    const reqData = {
+      userId: getUserId() || "",
+      // userId: "632b35e408c2ef17b15059d6",
+      oldPassword: inputData.oldPassword,
+      newPassword: inputData.newPassword,
+      authToken: getToken() || "",
+    }
+    setHideDialog(true)
+    const res = await dispatch<any>(ChangePassword(reqData))
+    console.log("dispatch response: " + res)
+  }else{
+    setHideDialog(false)
+  }
+  }
+
+  const validate = {
+    oldPassword: (password: string) => passwordValidation(password),
+    newPassword: (password: string) => passwordValidation(password),
+    confirmPassword: (confirmPassword: any) =>
+      confirmPasswordValidation(confirmPassword, inputData.newPassword),
+    };
+
+  const [errors, setErrors] = useState({
+    oldPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
+
+  const handleBlur = async (event: any) => {
+    const { name, value } = event.target;
+
+    let error = validate[name](value);
+
+    setErrors({ ...errors, [name]: error });
+  };
+
+  // ********** FORM VALIDATION FUNCTION **********
+  const validateForm = () => {
+    let valid = true;
+    let error = null;
+    let tempErrors = errors;
+
+    for (const item in inputData) {
+      error = validate[item](inputData[item]);
+
+      if (error) {
+        valid = false;
+      }
+      tempErrors = { ...tempErrors, [item]: error };
+    }
+
+    setErrors({ ...tempErrors });
+
+    return valid;
+  };
+
+  const onClickCancel = () => {
+    
+  }
   return (
     <div className="edit-container">
       <MenuText
@@ -65,7 +191,14 @@ const EditProfile = () => {
         <p className="fw-normal py-2 mb-1"> CHANGE PASSWORD</p>
       </div>
       {/* change password dialog */}
-      <ChangePasswordDialog />
+      <ChangePasswordDialog
+        onClickChange={onClickPasswordChange}
+        onClickCancel={onClickCancel}
+        handleChange={handleChange}
+        apiError={error}
+        errors={errors}
+        hideDialog={hideDialog}
+        handleBlur={handleBlur}/>
     </div>
   );
 };
