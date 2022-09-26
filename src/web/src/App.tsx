@@ -20,8 +20,7 @@ import PaymentPage from "./pages/payment/PaymentPage";
 import ProductDetails from "./pages/productdetails/ProductDetails";
 import { NotificationContainer } from "react-notifications";
 import "react-notifications/lib/notifications.css";
-import { ApolloProvider } from '@apollo/client';
-import { client } from "./apollo_client/client";
+import ForgetPasswordPage from "./pages/forgotpassword/ForgetPasswordPage";
 
 
 function App() {
@@ -35,6 +34,7 @@ function App() {
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/register" element={<RegisterPage />}></Route>
+        <Route path="/forget-password" element={<ForgetPasswordPage />}></Route>
         <Route path="/bag" element={<BagPage />}></Route>
         <Route path="/select-address" element={<AddressPage />} />
         <Route path="/payment" element={<PaymentPage />} />

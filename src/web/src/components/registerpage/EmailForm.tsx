@@ -19,12 +19,6 @@ export default function EmailForm(props: Props) {
           width="100%"
         />
         <div className="mx-4 mt-4">
-          <div
-            className="text-center text-highlighted"
-            style={{ fontSize: "25px", letterSpacing: "2px" }}
-          >
-            <span>Signup</span>
-          </div>
           <form onSubmit={submitEmail}>
             <div className="form-group mt-3">
               <label className="form-control-label" htmlFor="email">
@@ -43,11 +37,7 @@ export default function EmailForm(props: Props) {
                 {errors.email}
               </p>
             </div>
-            <div className="text-muted mt-4 pt-1">
-              By Continuing, I agree to the{" "}
-              <span className="text-highlighted">Terms of Usage</span> &#38;{" "}
-              <span className="text-highlighted">Privacy Policy</span>
-            </div>
+           
             <div className="mt-3">
               <input
                 className="btn btn-block login-btn"
