@@ -90,3 +90,9 @@ export const nameValidation = (fieldName: string, fieldValue: string) => {
       return `${fieldName} is required`;
     }
   };
+
+  export const fieldValidation = (fieldName: string, input: any) => {
+    if (input.trim() === "") {
+      return `${fieldName} is required`;
+    }
+  };
