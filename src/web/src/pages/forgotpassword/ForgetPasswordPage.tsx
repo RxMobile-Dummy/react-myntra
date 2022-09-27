@@ -1,12 +1,15 @@
-import { confirmPasswordValidation, emailValidation, ForgotPassword, passwordValidation, RootState } from "core";
+import { confirmPasswordValidation, emailValidation, ForgotPassword, passwordValidation, RootState, fieldValidation, ResetPassword } from "core";
 import React, { useEffect, useState } from "react";
 import { NotificationManager } from "react-notifications";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import ChangePassword from "../../components/forgotpassword/ChangePassword";
 import EmailForm from "../../components/registerpage/EmailForm";
 
 export default function ForgetPasswordPage(props) {
-  const [email, setEmail] = useState("");
+  let navigate = useNavigate();
+
+  const [email, setEmail] = useState("arjun@yopmail.com");
   const [isOtpAvailable, setIsOtpAvailable] = useState(false);
 
   const dispatch = useDispatch()
@@ -15,24 +18,43 @@ export default function ForgetPasswordPage(props) {
     (state: RootState) => state.forgotPasswordReducer
   );
 
+  let { resetData, resetError } = useSelector(
+    (state: RootState) => state.resetPasswordReducer
+  );
+
   console.log("data:::", data);
   console.log("error:::", error);
+  console.log("resetData:::", resetData);
+  console.log("resetError:::", resetError);
 
   useEffect(() => {
-    if(data){
-    console.log("data:::us: ", data);
-    setPasswords({
-      otp: "",
-      newPassword: "",
-      confirmNewPassword: "",
-    })
-    setIsOtpAvailable(true)
-    NotificationManager.success(data,"", 2000);
-    }else if(error){
-      console.log("error:::us: ", error);
-      NotificationManager.error(error,"", 2000);
+    console.log("isOtpAvailable:::us: ", isOtpAvailable);
+
+    if (!isOtpAvailable) {
+      if (data) {
+        console.log("data:::us: ", data);
+        setIsOtpAvailable(true)
+        NotificationManager.success(data, "", 2000);
+      } else if (error) {
+        console.log("error:::us: ", error);
+        NotificationManager.error(error, "", 2000);
+      }
+    } else {
+      if (resetData) {
+        console.log("resetData:::us: ", resetData);
+        setPasswords({
+          otp: "",
+          newPassword: "",
+          confirmNewPassword: "",
+        })
+        NotificationManager.success(resetData, "", 2000);
+        navigate("/login");
+      } else if (resetError) {
+        console.log("error:::us: ", resetError);
+        NotificationManager.error(resetError, "", 2000);
+      }
     }
-  }, [data, error]);
+  }, [data, error, resetData, resetError]);
 
   const [passwords, setPasswords] = useState({
     otp: "",
@@ -41,8 +63,8 @@ export default function ForgetPasswordPage(props) {
   });
 
   const [errors, setErrors] = useState({
-    otp: "",
     email: "",
+    otp: "",
     newPassword: "",
     confirmNewPassword: "",
   });
@@ -92,12 +114,23 @@ export default function ForgetPasswordPage(props) {
 
   const submitChangePassword = async (event) => {
     event.preventDefault();
+    const isValid = validateForm();
+    if (isValid) {
+      const reqData = {
+        email: email,
+        otp: passwords.otp,
+        newPassword: passwords.newPassword
+      }
+      await dispatch<any>(ResetPassword(reqData))
+
+    }
   };
 
   // ********** VALIDATE OBJECT **********
   const validate = {
-    newPassword: (password) => passwordValidation(password),
-    confirmNewPassword: (password) =>
+    otp: (otp: any) => fieldValidation("OTP", otp),
+    newPassword: (password: any) => passwordValidation(password),
+    confirmNewPassword: (password: any) =>
       confirmPasswordValidation(newPassword, password),
   };
 
@@ -107,16 +140,16 @@ export default function ForgetPasswordPage(props) {
     let error = emailValidation(email);
     if (!error) {
 
-    if(!error){
-      const reqData = {
-        email: email,
+      if (!error) {
+        const reqData = {
+          email: email,
+        }
+        const res = await dispatch<any>(ForgotPassword(reqData))
+        console.log("dispatch response: " + res)
+      } else {
+        setErrors({ ...errors, email: error });
       }
-      const res = await dispatch<any>(ForgotPassword(reqData))
-      console.log("dispatch response: " + res)
-    } else {
-      setErrors({ ...errors, email: error });
-    }
-  };
+    };
   }
 
   const { otp, newPassword, confirmNewPassword } = passwords;
