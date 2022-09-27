@@ -2,10 +2,36 @@ import React from "react";
 
 interface Props {
   dialogTitle?: string;
+  address?: any;
+  handleChange?: any;
+  handleBlur?: any;
+  submitClickHandler?: any;
+  errors?: any;
 }
 
 const EditAddressDialog = (props: Props) => {
-  const { dialogTitle = "ADD NEW ADDRESS" } = props;
+  const {
+    dialogTitle = "ADD NEW ADDRESS",
+    address,
+    handleChange,
+    handleBlur,
+    submitClickHandler,
+    errors,
+  } = props;
+  const {
+    name,
+    mobileNo,
+    pinCode,
+    country,
+    state,
+    city,
+    billingAddress,
+    shippingAddress,
+    locality,
+    type,
+    isDefault,
+  } = address;
+
   return (
     <div
       className="modal fade"
@@ -25,6 +51,7 @@ const EditAddressDialog = (props: Props) => {
             <button
               type="button"
               className="btn-close"
+              id="close-button"
               data-bs-dismiss="modal"
               aria-label="Close"
             ></button>
@@ -32,42 +59,63 @@ const EditAddressDialog = (props: Props) => {
           <div className="modal-body">
             <form
               id="input-form"
-              onSubmit={() => {}}
+              onSubmit={submitClickHandler}
               className="form-container"
             >
               <div className="form-row">
                 <input
                   type="text"
-                  id="form-email"
+                  id="form-name"
                   className="form-textbox"
                   required
+                  name="name"
+                  value={name}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
-                <label htmlFor="form-email" className="form-label">
+                <label htmlFor="form-name" className="form-label">
                   Name*
                 </label>
+                <p className="text-danger mb-0 font-weight-bold">
+                  {errors.name}
+                </p>
               </div>
               <div className="form-row">
                 <input
-                  type="text"
+                  type="number"
                   id="form-mobile"
+                  name="mobileNo"
                   className="form-textbox"
                   required
+                  value={mobileNo}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
                 <label htmlFor="form-mobile" className="form-label">
                   Mobile*
                 </label>
+                <p className="text-danger mb-0 font-weight-bold">
+                  {errors.mobileNo}
+                </p>
               </div>
               <div className="ad-inp">
                 <div className="form-row">
                   <input
                     type="text"
                     id="form-pincode"
+                    name="pinCode"
                     className="form-textbox"
                     required
+                    value={pinCode}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
                   />
                   <label htmlFor="form-pincode" className="form-label">
                     Pincode*
                   </label>
+                  <p className="text-danger mb-0 font-weight-bold">
+                    {errors.pinCode}
+                  </p>
                 </div>
                 <div className="form-row">
                   <input
@@ -75,10 +123,17 @@ const EditAddressDialog = (props: Props) => {
                     id="form-state"
                     className="form-textbox"
                     required
+                    name="state"
+                    value={state}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
                   />
                   <label htmlFor="form-state" className="form-label">
                     State*
                   </label>
+                  <p className="text-danger mb-0 font-weight-bold">
+                    {errors.state}
+                  </p>
                 </div>
               </div>
               <div className="form-row">
@@ -87,10 +142,17 @@ const EditAddressDialog = (props: Props) => {
                   id="form-address"
                   className="form-textbox"
                   required
+                  name="billingAddress"
+                  value={billingAddress}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
                 <label htmlFor="form-address" className="form-label">
                   Address (House No, Building, Street, Area) *
                 </label>
+                <p className="text-danger mb-0 font-weight-bold">
+                  {errors.billingAddress}
+                </p>
               </div>
               <div className="form-row">
                 <input
@@ -98,10 +160,17 @@ const EditAddressDialog = (props: Props) => {
                   id="form-town"
                   className="form-textbox"
                   required
+                  name="locality"
+                  value={locality}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
                 <label htmlFor="form-town" className="form-label">
                   Locality/ Town*
                 </label>
+                <p className="text-danger mb-0 font-weight-bold">
+                  {errors.locality}
+                </p>
               </div>
               <div className="form-row">
                 <input
@@ -109,10 +178,17 @@ const EditAddressDialog = (props: Props) => {
                   id="form-city"
                   className="form-textbox"
                   required
+                  name="city"
+                  value={city}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
                 <label htmlFor="form-city" className="form-label">
                   City/ District *
                 </label>
+                <p className="text-danger mb-0 font-weight-bold">
+                  {errors.city}
+                </p>
               </div>
               {/* <span className="">Type of address *</span> */}
               <p className="fw-lighter mt-3">Type of address *</p>
@@ -124,6 +200,7 @@ const EditAddressDialog = (props: Props) => {
                   name="inlineRadioOptions"
                   id="inlineRadio1"
                   value="option1"
+                  onChange={handleChange}
                 />
                 <label className="form-check-label" htmlFor="inlineRadio1">
                   Home
@@ -136,6 +213,7 @@ const EditAddressDialog = (props: Props) => {
                   name="inlineRadioOptions"
                   id="inlineRadio2"
                   value="option2"
+                  onChange={handleChange}
                 />
                 <label className="form-check-label" htmlFor="inlineRadio2">
                   Office
@@ -147,6 +225,7 @@ const EditAddressDialog = (props: Props) => {
                   type="checkbox"
                   value=""
                   id="flexCheckDefault"
+                  onChange={handleChange}
                 />
                 <label className="form-check-label" htmlFor="flexCheckDefault">
                   Make this as my default address
@@ -158,6 +237,7 @@ const EditAddressDialog = (props: Props) => {
             <button
               className=""
               data-bs-toggle="modal"
+              id="cancel-button"
               data-bs-target="#editAddressDialog"
             >
               CANCEL

@@ -9,7 +9,7 @@ import EmailForm from "../../components/registerpage/EmailForm";
 export default function ForgetPasswordPage(props) {
   let navigate = useNavigate();
 
-  const [email, setEmail] = useState("arjun@yopmail.com");
+  const [email, setEmail] = useState("");
   const [isOtpAvailable, setIsOtpAvailable] = useState(false);
 
   const dispatch = useDispatch()
