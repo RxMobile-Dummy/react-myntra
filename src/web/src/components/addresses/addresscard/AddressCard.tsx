@@ -16,9 +16,9 @@ const AddressCard = (props: Props) => {
     city,
     pinCode,
     state,
-    mobile,
+    mobileNo,
     isDefault,
-    addressType,
+    type,
   } = addresses;
   return (
     <div className="ac-container mt-5">
@@ -34,11 +34,11 @@ const AddressCard = (props: Props) => {
               <span>{locality}</span>
               <span>{`${city} - ${pinCode}`}</span>
               <span>{state}</span>
-              <span className="mt-3">{`Mobile: ${mobile}`}</span>
+              <span className="mt-3">{`Mobile: ${mobileNo}`}</span>
             </div>
           </div>
           <div className="ac-second-col">
-            <span className="ac-title">{addressType}</span>
+            <span className="ac-title">{type}</span>
           </div>
         </div>
         {showButton && (

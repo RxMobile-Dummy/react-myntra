@@ -1,6 +1,7 @@
 import {
   contactNumberValidation,
   fieldValidation,
+  GetAddressList,
   nameValidation,
   pincodeValidation,
   RootState,
@@ -25,12 +26,32 @@ const Addresses = () => {
 
   const dispatch = useDispatch();
 
+  let { addressListData, addressListError } = useSelector(
+    (state: RootState) => state.getAddressListReducer
+  );
+
   let { data, error } = useSelector(
     (state: RootState) => state.addAddressReducer
   );
 
   console.log("data:::", data);
   console.log("error:::", error);
+  console.log("addressListData:::", addressListData);
+  console.log("addressListError:::", addressListError);
+
+  useEffect(() => {
+    if (!addressListData) {
+      const reqData = {
+        userId: getUserId() || "",
+        authToken: getToken() || "",
+      };
+      dispatch<any>(GetAddressList(reqData));
+    }
+    if (addressListData && addressListData.length > 0) {
+      setIsAddressAvailable(true);
+    } else {
+    }
+  }, [addressListData]);
 
   useEffect(() => {
     if (data) {
@@ -172,16 +193,17 @@ const Addresses = () => {
           <span>+ ADD NEW ADDRESS</span>
         </div>
       </div>
-      {AddressesDummy.map((address, index) => {
-        return (
-          <AddressCard
-            key={index}
-            addresses={address}
-            showButton={selectedIndex === index}
-            handleClick={() => addressClickHandler(index)}
-          />
-        );
-      })}
+      {addressListData &&
+        addressListData.map((address: any, index: any) => {
+          return (
+            <AddressCard
+              key={index}
+              addresses={address}
+              showButton={selectedIndex === index}
+              handleClick={() => addressClickHandler(index)}
+            />
+          );
+        })}
       <EditAddressDialog
         dialogTitle={dialogTitle}
         address={address}
