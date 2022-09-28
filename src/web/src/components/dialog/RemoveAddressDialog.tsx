@@ -1,7 +1,12 @@
 import React from "react";
 import "./DialogStyles.css";
 
-const RemoveAddressDialog = () => {
+interface Props {
+  submitRemoveHandler: any;
+}
+
+const RemoveAddressDialog = (props: Props) => {
+  const { submitRemoveHandler } = props;
   return (
     <div
       className="modal fade"
@@ -24,11 +29,12 @@ const RemoveAddressDialog = () => {
             <span
               className=""
               data-bs-toggle="modal"
+              id="remove-cancel-btn"
               data-bs-target="#removeAddressDialog"
             >
               CANCEL
             </span>
-            <span>DELETE</span>
+            <span onClick={submitRemoveHandler}>DELETE</span>
           </div>
         </div>
       </div>

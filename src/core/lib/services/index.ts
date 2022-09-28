@@ -5,3 +5,4 @@ export * from "./ForgotPasswordActionCretor";
 export * from "./ResetPasswordActionCretor";
 export * from "./AddAddressActionCretor";
 export * from "./GetAddressListActionCretor";
+export * from "./RemoveAddressActionCretor";

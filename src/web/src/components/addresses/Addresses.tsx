@@ -5,6 +5,8 @@ import {
   nameValidation,
   pincodeValidation,
   RootState,
+  AddAddress,
+  RemoveAddress,
 } from "core";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +18,6 @@ import AddressCard from "./addresscard/AddressCard";
 import { NotificationManager } from "react-notifications";
 
 import "./Addresses.css";
-import { AddAddress } from "core";
 import { getToken, getUserId } from "../../utils/Storage";
 
 const Addresses = () => {
@@ -28,6 +29,10 @@ const Addresses = () => {
 
   let { addressListData, addressListError } = useSelector(
     (state: RootState) => state.getAddressListReducer
+  );
+
+  let { removeAdddata, removeAddError } = useSelector(
+    (state: RootState) => state.removeAddressReducer
   );
 
   let { data, error } = useSelector(
@@ -50,6 +55,7 @@ const Addresses = () => {
     if (addressListData && addressListData.length > 0) {
       setIsAddressAvailable(true);
     } else {
+      setIsAddressAvailable(false);
     }
   }, [addressListData]);
 
@@ -67,6 +73,21 @@ const Addresses = () => {
       NotificationManager.error(error, "", 2000);
     }
   }, [data, error]);
+
+  useEffect(() => {
+    if (removeAdddata) {
+      console.log("removeAdddata:::us: ", removeAdddata);
+      const closeButton = document.getElementById(
+        "remove-cancel-btn"
+      ) as HTMLElement;
+      closeButton.click();
+
+      NotificationManager.success("Address removed", "", 2000);
+    } else if (removeAddError) {
+      console.log("error:::us: ", removeAddError);
+      NotificationManager.error(removeAddError, "", 2000);
+    }
+  }, [removeAdddata, removeAddError]);
 
   const [address, setAddress] = useState({
     name: "",
@@ -102,7 +123,17 @@ const Addresses = () => {
 
   const onEditClickHandler = (index: any) => {};
 
-  const onRemoveClickHandler = (index: any) => {};
+  const onRemoveClickHandler = (event: any) => {
+    const id = addressListData[selectedIndex]._id;
+    console.log("addressId :: ", id);
+    event.preventDefault();
+    const reqData = {
+      userId: getUserId() || "",
+      authToken: getToken() || "",
+      addressId: id,
+    };
+    dispatch<any>(RemoveAddress(reqData));
+  };
 
   const submitClickHandler = async (event: any) => {
     event.preventDefault();
@@ -213,7 +244,7 @@ const Addresses = () => {
         errors={errors}
       />
       {/* remove address dialog */}
-      <RemoveAddressDialog />
+      <RemoveAddressDialog submitRemoveHandler={onRemoveClickHandler} />
     </div>
   );
 };
