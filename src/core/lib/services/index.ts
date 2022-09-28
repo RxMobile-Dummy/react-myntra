@@ -4,3 +4,4 @@ export * from "./ChangePasswordActionCretor";
 export * from "./ForgotPasswordActionCretor";
 export * from "./ResetPasswordActionCretor";
 export * from "./AddAddressActionCretor";
+export * from "./GetAddressListActionCretor";
