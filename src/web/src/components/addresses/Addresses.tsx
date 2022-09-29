@@ -7,6 +7,7 @@ import {
   RootState,
   AddAddress,
   RemoveAddress,
+  EditAddress,
 } from "core";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,6 +25,7 @@ const Addresses = () => {
   const [isAddressAvailable, setIsAddressAvailable] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [dialogTitle, setDialogTitle] = useState("ADD NEW ADDRESS");
+  const [isEdit, setEditable] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -37,6 +39,10 @@ const Addresses = () => {
 
   let { data, error } = useSelector(
     (state: RootState) => state.addAddressReducer
+  );
+
+  let { editAdddata, editAdderror } = useSelector(
+    (state: RootState) => state.editAddressReducer
   );
 
   console.log("data:::", data);
@@ -73,6 +79,26 @@ const Addresses = () => {
       NotificationManager.error(error, "", 2000);
     }
   }, [data, error]);
+
+  useEffect(() => {
+    if (editAdddata) {
+      console.log("editAdddata:::us: ", editAdddata);
+      const closeButton = document.getElementById(
+        "cancel-button"
+      ) as HTMLElement;
+      closeButton.click();
+
+      NotificationManager.success("Address updated", "", 2000);
+      const reqData = {
+        userId: getUserId() || "",
+        authToken: getToken() || "",
+      };
+      dispatch<any>(GetAddressList(reqData));
+    } else if (editAdderror) {
+      console.log("editAdderror:::us: ", editAdderror);
+      NotificationManager.error(editAdderror, "", 2000);
+    }
+  }, [editAdddata, editAdderror]);
 
   useEffect(() => {
     if (removeAdddata) {
@@ -121,7 +147,30 @@ const Addresses = () => {
     setSelectedIndex(index);
   };
 
-  const onEditClickHandler = (index: any) => {};
+  const onCancelClickHandler = (event: any) => {
+    event.preventDefault();
+    setEditable(false);
+    setAddress({
+      name: "",
+      mobileNo: "",
+      pinCode: "",
+      country: "",
+      state: "",
+      city: "",
+      billingAddress: "",
+      shippingAddress: "",
+      locality: "",
+      type: "",
+      isDefault: false,
+    });
+  };
+
+  const onEditClickHandler = (event: any) => {
+    event.preventDefault();
+    setDialogTitle("EDIT ADDRESS");
+    setEditable(true);
+    setAddress(addressListData[selectedIndex]);
+  };
 
   const onRemoveClickHandler = (event: any) => {
     const id = addressListData[selectedIndex]._id;
@@ -137,27 +186,49 @@ const Addresses = () => {
 
   const submitClickHandler = async (event: any) => {
     event.preventDefault();
+    if (!isEdit) {
+      const reqData = {
+        userId: getUserId() || "",
+        authToken: getToken() || "",
+        name: address.name,
+        mobileNo: address.mobileNo,
+        pinCode: address.pinCode,
+        country: address.country,
+        state: address.state,
+        city: address.city,
+        billingAddress: address.billingAddress,
+        shippingAddress: address.shippingAddress,
+        locality: address.locality,
+        type: "Home",
+        isDefault: false,
+      };
+      await dispatch<any>(AddAddress(reqData));
+    } else {
+      const id = addressListData[selectedIndex]._id;
 
-    const reqData = {
-      userId: getUserId() || "",
-      authToken: getToken() || "",
-      name: address.name,
-      mobileNo: address.mobileNo,
-      pinCode: address.pinCode,
-      country: address.country,
-      state: address.state,
-      city: address.city,
-      billingAddress: address.billingAddress,
-      shippingAddress: address.shippingAddress,
-      locality: address.locality,
-      type: "Home",
-      isDefault: false,
-    };
-    await dispatch<any>(AddAddress(reqData));
+      const reqData = {
+        userId: getUserId() || "",
+        authToken: getToken() || "",
+        addressId: id,
+        name: address.name,
+        mobileNo: address.mobileNo,
+        pinCode: address.pinCode,
+        country: address.country,
+        state: address.state,
+        city: address.city,
+        billingAddress: address.billingAddress,
+        shippingAddress: address.shippingAddress,
+        locality: address.locality,
+        type: "Home",
+        isDefault: false,
+      };
+      await dispatch<any>(EditAddress(reqData));
+    }
   };
 
   const onAddAddressClickHandler = () => {
     setDialogTitle("ADD NEW ADDRESS");
+    setEditable(false);
   };
 
   const handleChange = (event: any) => {
@@ -220,6 +291,7 @@ const Addresses = () => {
           className="border add-address px-3 py-2"
           data-bs-toggle="modal"
           data-bs-target="#editAddressDialog"
+          onClick={onAddAddressClickHandler}
         >
           <span>+ ADD NEW ADDRESS</span>
         </div>
@@ -232,6 +304,7 @@ const Addresses = () => {
               addresses={address}
               showButton={selectedIndex === index}
               handleClick={() => addressClickHandler(index)}
+              handleEditClick={onEditClickHandler}
             />
           );
         })}
@@ -241,6 +314,7 @@ const Addresses = () => {
         handleChange={handleChange}
         handleBlur={handleBlur}
         submitClickHandler={submitClickHandler}
+        handleCancel={onCancelClickHandler}
         errors={errors}
       />
       {/* remove address dialog */}

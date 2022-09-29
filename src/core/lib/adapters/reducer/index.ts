@@ -7,6 +7,7 @@ import resetPasswordReducer from "./resetPasswordReducer";
 import addAddressReducer from "./addAddressReducer";
 import getAddressListReducer from "./getAddressListReducer";
 import removeAddressReducer from "./removeAddressReducer";
+import editAddressReducer from "./editAddressReducer";
 
 const reducers = combineReducers({
   auth: authReducer,
@@ -17,6 +18,7 @@ const reducers = combineReducers({
   addAddressReducer: addAddressReducer,
   getAddressListReducer: getAddressListReducer,
   removeAddressReducer: removeAddressReducer,
+  editAddressReducer: editAddressReducer,
 });
 
 export default reducers;
