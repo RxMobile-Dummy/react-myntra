@@ -4,11 +4,12 @@ import "./AddressCard.css";
 interface Props {
   addresses: any;
   handleClick: any;
+  handleEditClick: any;
   showButton: boolean;
 }
 
 const AddressCard = (props: Props) => {
-  const { addresses, handleClick, showButton } = props;
+  const { addresses, handleClick, showButton, handleEditClick } = props;
   const {
     name,
     address,
@@ -47,6 +48,7 @@ const AddressCard = (props: Props) => {
               className=""
               data-bs-toggle="modal"
               data-bs-target="#editAddressDialog"
+              onClick={handleEditClick}
             >
               EDIT
             </span>

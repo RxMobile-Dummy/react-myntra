@@ -4,6 +4,7 @@ interface Props {
   dialogTitle?: string;
   address?: any;
   handleChange?: any;
+  handleCancel?: any;
   handleBlur?: any;
   submitClickHandler?: any;
   errors?: any;
@@ -17,6 +18,7 @@ const EditAddressDialog = (props: Props) => {
     handleBlur,
     submitClickHandler,
     errors,
+    handleCancel,
   } = props;
   const {
     name,
@@ -54,6 +56,7 @@ const EditAddressDialog = (props: Props) => {
               id="close-button"
               data-bs-dismiss="modal"
               aria-label="Close"
+              onClick={handleCancel}
             ></button>
           </div>
           <div className="modal-body">
@@ -239,6 +242,7 @@ const EditAddressDialog = (props: Props) => {
               data-bs-toggle="modal"
               id="cancel-button"
               data-bs-target="#editAddressDialog"
+              onClick={handleCancel}
             >
               CANCEL
             </button>
