@@ -96,3 +96,28 @@ export const nameValidation = (fieldName: string, fieldValue: string) => {
       return `${fieldName} is required`;
     }
   };
+
+  export const cardNumberValidation = (input: any) => {
+    if (input.trim() === "") {
+      return `Card number is required`;
+    }else if (input.trim().length < 14){
+      return `Card number is invalid`
+    }
+  };
+
+  export const cardMonthValidation = (input: any) => {
+    if (input.trim() === "") {
+      return `Month is required`;
+    }
+    if (input.trim().length < 2 || input.trim() > 12 || input.trim() < 1) {
+      return `Invalid Month`
+    }
+  };
+
+  export const cardYearValidation = (input: any) => {
+    if (input.trim() === "") {
+      return `Year is required`;
+    }else if (input.trim().length < 4) {
+      return `Invalid Year`
+    }
+  };

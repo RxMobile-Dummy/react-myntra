@@ -1,0 +1,4 @@
+export enum AddCardInfoActionType {
+  ADD_CARD_INFO_SUCCESS = "ADD_CARD_INFO_SUCCESS",
+  ADD_CARD_INFO_FAILED = "ADD_CARD_INFO_FAILED",
+}
