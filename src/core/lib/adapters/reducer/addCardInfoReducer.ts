@@ -12,7 +12,7 @@ const initialState = {
   addCardError: undefined,
 };
 
-const addAddressReducer = (state: UserState = initialState, action: AddCardInfoAction): any => {
+const addCardInfoReducer = (state: UserState = initialState, action: AddCardInfoAction): any => {
   console.log("action payload:", action.payload);
   switch (action.type) {
     case AddCardInfoActionType.ADD_CARD_INFO_SUCCESS:
@@ -30,4 +30,4 @@ const addAddressReducer = (state: UserState = initialState, action: AddCardInfoA
   }
 };
 
-export default addAddressReducer;
+export default addCardInfoReducer;

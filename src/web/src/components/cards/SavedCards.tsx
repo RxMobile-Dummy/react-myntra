@@ -1,13 +1,39 @@
-import React, { useState } from "react";
+import { GetCardInfoList, RootState } from "core";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { images } from "../../assets/images";
 import { CardsDummy } from "../../constants/CardsDummy";
+import { getToken, getUserId } from "../../utils/Storage";
 import RemoveCardDialog from "../dialog/RemoveCardDialog";
 import CardsUi from "./cardui/CardsUi";
 import "./SavedCards.css";
 
 const SavedCards = () => {
   const [isCardAvailable, setSetCardAvailable] = useState(true);
+  const dispatch = useDispatch();
+
+  let { getCardListData, getCardListError } = useSelector(
+    (state: RootState) => state.getCardInfoListReducer
+  );
+  console.log("getCardListData:::", getCardListData);
+  console.log("getCardListError:::", getCardListError);
+
+  useEffect(() => {
+    if (!getCardListData) {
+      const reqData = {
+        userId: getUserId() || "",
+        authToken: getToken() || "",
+      };
+      dispatch<any>(GetCardInfoList(reqData));
+    }
+    if (getCardListData && getCardListData.length > 0) {
+      setSetCardAvailable(true);
+    } else {
+      setSetCardAvailable(false);
+    }
+  }, [getCardListData]);
+
   if (!isCardAvailable) {
     return (
       <div className="no-address-container">
@@ -40,15 +66,16 @@ const SavedCards = () => {
           </Link>
         </div>
       </div>
-      {CardsDummy.map((card, index) => {
-        return (
-          <CardsUi
-            key={index}
-            cardData={card}
-            // handleClick={() => addressClickHandler(index)}
-          />
-        );
-      })}
+      {getCardListData &&
+        getCardListData.map((card: any, index: number) => {
+          return (
+            <CardsUi
+              key={index}
+              cardData={card}
+              // handleClick={() => addressClickHandler(index)}
+            />
+          );
+        })}
       <RemoveCardDialog />
     </div>
   );
