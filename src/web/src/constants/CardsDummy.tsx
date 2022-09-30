@@ -1,10 +1,11 @@
 export const CardsDummy = [
   {
-    name: "Test User",
+    cardName: "Test User",
     bankName: "IDFC Bank",
     card: "VISA",
     cardType: "DEBIT CARD ",
     cardNumber: "4545 12** **** 2342",
-    validity: "XX/XX",
+    expiryMonth: "XX",
+    expiryYear: "XXXX",
   },
 ];

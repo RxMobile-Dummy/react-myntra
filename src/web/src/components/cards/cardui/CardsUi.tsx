@@ -7,8 +7,15 @@ interface Props {
 }
 
 const CardsUi = (props: Props) => {
-  const { name, bankName, card, cardType, cardNumber, validity } =
-    props.cardData;
+  const {
+    cardName,
+    bankName,
+    card,
+    cardType,
+    cardNumber,
+    expiryMonth,
+    expiryYear,
+  } = props.cardData;
   return (
     <div className="cc-container mt-5">
       <div className="mt-2 bg-white main-card" onClick={() => {}}>
@@ -21,11 +28,11 @@ const CardsUi = (props: Props) => {
               <div className="cc-card-con">
                 <div className="d-flex flex-column ">
                   <span className="cc-title mt-3">{"NAME ON CARD"}</span>
-                  <span className="cc-data">{name}</span>
+                  <span className="cc-data">{cardName}</span>
                 </div>
                 <div className="d-flex flex-column">
                   <span className="cc-title mt-3">{"Validity"}</span>
-                  <span className="cc-data">{validity}</span>
+                  <span className="cc-data">{`${expiryMonth}/${expiryYear}`}</span>
                 </div>
               </div>
             </div>
