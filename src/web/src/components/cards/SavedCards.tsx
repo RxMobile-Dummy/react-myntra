@@ -1,7 +1,7 @@
 import { GetCardInfoList, RootState, RemoveCardInfo } from "core";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { images } from "../../assets/images";
 import { CardsDummy } from "../../constants/CardsDummy";
 import { getToken, getUserId } from "../../utils/Storage";
@@ -11,6 +11,8 @@ import "./SavedCards.css";
 import { NotificationManager } from "react-notifications";
 
 const SavedCards = () => {
+  let navigate = useNavigate();
+
   const [isCardAvailable, setSetCardAvailable] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const dispatch = useDispatch();
@@ -76,6 +78,12 @@ const SavedCards = () => {
     setSelectedIndex(index);
   };
 
+  const onEditClick = (event: any, index: number) => {
+    const id = getCardListData[index]._id;
+
+    navigate(`addcard/${id}`, { state: getCardListData[index] });
+  };
+
   if (!isCardAvailable) {
     return (
       <div className="no-address-container">
@@ -112,6 +120,7 @@ const SavedCards = () => {
               index={index}
               cardData={card}
               onRemoveClick={onRemoveClick}
+              onEditClick={onEditClick}
             />
           );
         })}

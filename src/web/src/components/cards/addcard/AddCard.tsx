@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./AddCard.css";
 import BottomLineInput from "../../input/BottomLineInput";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   nameValidation,
@@ -10,15 +10,21 @@ import {
   cardMonthValidation,
   cardYearValidation,
   AddCardInfo,
+  EditCardInfo,
 } from "core";
 import { NotificationManager } from "react-notifications";
 import { getToken, getUserId } from "../../../utils/Storage";
+
+interface CustomizedState {
+  myState: string;
+}
 
 const AddCard = () => {
   let navigate = useNavigate();
 
   const [isEditcard, setEditCard] = useState(false);
   let { id } = useParams();
+  const { state } = useLocation();
 
   useEffect(() => {
     console.log(`/cards/${id}`);
@@ -28,6 +34,10 @@ const AddCard = () => {
     } else {
       console.log(`card edit`);
       setEditCard(true);
+      const data = state as any;
+      delete data._id;
+      delete data.paymentMethod;
+      setCardInputs(data);
     }
   }, []);
 
@@ -37,8 +47,14 @@ const AddCard = () => {
     (state: RootState) => state.addCardInfoReducer
   );
 
+  let { editCardData, editCardError } = useSelector(
+    (state: RootState) => state.editCardInfoReducer
+  );
+
   console.log("data:::", addCarddata);
   console.log("error:::", addCardError);
+  console.log("editCardData:::", editCardData);
+  console.log("editCardError:::", editCardError);
 
   useEffect(() => {
     if (addCarddata) {
@@ -52,6 +68,19 @@ const AddCard = () => {
       NotificationManager.error(addCardError, "", 2000);
     }
   }, [addCarddata, addCardError]);
+
+  useEffect(() => {
+    if (editCardData) {
+      console.log("data:::us: ", editCardData);
+
+      NotificationManager.success("Card updated", "", 2000);
+      navigate("/profile/cards");
+      window.location.reload();
+    } else if (editCardError) {
+      console.log("editCardError:::us: ", editCardError);
+      NotificationManager.error(editCardError, "", 2000);
+    }
+  }, [editCardData, editCardError]);
 
   const [cardInputs, setCardInputs] = useState({
     cardName: "",
@@ -72,6 +101,8 @@ const AddCard = () => {
     cardNumber: (cardNumber: string) => cardNumberValidation(cardNumber),
     expiryMonth: (expiryMonth: any) => cardMonthValidation(expiryMonth),
     expiryYear: (expiryYear: string) => cardYearValidation(expiryYear),
+    _id: () => {},
+    paymenMethod: () => {},
   };
 
   const handleChange = (event: any) => {
@@ -91,17 +122,22 @@ const AddCard = () => {
     let error = null;
     let tempErrors = errors;
 
-    for (const item in cardInputs) {
-      error = validate[item](cardInputs[item]);
+    try {
+      console.log("validating form ::", cardInputs);
+      for (const item in cardInputs) {
+        error = validate[item](cardInputs[item]);
 
-      if (error) {
-        valid = false;
+        if (error) {
+          valid = false;
+        }
+
+        tempErrors = { ...tempErrors, [item]: error };
       }
-
-      tempErrors = { ...tempErrors, [item]: error };
+      setErrors({ ...tempErrors });
+    } catch (error) {
+      console.log("VALIDATION error ::: ", error);
+      valid = false;
     }
-
-    setErrors({ ...tempErrors });
 
     return valid;
   };
@@ -119,6 +155,17 @@ const AddCard = () => {
         expiryYear: expiryYear,
       };
       await dispatch<any>(AddCardInfo(reqData));
+    } else if (isEditcard && isValid) {
+      const reqData = {
+        userId: getUserId() || "",
+        authToken: getToken() || "",
+        cardInfoId: id || "",
+        cardName: cardName,
+        cardNumber: cardNumber,
+        expiryMonth: expiryMonth,
+        expiryYear: expiryYear,
+      };
+      await dispatch<any>(EditCardInfo(reqData));
     } else {
       NotificationManager.error("Invalid inputs", "", 2000);
     }
