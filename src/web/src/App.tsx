@@ -22,7 +22,6 @@ import { NotificationContainer } from "react-notifications";
 import "react-notifications/lib/notifications.css";
 import ForgetPasswordPage from "./pages/forgotpassword/ForgetPasswordPage";
 
-
 function App() {
   return (
     // <ApolloProvider client={client}>

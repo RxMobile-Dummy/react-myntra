@@ -9,3 +9,4 @@ export * from "./RemoveAddressActionCretor";
 export * from "./EditAddressActionCretor";
 export * from "./AddCardInfoActionCretor";
 export * from "./GetCardInfoListActionCretor";
+export * from "./RemoveCardInfoActionCretor";

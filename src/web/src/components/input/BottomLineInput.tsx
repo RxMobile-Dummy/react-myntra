@@ -10,6 +10,7 @@ interface Props {
   handleBlur: any;
   error?: string;
   type: string;
+  maxLength?: number;
 }
 
 const BottomLineInput = (props: Props) => {
@@ -23,6 +24,7 @@ const BottomLineInput = (props: Props) => {
     error = "",
     value,
     type = "text",
+    maxLength = 50,
   } = props;
   return (
     <div className="form-row">
@@ -35,6 +37,7 @@ const BottomLineInput = (props: Props) => {
         value={value}
         onChange={handleChange}
         onBlur={handleBlur}
+        maxLength={maxLength}
       />
       <label htmlFor={id} className="form-label">
         {label}
