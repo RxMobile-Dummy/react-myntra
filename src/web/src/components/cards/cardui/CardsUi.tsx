@@ -6,6 +6,7 @@ interface Props {
   cardData: any;
   index: number;
   onRemoveClick: (event: any, index: number) => void;
+  onEditClick: (event: any, index: number) => void;
 }
 
 const CardsUi = (props: Props) => {
@@ -19,7 +20,7 @@ const CardsUi = (props: Props) => {
     expiryYear,
   } = props.cardData;
 
-  const { onRemoveClick, index } = props;
+  const { onRemoveClick, index, onEditClick } = props;
   return (
     <div className="cc-container mt-5">
       <div className="mt-2 bg-white main-card" onClick={() => {}}>
@@ -47,8 +48,9 @@ const CardsUi = (props: Props) => {
           </div>
         </div>
         <div className="border-top cc-footer">
-          <span className="">
-            <Link to="addcard/12312">EDIT</Link>
+          <span className="" onClick={(e) => onEditClick(e, index)}>
+            {/* <Link to="addcard/12312">EDIT</Link> */}
+            EDIT
           </span>
           <span
             data-bs-toggle="modal"
