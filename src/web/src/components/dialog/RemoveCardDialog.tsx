@@ -1,7 +1,12 @@
 import React from "react";
 import "./DialogStyles.css";
 
-const RemoveCardDialog = () => {
+interface Props {
+  submitRemoveHandler: any;
+}
+
+const RemoveCardDialog = (props: Props) => {
+  const { submitRemoveHandler } = props;
   return (
     <div
       className="modal fade"
@@ -25,10 +30,17 @@ const RemoveCardDialog = () => {
               className=""
               data-bs-toggle="modal"
               data-bs-target="#removeCardDialog"
+              id="remove-cancel-btn"
             >
               CANCEL
             </span>
-            <span>DELETE</span>
+            <span
+              data-bs-toggle="modal"
+              data-bs-target="#removeCardDialog"
+              onClick={submitRemoveHandler}
+            >
+              DELETE
+            </span>
           </div>
         </div>
       </div>

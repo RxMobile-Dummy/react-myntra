@@ -10,6 +10,7 @@ import removeAddressReducer from "./removeAddressReducer";
 import editAddressReducer from "./editAddressReducer";
 import addCardInfoReducer from "./addCardInfoReducer";
 import getCardInfoListReducer from "./getCardInfoListReducer";
+import removeCardInfoReducer from "./removeCardInfoReducer";
 
 const reducers = combineReducers({
   auth: authReducer,
@@ -23,6 +24,7 @@ const reducers = combineReducers({
   editAddressReducer: editAddressReducer,
   addCardInfoReducer: addCardInfoReducer,
   getCardInfoListReducer: getCardInfoListReducer,
+  removeCardInfoReducer: removeCardInfoReducer,
 });
 
 export default reducers;

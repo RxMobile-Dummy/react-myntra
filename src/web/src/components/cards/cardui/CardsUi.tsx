@@ -4,6 +4,8 @@ import "./CardUI.css";
 
 interface Props {
   cardData: any;
+  index: number;
+  onRemoveClick: (event: any, index: number) => void;
 }
 
 const CardsUi = (props: Props) => {
@@ -16,6 +18,8 @@ const CardsUi = (props: Props) => {
     expiryMonth,
     expiryYear,
   } = props.cardData;
+
+  const { onRemoveClick, index } = props;
   return (
     <div className="cc-container mt-5">
       <div className="mt-2 bg-white main-card" onClick={() => {}}>
@@ -43,14 +47,14 @@ const CardsUi = (props: Props) => {
           </div>
         </div>
         <div className="border-top cc-footer">
-          <span
-            className=""
-            data-bs-toggle="modal"
-            data-bs-target="#editAddressDialog"
-          >
+          <span className="">
             <Link to="addcard/12312">EDIT</Link>
           </span>
-          <span data-bs-toggle="modal" data-bs-target="#removeCardDialog">
+          <span
+            data-bs-toggle="modal"
+            data-bs-target="#removeCardDialog"
+            onClick={(e) => onRemoveClick(e, index)}
+          >
             REMOVE
           </span>
         </div>

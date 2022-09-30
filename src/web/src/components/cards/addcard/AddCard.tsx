@@ -164,6 +164,7 @@ const AddCard = () => {
               value={expiryMonth}
               type="number"
               name="expiryMonth"
+              maxLength={2}
             />
             <BottomLineInput
               label={"Expiry Year (YYYY)*"}
@@ -175,6 +176,7 @@ const AddCard = () => {
               value={expiryYear}
               type="number"
               name="expiryYear"
+              maxLength={4}
             />
           </div>
           <div className="ac-bottom-button mt-5">
