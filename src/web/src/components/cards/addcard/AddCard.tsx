@@ -11,6 +11,8 @@ import {
   cardYearValidation,
   AddCardInfo,
   EditCardInfo,
+  ResetEditCardInfoState,
+  ResetAddCardInfoState,
 } from "core";
 import { NotificationManager } from "react-notifications";
 import { getToken, getUserId } from "../../../utils/Storage";
@@ -61,11 +63,13 @@ const AddCard = () => {
       console.log("data:::us: ", addCarddata);
 
       NotificationManager.success("Card added", "", 2000);
+      dispatch<any>(ResetAddCardInfoState());
       navigate("/profile/cards");
       window.location.reload();
     } else if (addCardError) {
       console.log("addCardError:::us: ", addCardError);
       NotificationManager.error(addCardError, "", 2000);
+      dispatch<any>(ResetAddCardInfoState());
     }
   }, [addCarddata, addCardError]);
 
@@ -74,11 +78,13 @@ const AddCard = () => {
       console.log("data:::us: ", editCardData);
 
       NotificationManager.success("Card updated", "", 2000);
+      dispatch<any>(ResetEditCardInfoState());
       navigate("/profile/cards");
       window.location.reload();
     } else if (editCardError) {
       console.log("editCardError:::us: ", editCardError);
       NotificationManager.error(editCardError, "", 2000);
+      dispatch<any>(ResetEditCardInfoState());
     }
   }, [editCardData, editCardError]);
 
@@ -171,6 +177,10 @@ const AddCard = () => {
     }
   };
 
+  const onCancelClickHandler = () => {
+    navigate("/profile/cards");
+  };
+
   const { cardName, cardNumber, expiryMonth, expiryYear } = cardInputs;
 
   return (
@@ -227,7 +237,9 @@ const AddCard = () => {
             />
           </div>
           <div className="ac-bottom-button mt-5">
-            <button form="">CANCEL</button>
+            <button form="" onClick={onCancelClickHandler}>
+              CANCEL
+            </button>
             <button form="form-car-con">SAVE</button>
           </div>
         </form>

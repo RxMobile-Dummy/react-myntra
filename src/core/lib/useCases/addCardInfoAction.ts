@@ -10,4 +10,9 @@ export interface AddCardInfoError {
   payload: any;
 }
 
-export type AddCardInfoAction =  AddCardInfoSuccess | AddCardInfoError;
+export interface AddCardInfoReset {
+  readonly type: AddCardInfoActionType.ADD_CARD_INFO_RESET;
+  payload: any;
+}
+
+export type AddCardInfoAction =  AddCardInfoSuccess | AddCardInfoError | AddCardInfoReset;

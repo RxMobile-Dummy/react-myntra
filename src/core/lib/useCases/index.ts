@@ -1,5 +1,6 @@
 export * from "./loginAction"
 export * from "./registerAction"
+export * from "./logoutAction"
 export * from "./changePasswordAction"
 export * from "./forgotPasswordAction"
 export * from "./resetPasswordAction"

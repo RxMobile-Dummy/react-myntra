@@ -25,6 +25,12 @@ const addAddressReducer = (state: UserState = initialState, action: AddAddressAc
           ...state,
           error: action.payload,
         };
+    case AddAddressActionType.ADD_ADDRESS_RESET:
+        return {
+          ...state,
+          data: action.payload,
+          error: action.payload,
+        };
     default:
       return state;
   }

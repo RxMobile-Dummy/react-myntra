@@ -51,3 +51,11 @@ export const ResetPassword = (user : Props) => {
   };
 };
 
+export const ResetPasswordResetState = () => {
+  return async (dispatch: Dispatch<ResetPasswordAction>) => {
+    dispatch({
+      type: ResetPasswordActionType.RESET_PASSWORD_RESET,
+      payload: undefined,
+    });
+  }
+}

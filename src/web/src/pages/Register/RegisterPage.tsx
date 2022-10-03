@@ -1,10 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
 import RegisterForm from "../../components/registerpage/RegisterForm";
-import { NotificationManager } from "react-notifications"
+import { NotificationManager } from "react-notifications";
 
-import countryList from 'react-select-country-list'
-import { useNavigate } from 'react-router-dom';
-
+import countryList from "react-select-country-list";
+import { useNavigate } from "react-router-dom";
 
 import {
   Register,
@@ -16,9 +15,14 @@ import {
   passwordValidation,
   confirmPasswordValidation,
   selectionValidation,
+  ResetRegisterState,
 } from "core";
 import { useDispatch, useSelector } from "react-redux";
-import { isUserSessions, setUserData, setUserSession } from "../../utils/Storage";
+import {
+  isUserSessions,
+  setUserData,
+  setUserSession,
+} from "../../utils/Storage";
 
 interface Props {
   props?: any;
@@ -26,52 +30,50 @@ interface Props {
 export default function RegisterPage(props: Props) {
   let navigate = useNavigate();
 
-  const [value, setValue] = useState('')
-  const options = useMemo(() => countryList().getData(), [])
+  const [value, setValue] = useState("");
+  const options = useMemo(() => countryList().getData(), []);
 
-  const changeHandler = value => {
-    console.log('value: ', value)
-    console.log('countryList: ', countryList().getData())
-    setValue(value)
+  const changeHandler = (value) => {
+    console.log("value: ", value);
+    console.log("countryList: ", countryList().getData());
+    setValue(value);
     setCustomer({
       ...customer,
-      country: value.label
+      country: value.label,
     });
-  }
+  };
 
- const register = async (event) => {
-  event.preventDefault();
+  const register = async (event) => {
+    event.preventDefault();
 
-  let isValidForm = validateForm();
-  // let isValidForm = true
+    let isValidForm = validateForm();
+    // let isValidForm = true
 
-  console.log("country ::", country)
-  if (isValidForm) {
-    try {
-      let reqData = {
-        customerName: name,
-        email,
-        contactNumber,
-        dob,
-        gender,
-        password,
-        country,
-        platform: "web",
-        fcmToken: "3243242asdsa",
-        deviceId: "348723784238"
-      };
-      await dispatch<any>(Register(reqData))
-
-    } catch (error: any) {
-      console.error(error.message);
+    console.log("country ::", country);
+    if (isValidForm) {
+      try {
+        let reqData = {
+          customerName: name,
+          email,
+          contactNumber,
+          dob,
+          gender,
+          password,
+          country,
+          platform: "web",
+          fcmToken: "3243242asdsa",
+          deviceId: "348723784238",
+        };
+        await dispatch<any>(Register(reqData));
+      } catch (error: any) {
+        console.error(error.message);
+      }
+    } else {
+      NotificationManager.error("Invalid Input", "", 2000);
     }
-  } else {
-    NotificationManager.error("Invalid Input", "", 2000);
-  }
-};
- 
+  };
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   let { data, error } = useSelector(
     (state: RootState) => state.registerReducer
@@ -81,22 +83,22 @@ export default function RegisterPage(props: Props) {
   console.log("error:::", error);
 
   useEffect(() => {
-    if(isUserSessions()){
+    if (isUserSessions()) {
       navigate("/");
     }
   });
 
   useEffect(() => {
-    if(data){
-    console.log("data:::us: ", data);
-    NotificationManager.success("User registered successfully", "", 1000);
-    setUserSession(data.token, data._id)
-    setUserData(data)
-    navigate("/");
-    }else if(error){
+    if (data) {
+      console.log("data:::us: ", data);
+      NotificationManager.success("User registered successfully", "", 1000);
+      setUserSession(data.token, data._id);
+      setUserData(data);
+      navigate("/");
+    } else if (error) {
       console.log("error:::us: ", error);
-      NotificationManager.error(error,"", 2000);
-      error = undefined;
+      NotificationManager.error(error, "", 2000);
+      dispatch<any>(ResetRegisterState());
     }
   }, [data, error]);
 
@@ -135,7 +137,7 @@ export default function RegisterPage(props: Props) {
     confirmPassword: (confirmPassword: any) =>
       confirmPasswordValidation(confirmPassword, password),
     country: (country: any) => selectionValidation("Country", country),
-    };
+  };
 
   // ********** HANDLE CHANGE FUNCTION **********
   const handleChange = (event: any) => {
@@ -184,31 +186,23 @@ export default function RegisterPage(props: Props) {
     return valid;
   };
 
-
   // ********** DESTRUCTRING OF CUSTOMER **********
-  const {
-    name,
-    email,
-    contactNumber,
-    dob,
-    gender,
-    password,
-    country,
-  } = customer;
+  const { name, email, contactNumber, dob, gender, password, country } =
+    customer;
 
   return (
     <>
-        <RegisterForm
-          customer={customer}
-          errors={errors}
-          handleChange={handleChange}
-          handleBlur={handleBlur}
-          register={register}
-          isBtnDisable={isBtnDisable}
-          countryChangeHandler={changeHandler}
-          countries={options}
-          countryValue={value}
-        />
+      <RegisterForm
+        customer={customer}
+        errors={errors}
+        handleChange={handleChange}
+        handleBlur={handleBlur}
+        register={register}
+        isBtnDisable={isBtnDisable}
+        countryChangeHandler={changeHandler}
+        countries={options}
+        countryValue={value}
+      />
     </>
   );
 }

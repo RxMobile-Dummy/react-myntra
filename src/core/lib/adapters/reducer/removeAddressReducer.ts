@@ -25,6 +25,12 @@ const removeAddressReducer = (state: UserState = initialState, action: RemoveAdd
           ...state,
           removeAddError: action.payload,
         };
+    case RemoveAddressActionType.REMOVE_ADDRESS_RESET:
+        return {
+          ...state,
+          removeAdddata: action.payload,
+          removeAddError: action.payload,
+        };
     default:
       return state;
   }

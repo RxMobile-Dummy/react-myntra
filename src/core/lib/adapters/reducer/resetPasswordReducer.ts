@@ -25,6 +25,12 @@ const resetPasswordReducer = (state: UserState = initialState, action: ResetPass
           ...state,
           resetError: action.payload,
         };
+    case ResetPasswordActionType.RESET_PASSWORD_RESET:
+        return {
+          ...state,
+          resetData: action.payload,
+          resetError: action.payload,
+        };
     default:
       return state;
   }

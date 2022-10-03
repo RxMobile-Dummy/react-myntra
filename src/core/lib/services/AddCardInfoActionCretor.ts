@@ -56,3 +56,12 @@ export const AddCardInfo = (card : Props) => {
   };
 };
 
+export const ResetAddCardInfoState = () => {
+  return async (dispatch: Dispatch<AddCardInfoAction>) => {
+    dispatch({
+      type: AddCardInfoActionType.ADD_CARD_INFO_RESET,
+      payload: undefined,
+    });
+  }
+}
+

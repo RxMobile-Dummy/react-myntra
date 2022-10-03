@@ -49,3 +49,11 @@ export const RemoveAddress = (address : Props) => {
   };
 };
 
+export const ResetRemoveAddressState = () => {
+  return async (dispatch: Dispatch<RemoveAddressAction>) => {
+    dispatch({
+      type: RemoveAddressActionType.REMOVE_ADDRESS_RESET,
+      payload: undefined,
+    });
+  }
+}

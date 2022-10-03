@@ -63,3 +63,12 @@ export const Login = (user : Props) => {
   }
 };
 };
+
+export const ResetLoginState = () => {
+  return async (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.LOGIN_RESET,
+      payload: undefined,
+    });
+  }
+}

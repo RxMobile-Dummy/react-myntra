@@ -62,3 +62,12 @@ export const GetAddressList = (address: Props) => {
   };
 };
 
+export const ResetAddressListState = () => {
+  return async (dispatch: Dispatch<GetAddressListAction>) => {
+    dispatch({
+      type: GetAddressListActionType.GET_ADDRESS_LIST_RESET,
+      payload: undefined,
+    });
+  }
+}
+

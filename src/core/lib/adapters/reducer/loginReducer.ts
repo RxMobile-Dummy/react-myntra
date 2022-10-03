@@ -26,6 +26,12 @@ const loginReducer = (state: UserState = initialState, action: Action): any => {
           ...state,
           error: action.payload,
         };
+    case ActionType.LOGIN_RESET:
+        return {
+          ...state,
+          error: action.payload,
+          loginData: action.payload,
+        };
     default:
       return state;
   }

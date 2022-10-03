@@ -56,3 +56,12 @@ export const GetCardInfoList = (address: Props) => {
   };
 };
 
+export const ResetCardInfoListState = () => {
+  return async (dispatch: Dispatch<GetCardInfoListAction>) => {
+    dispatch({
+      type: GetCardInfoListActionType.GET_CARD_INFO_LIST_RESET,
+      payload: undefined,
+    });
+  }
+}
+

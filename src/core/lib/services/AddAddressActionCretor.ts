@@ -72,3 +72,13 @@ export const AddAddress = (address : Props) => {
   };
 };
 
+
+export const ResetAddAddressState = () => {
+  return async (dispatch: Dispatch<AddAddressAction>) => {
+    dispatch({
+      type: AddAddressActionType.ADD_ADDRESS_RESET,
+      payload: undefined,
+    });
+  }
+}
+

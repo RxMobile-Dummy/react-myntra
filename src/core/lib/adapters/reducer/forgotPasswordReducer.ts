@@ -25,6 +25,12 @@ const forgotPasswordReducer = (state: UserState = initialState, action: ForgotPa
           ...state,
           error: action.payload,
         };
+    case ForgotPasswordActionType.FORGOT_PASSWORD_RESET:
+        return {
+          ...state,
+          data: action.payload,
+          error: action.payload,
+        };
     default:
       return state;
   }

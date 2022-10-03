@@ -25,6 +25,12 @@ const editAddressReducer = (state: UserState = initialState, action: EditAddress
           ...state,
           editAdderror: action.payload,
         };
+    case EditAddressActionType.EDIT_ADDRESS_RESET:
+        return {
+          ...state,
+          editAdddata: action.payload,
+          editAdderror: action.payload,
+        };
     default:
       return state;
   }

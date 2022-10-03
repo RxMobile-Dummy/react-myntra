@@ -10,4 +10,9 @@ export interface ForgotPasswordError {
   payload: any;
 }
 
-export type ForgotPasswordAction =  ForgotPasswordSuccess | ForgotPasswordError;
+export interface ForgotPasswordReset {
+  readonly type: ForgotPasswordActionType.FORGOT_PASSWORD_RESET;
+  payload: any;
+}
+
+export type ForgotPasswordAction =  ForgotPasswordSuccess | ForgotPasswordError | ForgotPasswordReset;

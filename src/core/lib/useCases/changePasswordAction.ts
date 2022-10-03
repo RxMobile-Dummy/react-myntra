@@ -10,4 +10,9 @@ export interface ChangePasswordError {
   payload: any;
 }
 
-export type ChangePasswordAction =  ChangePasswordSuccess | ChangePasswordError;
+export interface ChangePasswordReset {
+  readonly type: ChangePasswordActionType.CHANGE_PASSWORD_RESET;
+  payload: any;
+}
+
+export type ChangePasswordAction =  ChangePasswordSuccess | ChangePasswordError | ChangePasswordReset;

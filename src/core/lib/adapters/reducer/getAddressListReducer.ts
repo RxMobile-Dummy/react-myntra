@@ -25,6 +25,12 @@ const getAddressListReducer = (state: UserState = initialState, action: GetAddre
           ...state,
           addressListError: action.payload,
         };
+    case GetAddressListActionType.GET_ADDRESS_LIST_RESET:
+        return {
+          ...state,
+          addressListData: action.payload,
+          addressListError: action.payload,
+        };
     default:
       return state;
   }

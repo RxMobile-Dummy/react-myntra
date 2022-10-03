@@ -25,6 +25,12 @@ const getCardInfoListReducer = (state: UserState = initialState, action: GetCard
           ...state,
           getCardListError: action.payload,
         };
+    case GetCardInfoListActionType.GET_CARD_INFO_LIST_RESET:
+        return {
+          ...state,
+          getCardListData: action.payload,
+          getCardListError: action.payload,
+        };
     default:
       return state;
   }
