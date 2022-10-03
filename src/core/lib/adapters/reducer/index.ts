@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import authReducer from "./loginReducer";
 import registerReducer from "./registerReducer";
+import logoutReducer from "./logoutReducer";
 import changePasswordReducer from "./changePasswordReducer";
 import forgotPasswordReducer from "./forgotPasswordReducer";
 import resetPasswordReducer from "./resetPasswordReducer";
@@ -16,6 +17,7 @@ import editCardInfoReducer from "./editCardInfoReducer";
 const reducers = combineReducers({
   auth: authReducer,
   registerReducer: registerReducer,
+  logoutReducer: logoutReducer,
   changePasswordReducer: changePasswordReducer,
   forgotPasswordReducer: forgotPasswordReducer,
   resetPasswordReducer: resetPasswordReducer,

@@ -8,6 +8,9 @@ import {
   AddAddress,
   RemoveAddress,
   EditAddress,
+  ResetAddAddressState,
+  ResetEditAddressState,
+  ResetRemoveAddressState,
 } from "core";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -74,9 +77,15 @@ const Addresses = () => {
       closeButton.click();
 
       NotificationManager.success("Address added", "", 2000);
+      const reqData = {
+        userId: getUserId() || "",
+        authToken: getToken() || "",
+      };
+      dispatch<any>(GetAddressList(reqData));
     } else if (error) {
       console.log("error:::us: ", error);
       NotificationManager.error(error, "", 2000);
+      dispatch<any>(ResetAddAddressState());
     }
   }, [data, error]);
 
@@ -97,6 +106,7 @@ const Addresses = () => {
     } else if (editAdderror) {
       console.log("editAdderror:::us: ", editAdderror);
       NotificationManager.error(editAdderror, "", 2000);
+      dispatch<any>(ResetEditAddressState());
     }
   }, [editAdddata, editAdderror]);
 
@@ -112,6 +122,7 @@ const Addresses = () => {
     } else if (removeAddError) {
       console.log("error:::us: ", removeAddError);
       NotificationManager.error(removeAddError, "", 2000);
+      dispatch<any>(ResetRemoveAddressState());
     }
   }, [removeAdddata, removeAddError]);
 

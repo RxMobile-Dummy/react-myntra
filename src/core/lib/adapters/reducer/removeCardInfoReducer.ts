@@ -25,6 +25,12 @@ const removeCardInfoReducer = (state: UserState = initialState, action: RemoveCa
           ...state,
           removeCardError: action.payload,
         };
+    case RemoveCardInfoActionType.REMOVE_CARD_INFO_RESET:
+        return {
+          ...state,
+          removeCarddata: action.payload,
+          removeCardError: action.payload,
+        };
     default:
       return state;
   }

@@ -10,4 +10,9 @@ export interface RemoveAddressError {
   payload: any;
 }
 
-export type RemoveAddressAction =  RemoveAddressSuccess | RemoveAddressError;
+export interface RemoveAddressReset {
+  readonly type: RemoveAddressActionType.REMOVE_ADDRESS_RESET;
+  payload: any;
+}
+
+export type RemoveAddressAction =  RemoveAddressSuccess | RemoveAddressError | RemoveAddressReset;

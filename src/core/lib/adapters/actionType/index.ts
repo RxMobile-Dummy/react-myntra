@@ -1,5 +1,6 @@
 export * from "./loginActionTypes"
 export * from "./registerActionType"
+export * from "./logoutActionTypes"
 export * from "./changePasswordActionType"
 export * from "./forgotPasswordActionType"
 export * from "./resetPasswordActionType"

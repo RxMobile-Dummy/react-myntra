@@ -10,4 +10,9 @@ export interface RemoveCardInfoError {
   payload: any;
 }
 
-export type RemoveCardInfoAction =  RemoveCardInfoSuccess | RemoveCardInfoError;
+export interface RemoveCardInfoReset {
+  readonly type: RemoveCardInfoActionType.REMOVE_CARD_INFO_RESET;
+  payload: any;
+}
+
+export type RemoveCardInfoAction =  RemoveCardInfoSuccess | RemoveCardInfoError | RemoveCardInfoReset;

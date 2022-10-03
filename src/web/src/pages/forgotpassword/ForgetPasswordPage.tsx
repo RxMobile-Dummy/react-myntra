@@ -1,4 +1,14 @@
-import { confirmPasswordValidation, emailValidation, ForgotPassword, passwordValidation, RootState, fieldValidation, ResetPassword } from "core";
+import {
+  confirmPasswordValidation,
+  emailValidation,
+  ForgotPassword,
+  passwordValidation,
+  RootState,
+  fieldValidation,
+  ResetPassword,
+  ResetForgotPasswordState,
+  ResetPasswordResetState,
+} from "core";
 import React, { useEffect, useState } from "react";
 import { NotificationManager } from "react-notifications";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,7 +22,7 @@ export default function ForgetPasswordPage(props) {
   const [email, setEmail] = useState("");
   const [isOtpAvailable, setIsOtpAvailable] = useState(false);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   let { data, error } = useSelector(
     (state: RootState) => state.forgotPasswordReducer
@@ -33,11 +43,13 @@ export default function ForgetPasswordPage(props) {
     if (!isOtpAvailable) {
       if (data) {
         console.log("data:::us: ", data);
-        setIsOtpAvailable(true)
+        setIsOtpAvailable(true);
         NotificationManager.success(data, "", 2000);
+        dispatch<any>(ResetForgotPasswordState());
       } else if (error) {
         console.log("error:::us: ", error);
         NotificationManager.error(error, "", 2000);
+        dispatch<any>(ResetForgotPasswordState());
       }
     } else {
       if (resetData) {
@@ -46,12 +58,15 @@ export default function ForgetPasswordPage(props) {
           otp: "",
           newPassword: "",
           confirmNewPassword: "",
-        })
+        });
         NotificationManager.success(resetData, "", 2000);
+        dispatch<any>(ResetPasswordResetState());
+
         navigate("/login");
       } else if (resetError) {
         console.log("error:::us: ", resetError);
         NotificationManager.error(resetError, "", 2000);
+        dispatch<any>(ResetPasswordResetState());
       }
     }
   }, [data, error, resetData, resetError]);
@@ -119,10 +134,9 @@ export default function ForgetPasswordPage(props) {
       const reqData = {
         email: email,
         otp: passwords.otp,
-        newPassword: passwords.newPassword
-      }
-      await dispatch<any>(ResetPassword(reqData))
-
+        newPassword: passwords.newPassword,
+      };
+      await dispatch<any>(ResetPassword(reqData));
     }
   };
 
@@ -135,22 +149,20 @@ export default function ForgetPasswordPage(props) {
   };
 
   const submitEmail = async (event: any) => {
-
     event.preventDefault();
     let error = emailValidation(email);
     if (!error) {
-
       if (!error) {
         const reqData = {
           email: email,
-        }
-        const res = await dispatch<any>(ForgotPassword(reqData))
-        console.log("dispatch response: " + res)
+        };
+        const res = await dispatch<any>(ForgotPassword(reqData));
+        console.log("dispatch response: " + res);
       } else {
         setErrors({ ...errors, email: error });
       }
-    };
-  }
+    }
+  };
 
   const { otp, newPassword, confirmNewPassword } = passwords;
 
@@ -165,7 +177,7 @@ export default function ForgetPasswordPage(props) {
           submitEmail={submitEmail}
         />
       </>
-    )
+    );
   }
   return (
     <>

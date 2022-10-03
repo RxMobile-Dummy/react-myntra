@@ -5,15 +5,16 @@ import "./EditProfile.css";
 import { MdDone } from "react-icons/md";
 import ChangePasswordDialog from "../dialog/ChangePasswordDialog";
 
-import {useDispatch, useSelector } from "react-redux";
-import {getToken, getUserId, isUserSessions } from "../../utils/Storage";
-import { NotificationManager } from "react-notifications"
+import { useDispatch, useSelector } from "react-redux";
+import { getToken, getUserId, isUserSessions } from "../../utils/Storage";
+import { NotificationManager } from "react-notifications";
 
 import {
   ChangePassword,
   confirmPasswordValidation,
   passwordValidation,
-  RootState
+  ResetChangePasswordState,
+  RootState,
 } from "core";
 import { useNavigate } from "react-router-dom";
 
@@ -27,14 +28,14 @@ const EditProfile = () => {
   });
 
   const [hideDialog, setHideDialog] = useState(false);
-  
+
   useEffect(() => {
-    if(!isUserSessions()){
+    if (!isUserSessions()) {
       navigate("/login");
     }
   });
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   let { data, error } = useSelector(
     (state: RootState) => state.changePasswordReducer
@@ -44,22 +45,24 @@ const EditProfile = () => {
   console.log("error:::", error);
 
   useEffect(() => {
-    if(data){
-    console.log("data:::us: ", data);
-    setInputData({
-      oldPassword: "",
-      newPassword: "",
-      confirmPassword: "",
-    })
-    const closeButton = document.getElementById("close-button") as HTMLElement
-    closeButton.click();
+    if (data) {
+      console.log("data:::us: ", data);
+      setInputData({
+        oldPassword: "",
+        newPassword: "",
+        confirmPassword: "",
+      });
+      const closeButton = document.getElementById(
+        "close-button"
+      ) as HTMLElement;
+      closeButton.click();
 
-    NotificationManager.success(data,"", 2000);
-    // navigate("/");
-    }else if(error){
+      NotificationManager.success(data, "", 2000);
+      // navigate("/");
+    } else if (error) {
       console.log("error:::us: ", error);
-      NotificationManager.error(error,"", 2000);
-      error = undefined;
+      NotificationManager.error(error, "", 2000);
+      dispatch<any>(ResetChangePasswordState());
     }
   }, [data, error]);
 
@@ -71,29 +74,29 @@ const EditProfile = () => {
   const onClickPasswordChange = async (event) => {
     event.preventDefault();
 
-    const isValid = validateForm()
-    if(isValid){
-    const reqData = {
-      userId: getUserId() || "",
-      // userId: "632b35e408c2ef17b15059d6",
-      oldPassword: inputData.oldPassword,
-      newPassword: inputData.newPassword,
-      authToken: getToken() || "",
+    const isValid = validateForm();
+    if (isValid) {
+      const reqData = {
+        userId: getUserId() || "",
+        // userId: "632b35e408c2ef17b15059d6",
+        oldPassword: inputData.oldPassword,
+        newPassword: inputData.newPassword,
+        authToken: getToken() || "",
+      };
+      setHideDialog(true);
+      const res = await dispatch<any>(ChangePassword(reqData));
+      console.log("dispatch response: " + res);
+    } else {
+      setHideDialog(false);
     }
-    setHideDialog(true)
-    const res = await dispatch<any>(ChangePassword(reqData))
-    console.log("dispatch response: " + res)
-  }else{
-    setHideDialog(false)
-  }
-  }
+  };
 
   const validate = {
     oldPassword: (password: string) => passwordValidation(password),
     newPassword: (password: string) => passwordValidation(password),
     confirmPassword: (confirmPassword: any) =>
       confirmPasswordValidation(confirmPassword, inputData.newPassword),
-    };
+  };
 
   const [errors, setErrors] = useState({
     oldPassword: "",
@@ -129,9 +132,7 @@ const EditProfile = () => {
     return valid;
   };
 
-  const onClickCancel = () => {
-    
-  }
+  const onClickCancel = () => {};
   return (
     <div className="edit-container">
       <MenuText
@@ -198,7 +199,8 @@ const EditProfile = () => {
         apiError={error}
         errors={errors}
         hideDialog={hideDialog}
-        handleBlur={handleBlur}/>
+        handleBlur={handleBlur}
+      />
     </div>
   );
 };

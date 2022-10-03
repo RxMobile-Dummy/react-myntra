@@ -71,3 +71,12 @@ export const Register = (user : Props) => {
   };
 };
 
+export const ResetRegisterState = () => {
+  return async (dispatch: Dispatch<RegisterAction>) => {
+    dispatch({
+      type: RegisterActionType.REGISTER_RESET,
+      payload: undefined,
+    });
+  }
+}
+

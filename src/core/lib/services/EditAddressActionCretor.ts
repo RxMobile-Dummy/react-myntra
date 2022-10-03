@@ -71,3 +71,12 @@ export const EditAddress = (address : Props) => {
   };
 };
 
+export const ResetEditAddressState = () => {
+  return async (dispatch: Dispatch<EditAddressAction>) => {
+    dispatch({
+      type: EditAddressActionType.EDIT_ADDRESS_RESET,
+      payload: undefined,
+    });
+  }
+}
+

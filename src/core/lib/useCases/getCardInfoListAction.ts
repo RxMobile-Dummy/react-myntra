@@ -10,4 +10,9 @@ export interface GetCardInfoListError {
   payload: any;
 }
 
-export type GetCardInfoListAction =  GetCardInfoListSuccess | GetCardInfoListError;
+export interface GetCardInfoListReset {
+  readonly type: GetCardInfoListActionType.GET_CARD_INFO_LIST_RESET;
+  payload: any;
+}
+
+export type GetCardInfoListAction =  GetCardInfoListSuccess | GetCardInfoListError | GetCardInfoListReset;

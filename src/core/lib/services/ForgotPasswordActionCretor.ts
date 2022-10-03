@@ -47,3 +47,12 @@ export const ForgotPassword = (user : Props) => {
   };
 };
 
+export const ResetForgotPasswordState = () => {
+  return async (dispatch: Dispatch<ForgotPasswordAction>) => {
+    dispatch({
+      type: ForgotPasswordActionType.FORGOT_PASSWORD_RESET,
+      payload: undefined,
+    });
+  }
+}
+

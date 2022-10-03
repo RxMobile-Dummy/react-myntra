@@ -10,4 +10,9 @@ export interface AddAddressError {
   payload: any;
 }
 
-export type AddAddressAction =  AddAddressSuccess | AddAddressError;
+export interface AddAddressReset {
+  readonly type: AddAddressActionType.ADD_ADDRESS_RESET;
+  payload: any;
+}
+
+export type AddAddressAction =  AddAddressSuccess | AddAddressError | AddAddressReset;

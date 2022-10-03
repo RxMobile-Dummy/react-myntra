@@ -4,8 +4,16 @@ import { Link } from "react-router-dom";
 import { MenuData } from "../../constants/MenuData";
 import "./Navbar.css";
 import { FaUser, FaBookmark, FaShoppingBag } from "react-icons/fa";
-import { isUserSessions, removeUserSession } from "../../utils/Storage";
-import { useNavigate } from 'react-router-dom';
+import {
+  getToken,
+  getUserId,
+  isUserSessions,
+  removeUserSession,
+} from "../../utils/Storage";
+import { useNavigate } from "react-router-dom";
+import { RootState, Logout } from "core";
+import { useDispatch, useSelector } from "react-redux";
+import { NotificationManager } from "react-notifications";
 
 const Navbaar = () => {
   let navigate = useNavigate();
@@ -14,17 +22,37 @@ const Navbaar = () => {
   const [navExpanded, setNavExpanded] = useState(false);
   const [bagItems, setBagItems] = useState(0);
 
+  const dispatch = useDispatch();
+
+  let { logoutData, logoutError } = useSelector(
+    (state: RootState) => state.logoutReducer
+  );
+
   useEffect(() => {
-    if(isUserSessions()){
-      setIsLoggedIn(true)
+    if (logoutData) {
+      console.log("data:::us: ", logoutData);
+      removeUserSession();
+      navigate("/login");
+      window.location.reload();
+    } else if (logoutError) {
+      console.log("error:::us: ", logoutError);
+      NotificationManager.error(logoutError, "", 2000);
+    }
+  }, [logoutData, logoutError]);
+
+  useEffect(() => {
+    if (isUserSessions()) {
+      setIsLoggedIn(true);
     }
   });
 
   const onLogoutPress = () => {
-    removeUserSession()
-    navigate("/login")
-  }
-
+    const reqData = {
+      userId: getUserId() || "",
+      authToken: getToken() || "",
+    };
+    dispatch<any>(Logout(reqData));
+  };
 
   const setNewNavExpanded = (expanded: any) => {
     setNavExpanded(expanded);
@@ -137,7 +165,7 @@ const Navbaar = () => {
                         <div className="dropdown-item">
                           {isLoggedIn ? (
                             <button
-                            onClick={onLogoutPress}
+                              onClick={onLogoutPress}
                               className="btn btn-sm navbar-login-btn"
                             >
                               Logout
@@ -222,7 +250,7 @@ const Navbaar = () => {
                     <div className="dropdown-item">
                       {isLoggedIn ? (
                         <button
-                        onClick={onLogoutPress}
+                          onClick={onLogoutPress}
                           className="btn btn-sm navbar-login-btn"
                         >
                           Logout

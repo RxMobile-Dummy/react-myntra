@@ -25,6 +25,12 @@ const editCardInfoReducer = (state: UserState = initialState, action: EditCardIn
           ...state,
           editCardError: action.payload,
         };
+    case EditCardInfoActionType.EDIT_CARD_INFO_RESET:
+        return {
+          ...state,
+          editCardData: action.payload,
+          editCardError: action.payload,
+        };
     default:
       return state;
   }

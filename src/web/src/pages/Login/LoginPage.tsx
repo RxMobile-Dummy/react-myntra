@@ -1,55 +1,52 @@
 import React, { useEffect, useState } from "react";
 import "./LoginPage.css";
 import { Link } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
-import { NotificationManager } from "react-notifications"
+import { useNavigate } from "react-router-dom";
+import { NotificationManager } from "react-notifications";
 
+import { Login, ResetLoginState, RootState } from "core";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  Login,
-  RootState
-} from "core";
-import {useDispatch, useSelector } from "react-redux";
-import { isUserSessions, setUserData, setUserSession } from "../../utils/Storage";
+  isUserSessions,
+  setUserData,
+  setUserSession,
+} from "../../utils/Storage";
 
 export default function LoginPage() {
   let navigate = useNavigate();
 
   useEffect(() => {
-    if(isUserSessions()){
+    if (isUserSessions()) {
       navigate("/");
     }
   });
 
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
-
-  let { loginData, error } = useSelector(
-    (state: RootState) => state.auth
-  );
+  let { loginData, error } = useSelector((state: RootState) => state.auth);
 
   console.log("data:::", loginData);
   console.log("error:::", error);
 
   useEffect(() => {
-    if(loginData){
-    console.log("data:::us: ", loginData);
-    setUserSession(loginData.token, loginData._id)
-    setUserData(loginData)
-    navigate("/");
-    }else if(error){
+    if (loginData) {
+      console.log("data:::us: ", loginData);
+      setUserSession(loginData.token, loginData._id);
+      setUserData(loginData);
+      navigate("/");
+    } else if (error) {
       console.log("error:::us: ", error);
-      NotificationManager.error(error,"", 2000);
-      error = undefined;
+      NotificationManager.error(error, "", 2000);
+      dispatch<any>(ResetLoginState());
     }
   }, [loginData, error]);
-
 
   const [user, setUser] = useState({
     email: "",
     password: "",
     fcmToken: "werwer4324",
     deviceId: "234423423",
-    role: "user"
+    role: "user",
   });
 
   const handleChange = (event: any) => {
@@ -60,7 +57,7 @@ export default function LoginPage() {
   const handleSubmit = (event: any) => {
     console.log("handleSubmit called");
     event.preventDefault();
-     dispatch<any>(Login(user))
+    dispatch<any>(Login(user));
   };
 
   return (
@@ -142,4 +139,4 @@ export default function LoginPage() {
       </div>
     </>
   );
-};
+}

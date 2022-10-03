@@ -50,3 +50,12 @@ export const RemoveCardInfo = (address : Props) => {
   };
 };
 
+export const ResetRemoveCardInfoState = () => {
+  return async (dispatch: Dispatch<RemoveCardInfoAction>) => {
+    dispatch({
+      type: RemoveCardInfoActionType.REMOVE_CARD_INFO_RESET,
+      payload: undefined,
+    });
+  }
+}
+

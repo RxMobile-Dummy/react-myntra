@@ -25,6 +25,12 @@ const addCardInfoReducer = (state: UserState = initialState, action: AddCardInfo
           ...state,
           addCardError: action.payload,
         };
+    case AddCardInfoActionType.ADD_CARD_INFO_RESET:
+        return {
+          ...state,
+          addCarddata: action.payload,
+          addCardError: action.payload,
+        };
     default:
       return state;
   }

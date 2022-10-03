@@ -1,0 +1,5 @@
+export enum LogoutActionType {
+  LOGOUT_SUCCESS = "LOGOUT_SUCCESS",
+  LOGOUT_FAILED = "LOGOUT_FAILED",
+  LOGOUT_RESET = "LOGOUT_RESET",
+}

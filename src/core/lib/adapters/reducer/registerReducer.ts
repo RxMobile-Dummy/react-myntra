@@ -25,6 +25,12 @@ const registerReducer = (state: UserState = initialState, action: RegisterAction
           ...state,
           error: action.payload,
         };
+    case RegisterActionType.REGISTER_RESET:
+        return {
+          ...state,
+          data: action.payload,
+          error: action.payload,
+        };
     default:
       return state;
   }
