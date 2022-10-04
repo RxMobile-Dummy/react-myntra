@@ -341,15 +341,15 @@ const EditProfileComp = () => {
             />
             <label>Location*</label>
           </div>
-          <p className="text-danger mb-0 font-weight-bold">
+          <p className="text-danger mb-0 font-weight-bold mb-4">
             {profileErrors.country}
           </p>
 
-          <p className="fw-normal my-4">Alternate mobile details</p>
+          {/* <p className="fw-normal my-4">Alternate mobile details</p>
           <div className="material-textfield my-4">
             <input placeholder=" " type="text" />
             <label>Mobile Number</label>
-          </div>
+          </div> */}
           <Button title={"SAVE DETAILS"} />
         </form>
       </div>

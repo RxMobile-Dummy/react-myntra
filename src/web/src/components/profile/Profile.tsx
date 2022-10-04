@@ -42,14 +42,14 @@ const Profile = () => {
               <td>Location</td>
               <td>{profileData?.country}</td>
             </tr>
-            <tr>
+            {/* <tr>
               <td>Alternate mobile</td>
               <td>-not added-</td>
             </tr>
             <tr>
               <td>Hint name</td>
               <td>-not added-</td>
-            </tr>
+            </tr> */}
           </tbody>
         </table>
         <Link to="/profile/editprofile">
