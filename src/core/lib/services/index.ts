@@ -12,3 +12,4 @@ export * from "./AddCardInfoActionCretor";
 export * from "./GetCardInfoListActionCretor";
 export * from "./RemoveCardInfoActionCretor";
 export * from "./EditCardInfoActionCretor";
+export * from "./EditProfileActionCretor";

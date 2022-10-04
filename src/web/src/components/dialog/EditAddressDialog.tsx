@@ -1,13 +1,13 @@
 import React from "react";
 
 interface Props {
-  dialogTitle?: string;
-  address?: any;
-  handleChange?: any;
-  handleCancel?: any;
-  handleBlur?: any;
-  submitClickHandler?: any;
-  errors?: any;
+  dialogTitle: string;
+  address: any;
+  handleChange: any;
+  handleCancel: any;
+  handleBlur: any;
+  submitClickHandler: any;
+  errors: any;
 }
 
 const EditAddressDialog = (props: Props) => {

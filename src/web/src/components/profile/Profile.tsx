@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { getUserData } from "../../utils/Storage";
 import Button from "../button/Button";
 import MenuText from "../text/MenuText";
 import "./Profile.css";
 
 const Profile = () => {
+  const profileData = getUserData();
   return (
     <div className="profile-container">
       <MenuText
@@ -18,27 +20,27 @@ const Profile = () => {
           <tbody>
             <tr>
               <td>Full Name</td>
-              <td>Test user</td>
+              <td>{profileData?.fullName}</td>
             </tr>
             <tr>
               <td>Mobile Number</td>
-              <td>23423423423</td>
+              <td>{profileData?.mobileNo}</td>
             </tr>
             <tr>
               <td>Email</td>
-              <td>test@gmail.com</td>
+              <td>{profileData?.email}</td>
             </tr>
             <tr>
               <td>Gender</td>
-              <td>MALE</td>
+              <td>{profileData?.gender}</td>
             </tr>
             <tr>
               <td>Date of Birth</td>
-              <td>-not added-</td>
+              <td>{profileData?.dob}</td>
             </tr>
             <tr>
               <td>Location</td>
-              <td>-not added-</td>
+              <td>{profileData?.country}</td>
             </tr>
             <tr>
               <td>Alternate mobile</td>

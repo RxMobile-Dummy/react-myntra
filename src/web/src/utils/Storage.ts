@@ -25,21 +25,21 @@ export const setUserSession = (token: string, userId: string) => {
 export const setUserData = (userData: any) => {
   localStorage.setItem("user", JSON.stringify(userData));
 };
-export const getUserData = (userData: any) => {
-  const data = localStorage.get("user");
-  if(data) {
+export const getUserData = () => {
+  const data = localStorage.getItem("user");
+  if (data) {
     return JSON.parse(data);
-  }else{
-    return undefined
+  } else {
+    return undefined;
   }
 };
 
-export const isUserSessions = () =>{
+export const isUserSessions = () => {
   const userId = localStorage.getItem("userId");
-  const token = localStorage.getItem("token")
-  if(userId && token) {
+  const token = localStorage.getItem("token");
+  if (userId && token) {
     return true;
-  }else{
+  } else {
     return false;
   }
-}
+};

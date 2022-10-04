@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MenuText from "../../components/text/MenuText";
 import "./AccountPage.css";
 import { ProfileMenu } from "../../constants/ProfileMenu";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import { getUserData, isUserSessions } from "../../utils/Storage";
 const AccountPage = () => {
   //   let { path, url } = useMatch();
+
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isUserSessions()) {
+      navigate("/login");
+    }
+  });
 
   return (
     <div className="parent-container">

@@ -7,7 +7,7 @@ interface Props {
 
 const Button = (props: Props) => {
   return (
-    <button type="button" className="cus-btn">
+    <button type="submit" className="cus-btn">
       {props.title}
     </button>
   );
