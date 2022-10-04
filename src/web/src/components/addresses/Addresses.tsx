@@ -290,6 +290,7 @@ const Addresses = () => {
           handleBlur={handleBlur}
           submitClickHandler={submitClickHandler}
           errors={errors}
+          handleCancel={onCancelClickHandler}
         />
       </div>
     );

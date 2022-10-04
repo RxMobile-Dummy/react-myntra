@@ -22,6 +22,9 @@ export const Login = (user : Props) => {
      fullName
      email
      mobileNo
+     gender
+     dob
+     country
      isVerified
      token
      deviceId

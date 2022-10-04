@@ -8,12 +8,22 @@ import Loading from "../../components/Loading";
 // import { NotificationManager } from "react-notifications";
 import { images } from "../../assets/images";
 import "./WishListPage.css";
+import { useNavigate } from "react-router-dom";
+import { isUserSessions } from "../../utils/Storage";
 
 interface Props {
   props?: any;
 }
 
 export default function WishlistPage(props: Props) {
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isUserSessions()) {
+      navigate("/login");
+    }
+  });
+
   const [wishlistItems, setWishlistItems] = useState([
     {
       wishlistItemId: 1,

@@ -13,6 +13,7 @@ import addCardInfoReducer from "./addCardInfoReducer";
 import getCardInfoListReducer from "./getCardInfoListReducer";
 import removeCardInfoReducer from "./removeCardInfoReducer";
 import editCardInfoReducer from "./editCardInfoReducer";
+import editProfileReducer from "./editProfileReducer";
 
 const reducers = combineReducers({
   auth: authReducer,
@@ -29,6 +30,7 @@ const reducers = combineReducers({
   getCardInfoListReducer: getCardInfoListReducer,
   removeCardInfoReducer: removeCardInfoReducer,
   editCardInfoReducer: editCardInfoReducer,
+  editProfileReducer: editProfileReducer,
 });
 
 export default reducers;
