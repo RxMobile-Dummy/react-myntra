@@ -23,9 +23,17 @@ export const Register = (user : Props) => {
        statusCode
        message
        data {
-         _id
-         email
-         fullName
+        _id
+        fullName
+        email
+        mobileNo
+        gender
+        dob
+        country
+        isVerified
+        token
+        deviceId
+        platform
        }
      }
    }`

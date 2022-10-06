@@ -200,9 +200,10 @@ const EditAddressDialog = (props: Props) => {
                 <input
                   className="form-check-input"
                   type="radio"
-                  name="inlineRadioOptions"
+                  name="addType1"
                   id="inlineRadio1"
                   value="option1"
+                  checked={type === "Home"}
                   onChange={handleChange}
                 />
                 <label className="form-check-label" htmlFor="inlineRadio1">
@@ -213,9 +214,10 @@ const EditAddressDialog = (props: Props) => {
                 <input
                   className="form-check-input"
                   type="radio"
-                  name="inlineRadioOptions"
+                  name="addType2"
                   id="inlineRadio2"
                   value="option2"
+                  checked={type === "Office"}
                   onChange={handleChange}
                 />
                 <label className="form-check-label" htmlFor="inlineRadio2">
@@ -226,7 +228,8 @@ const EditAddressDialog = (props: Props) => {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  checked={isDefault}
+                  name="isDefault"
                   id="flexCheckDefault"
                   onChange={handleChange}
                 />

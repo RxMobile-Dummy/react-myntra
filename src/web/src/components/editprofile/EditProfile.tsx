@@ -84,6 +84,7 @@ const EditProfileComp = () => {
       closeButton.click();
 
       NotificationManager.success(data, "", 2000);
+      dispatch<any>(ResetChangePasswordState());
       // navigate("/");
     } else if (error) {
       console.log("error:::us: ", error);
@@ -362,6 +363,7 @@ const EditProfileComp = () => {
       </div>
       {/* change password dialog */}
       <ChangePasswordDialog
+        data={inputData}
         onClickChange={onClickPasswordChange}
         onClickCancel={onClickCancel}
         handleChange={handleChange}
