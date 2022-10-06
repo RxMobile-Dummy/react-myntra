@@ -1,13 +1,10 @@
 import React from 'react';
 import {SafeAreaView, Text, View} from 'react-native';
+import Login from './src/screens/Login';
 
 const App = () => {
   return (
-    <SafeAreaView>
-      <View>
-        <Text>React myntra app</Text>
-      </View>
-    </SafeAreaView>
+     <Login/>
   );
 };
 
