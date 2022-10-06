@@ -49,10 +49,10 @@ export const ProfileMenu = [
         menuName: "Addresses",
         menuLink: "/profile/addresses",
       },
-      {
-        menuName: "Myntra Insider",
-        menuLink: "/profile/myntra-insider",
-      },
+      // {
+      //   menuName: "Myntra Insider",
+      //   menuLink: "/profile/myntra-insider",
+      // },
     ],
   },
   {

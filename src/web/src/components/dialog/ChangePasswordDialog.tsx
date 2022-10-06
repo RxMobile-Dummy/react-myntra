@@ -9,11 +9,21 @@ interface Props {
   errors: any;
   handleBlur: any;
   hideDialog: boolean;
+  data: any;
 }
 
 const ChangePasswordDialog = (props: Props) => {
-
-  const { onClickChange, onClickCancel, handleChange, handleBlur, apiError, errors, hideDialog } = props
+  const {
+    onClickChange,
+    onClickCancel,
+    handleChange,
+    handleBlur,
+    apiError,
+    errors,
+    hideDialog,
+    data,
+  } = props;
+  const { oldPassword, newPassword, confirmPassword } = data;
   return (
     <div
       className="modal fade"
@@ -24,7 +34,6 @@ const ChangePasswordDialog = (props: Props) => {
       aria-labelledby="staticBackdropLabel"
       aria-hidden="true"
     >
-    
       <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
           <div className="modal-header">
@@ -41,31 +50,48 @@ const ChangePasswordDialog = (props: Props) => {
           <div className="modal-body" onSubmit={onClickChange}>
             <form id="change-form">
               <div className="material-textfield mt-4">
-                <input placeholder=" " type="password"
+                <input
+                  placeholder=" "
+                  type="password"
                   name="oldPassword"
                   id="oldPassword"
+                  value={oldPassword}
                   onBlur={handleBlur}
-                  onChange={handleChange} required />
+                  onChange={handleChange}
+                  required
+                />
                 <label>Old Password*</label>
               </div>
               <p className="text-danger mb-0 font-weight-bold">
                 {errors.oldPassword}
               </p>
               <div className="material-textfield mt-4">
-                <input placeholder=" " type="password"
+                <input
+                  placeholder=" "
+                  type="password"
                   name="newPassword"
                   id="newPassword"
+                  value={newPassword}
                   onBlur={handleBlur}
-                  onChange={handleChange} required />
+                  onChange={handleChange}
+                  required
+                />
                 <label>New Password*</label>
               </div>
               <p className="text-danger mb-0 font-weight-bold">
                 {errors.newPassword}
               </p>
               <div className="material-textfield mt-4">
-                <input placeholder=" " type="password" name="confirmPassword" id="confirmPassword"
+                <input
+                  placeholder=" "
+                  type="password"
+                  name="confirmPassword"
+                  id="confirmPassword"
                   onBlur={handleBlur}
-                  onChange={handleChange} required />
+                  value={confirmPassword}
+                  onChange={handleChange}
+                  required
+                />
                 <label>Confirm Password*</label>
               </div>
               <p className="text-danger mb-0 font-weight-bold">

@@ -1,4 +1,9 @@
-import { GetCardInfoList, RootState, RemoveCardInfo } from "core";
+import {
+  GetCardInfoList,
+  RootState,
+  RemoveCardInfo,
+  ResetRemoveCardInfoState,
+} from "core";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -55,10 +60,12 @@ const SavedCards = () => {
         userId: getUserId() || "",
         authToken: getToken() || "",
       };
+      dispatch<any>(ResetRemoveCardInfoState());
       dispatch<any>(GetCardInfoList(reqData));
     } else if (removeCardError) {
       console.log("error:::us: ", removeCardError);
       NotificationManager.error(removeCardError, "", 2000);
+      dispatch<any>(ResetRemoveCardInfoState());
     }
   }, [removeCarddata, removeCardError]);
 

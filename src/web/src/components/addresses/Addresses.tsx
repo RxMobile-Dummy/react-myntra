@@ -29,7 +29,7 @@ const Addresses = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [dialogTitle, setDialogTitle] = useState("ADD NEW ADDRESS");
   const [isEdit, setEditable] = useState(false);
-
+  const [isDefault, setIsDefault] = useState(false);
   const dispatch = useDispatch();
 
   let { addressListData, addressListError } = useSelector(
@@ -82,6 +82,7 @@ const Addresses = () => {
         authToken: getToken() || "",
       };
       dispatch<any>(GetAddressList(reqData));
+      dispatch<any>(ResetAddAddressState());
     } else if (error) {
       console.log("error:::us: ", error);
       NotificationManager.error(error, "", 2000);
@@ -102,6 +103,7 @@ const Addresses = () => {
         userId: getUserId() || "",
         authToken: getToken() || "",
       };
+      dispatch<any>(ResetEditAddressState());
       dispatch<any>(GetAddressList(reqData));
     } else if (editAdderror) {
       console.log("editAdderror:::us: ", editAdderror);
@@ -119,6 +121,12 @@ const Addresses = () => {
       closeButton.click();
 
       NotificationManager.success("Address removed", "", 2000);
+      dispatch<any>(ResetRemoveAddressState());
+      const reqData = {
+        userId: getUserId() || "",
+        authToken: getToken() || "",
+      };
+      dispatch<any>(GetAddressList(reqData));
     } else if (removeAddError) {
       console.log("error:::us: ", removeAddError);
       NotificationManager.error(removeAddError, "", 2000);
@@ -136,7 +144,7 @@ const Addresses = () => {
     billingAddress: "",
     shippingAddress: "",
     locality: "",
-    type: "",
+    type: "Home",
     isDefault: false,
   });
 
@@ -171,7 +179,7 @@ const Addresses = () => {
       billingAddress: "",
       shippingAddress: "",
       locality: "",
-      type: "",
+      type: "Home",
       isDefault: false,
     });
   };
@@ -210,8 +218,8 @@ const Addresses = () => {
         billingAddress: address.billingAddress,
         shippingAddress: address.shippingAddress,
         locality: address.locality,
-        type: "Home",
-        isDefault: false,
+        type: address.type,
+        isDefault: address.isDefault,
       };
       await dispatch<any>(AddAddress(reqData));
     } else {
@@ -230,8 +238,8 @@ const Addresses = () => {
         billingAddress: address.billingAddress,
         shippingAddress: address.shippingAddress,
         locality: address.locality,
-        type: "Home",
-        isDefault: false,
+        type: address.type,
+        isDefault: address.isDefault,
       };
       await dispatch<any>(EditAddress(reqData));
     }
@@ -244,7 +252,17 @@ const Addresses = () => {
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
-    setAddress({ ...address, [name]: value });
+    console.log("name:: ", name);
+    console.log("value:: ", value);
+    if (name === "isDefault") {
+      setAddress({ ...address, [name]: !address.isDefault });
+    } else if (name === "addType1") {
+      setAddress({ ...address, type: "Home" });
+    } else if (name === "addType2") {
+      setAddress({ ...address, type: "Office" });
+    } else {
+      setAddress({ ...address, [name]: value });
+    }
   };
 
   const validate = {
