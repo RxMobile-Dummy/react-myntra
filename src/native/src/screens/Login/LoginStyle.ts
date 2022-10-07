@@ -63,7 +63,7 @@ export const styles = StyleSheet.create({
     height: normalize(45),
   },
   lg: {
-    fontSize: normalize(14),
+    fontSize: normalize(16),
     color: '#fff',
   },
   bottomContainer: {

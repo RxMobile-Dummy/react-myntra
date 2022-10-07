@@ -5,6 +5,8 @@ import RegisterScreen from './src/screens/Register';
 import {NavigationContainer} from '@react-navigation/native';
 import Navigation from './src/navigations';
 import {Provider as PaperProvider} from 'react-native-paper';
+import ForgetPassword from './src/screens/ForgetPassword';
+import Login from './src/screens/Login';
 
 const App = () => {
   return (

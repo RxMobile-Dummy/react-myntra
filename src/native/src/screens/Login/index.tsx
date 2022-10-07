@@ -66,7 +66,9 @@ const Login: React.FC<Props> = props => {
                   bgColor="#ff3f6c"
                   children={
                     <View style={styles.lgContainer}>
-                      <Text style={styles.lg}>Login</Text>
+                      <Text style={{...styles.lg, fontWeight: 'bold'}}>
+                        Login
+                      </Text>
                     </View>
                   }
                 />
