@@ -11,7 +11,6 @@ import { Props } from './ILogin';
 const Login: React.FC<Props> = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState("")
   return (
     <LinearGradient colors={["#FEEDF6", "#FCEEE5"]} style={{ flex: 1 }}>
       <KeyboardAwareScrollView enableOnAndroid contentContainerStyle={{ flex: 1 }}>
@@ -55,7 +54,7 @@ const Login: React.FC<Props> = (props) => {
                   bgColor="#ff3f6c"
                   children={
                     <View style={styles.lgContainer}>
-                      <Text style={styles.lg}>Login</Text>
+                      <Text style={{...styles.lg, fontWeight : "bold"}}>Login</Text>
                     </View>
                   }
                 />

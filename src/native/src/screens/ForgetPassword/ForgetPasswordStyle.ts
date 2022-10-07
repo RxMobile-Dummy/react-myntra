@@ -23,6 +23,7 @@ export const styles = StyleSheet.create({
         paddingTop: normalize(15),
         paddingBottom : normalize(20),
         width: "100%",
+        height : normalize(180)
       },
       lgTxt: {
         fontSize: normalize(18),
@@ -40,10 +41,6 @@ export const styles = StyleSheet.create({
       elTxt : {
         fontSize: normalize(14),
         color: "#585757"
-      },
-      footer : {
-        marginTop: normalize(10),
-        paddingLeft: normalize(5)
       },
       txt : {
         fontSize: normalize(14),
@@ -66,17 +63,4 @@ export const styles = StyleSheet.create({
         fontSize: normalize(16),
         color: "#fff"
       },
-      bottomContainer : {
-        marginTop : "19%",
-        alignSelf : "center"
-      },
-      bottomTxt : {
-        fontSize : normalize(14),
-        color : "#6c757d"
-      },
-      boldTxt : {
-        fontSize : normalize(14),
-        color : Colors.pink,
-        fontWeight : "bold"
-      }
 })
