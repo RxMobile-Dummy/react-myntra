@@ -1,12 +1,12 @@
-import { StyleSheet, Platform, PixelRatio, Dimensions, } from 'react-native';
+import {StyleSheet, Platform, PixelRatio, Dimensions} from 'react-native';
 
-const scale = Dimensions.get("screen").width / 320;
+const scale = Dimensions.get('screen').width / 320;
 
 export function normalize(size: number) {
-  const newSize = size * scale
+  const newSize = size * scale;
   if (Platform.OS === 'ios') {
-    return Math.round(PixelRatio.roundToNearestPixel(newSize))
+    return Math.round(PixelRatio.roundToNearestPixel(newSize));
   } else {
-    return Math.round(PixelRatio.roundToNearestPixel(newSize)) - 2
+    return Math.round(PixelRatio.roundToNearestPixel(newSize)) - 2;
   }
 }

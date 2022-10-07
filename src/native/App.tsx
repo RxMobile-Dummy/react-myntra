@@ -1,11 +1,26 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 import {SafeAreaView, Text, View} from 'react-native';
+import RegisterScreen from './src/screens/Register';
+import {NavigationContainer} from '@react-navigation/native';
+import Navigation from './src/navigations';
+import {Provider as PaperProvider} from 'react-native-paper';
 import ForgetPassword from './src/screens/ForgetPassword';
 import Login from './src/screens/Login';
 
 const App = () => {
   return (
-     <Login/>
+    // <SafeAreaView>
+    //   <View>
+    //     {/* <Text>React myntra app</Text> */}
+    //     <RegisterScreen />
+    //   </View>
+    // </SafeAreaView>
+    <PaperProvider>
+      <NavigationContainer>
+        <Navigation />
+      </NavigationContainer>
+    </PaperProvider>
   );
 };
 
