@@ -4,7 +4,7 @@ import InputField from "../../components/InputField/InputField";
 import { styles } from "./ForgetPasswordStyle";
 import LinearGradient from 'react-native-linear-gradient';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import Button from "../../components/Button";
+import Button from "../../components/Button/Button";
 import { normalize } from "../../utils/commonStyles";
 
 const ForgetPassword = () => {

@@ -19,7 +19,7 @@ import Toast, {ErrorToast} from 'react-native-toast-message';
 import styles from './styles';
 import {Props} from './ISignUp';
 import {TextInputField} from '../../components/text_input/TextInputField';
-import CutomButton from '../../components/button/CutomButton';
+import CutomButton from '../../components/Button/CutomButton';
 import {String} from '../../constants/String';
 import CountryPicker from 'react-native-country-picker-modal';
 
