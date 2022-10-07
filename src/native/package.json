@@ -23,7 +23,9 @@
     "react-native-screens": "^3.18.0",
     "react-native-toast-message": "^2.1.5",
     "react-native-vector-icons": "^9.2.0",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "react-native-keyboard-aware-scroll-view": "^0.9.5",
+    "react-native-linear-gradient": "^2.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
