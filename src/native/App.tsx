@@ -6,20 +6,15 @@ import {NavigationContainer} from '@react-navigation/native';
 import Navigation from './src/navigations';
 import {Provider as PaperProvider} from 'react-native-paper';
 import ForgetPassword from './src/screens/ForgetPassword';
+import Home from './src/screens/Home';
 import Login from './src/screens/Login';
 
 const App = () => {
   return (
-    // <SafeAreaView>
-    //   <View>
-    //     {/* <Text>React myntra app</Text> */}
-    //     <RegisterScreen />
-    //   </View>
-    // </SafeAreaView>
     <PaperProvider>
-      <NavigationContainer>
-        <Navigation />
-      </NavigationContainer>
+      {/* <NavigationContainer> */}
+        <Home />
+      {/* </NavigationContainer> */}
     </PaperProvider>
   );
 };
