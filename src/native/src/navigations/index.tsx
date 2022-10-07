@@ -5,6 +5,7 @@ import {NavigationParams} from './NavigationParams';
 import {Colors} from '../constants/Color';
 import RegisterScreen from '../screens/Register';
 import {String} from '../constants/String';
+import Login from '../screens/Login';
 
 const Stack = createStackNavigator<NavigationParams>();
 
@@ -21,6 +22,13 @@ export default function Navigation() {
       <Stack.Screen
         name="Register"
         component={RegisterScreen}
+        options={{
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name="Login"
+        component={Login}
         options={{
           headerShown: true,
         }}

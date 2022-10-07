@@ -7,6 +7,8 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
 import {Font} from '../../constants/Font';
 import {Colors} from '../../constants/Color';
 
@@ -16,6 +18,7 @@ interface TextFieldProps {
   onTextChange: Function;
   onBlur: Function;
   value: string;
+  disabled?: boolean;
 }
 
 export const TextInputField: React.FC<TextFieldProps> = ({
@@ -24,6 +27,7 @@ export const TextInputField: React.FC<TextFieldProps> = ({
   onTextChange,
   onBlur,
   value,
+  disabled = false,
 }) => {
   const [isPassword, setIsPassword] = useState(false);
 
@@ -33,6 +37,7 @@ export const TextInputField: React.FC<TextFieldProps> = ({
 
   return (
     <TextInput
+      disabled={disabled}
       autoCapitalize="none"
       label={
         <Text style={{fontSize: 18, fontFamily: Font.MediumFont}}>
@@ -57,8 +62,10 @@ export const TextInputField: React.FC<TextFieldProps> = ({
         isSecure ? (
           <TextInput.Icon
             onPress={() => setIsPassword(!isPassword)}
-            icon={isPassword ? 'eye' : 'eye-off'}
-            color={Colors.black}
+            // name={isPassword ? 'eye' : 'eye-off'}
+            // color={Colors.black}
+            // name={<FontAwesome name="eye" color={Colors.black} size={24} />}
+            name={() => <FontAwesome name={'eye'} size={24} color="black" />}
           />
         ) : undefined
       }

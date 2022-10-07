@@ -1,31 +1,38 @@
-import React, { useState } from "react";
-import { SafeAreaView, Text, View, Image, Alert } from 'react-native'
-import { styles } from "./LoginStyle";
+import React, {useState} from 'react';
+import {SafeAreaView, Text, View, Image, Alert} from 'react-native';
+import {styles} from './LoginStyle';
 import LinearGradient from 'react-native-linear-gradient';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import InputField from "../../components/InputField/InputField";
-import Button from "../../components/Button";
-import { normalize } from "../../utils/commonStyles";
-import { Props } from './ILogin';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import InputField from '../../components/InputField/InputField';
+import Button from '../../components/button';
+import {normalize} from '../../utils/commonStyles';
+import {Props} from './ILogin';
 
-const Login: React.FC<Props> = (props) => {
+const Login: React.FC<Props> = props => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState("")
+  const [role, setRole] = useState('');
   return (
-    <LinearGradient colors={["#FEEDF6", "#FCEEE5"]} style={{ flex: 1 }}>
-      <KeyboardAwareScrollView enableOnAndroid contentContainerStyle={{ flex: 1 }}>
-        <View style={styles.subContainer} >
-          <Image source={{ uri: "https://constant.myntassets.com/pwa/assets/img/banner_login_landing_300.jpg" }} style={styles.img} resizeMode="cover" />
+    <LinearGradient colors={['#FEEDF6', '#FCEEE5']} style={{flex: 1}}>
+      <KeyboardAwareScrollView
+        enableOnAndroid
+        contentContainerStyle={{flex: 1, width: '100%'}}
+      >
+        <View style={styles.subContainer}>
+          <Image
+            source={{
+              uri: 'https://constant.myntassets.com/pwa/assets/img/banner_login_landing_300.jpg',
+            }}
+            style={styles.img}
+            resizeMode="cover"
+          />
           <View style={styles.header}>
-            <View style={{ alignItems: "center" }}>
+            <View style={{alignItems: 'center'}}>
               <Text style={styles.lgTxt}>Login</Text>
             </View>
             <View style={styles.box}>
               <View style={styles.elContainer}>
-                <Text style={styles.elTxt}>
-                  Email
-                </Text>
+                <Text style={styles.elTxt}>Email</Text>
                 <InputField
                   value={email}
                   onChange={(email: any) => setEmail(email)}
@@ -34,9 +41,7 @@ const Login: React.FC<Props> = (props) => {
               </View>
 
               <View style={styles.elContainer}>
-                <Text style={styles.elTxt}>
-                  Pasword
-                </Text>
+                <Text style={styles.elTxt}>Pasword</Text>
                 <InputField
                   value={password}
                   onChange={(email: any) => setPassword(email)}
@@ -44,14 +49,20 @@ const Login: React.FC<Props> = (props) => {
                 />
               </View>
               <View style={styles.footer}>
-                <Text style={styles.txt}>By Continuing, I agree to the<Text style={styles.subTxt}>{"  "}Terms of</Text></Text>
-                <Text style={styles.subTxt}>Usage <Text style={styles.txt}>{" "}&</Text><Text style={styles.subTxt}>{"  "}Privcay Policy</Text></Text>
+                <Text style={styles.txt}>
+                  By Continuing, I agree to the
+                  <Text style={styles.subTxt}>{'  '}Terms of</Text>
+                </Text>
+                <Text style={styles.subTxt}>
+                  Usage <Text style={styles.txt}> &</Text>
+                  <Text style={styles.subTxt}>{'  '}Privcay Policy</Text>
+                </Text>
               </View>
               {/* Add button */}
               <View style={styles.top}>
                 <Button
                   height={normalize(45)}
-                  onPress={() => Alert.alert("Hello")}
+                  onPress={() => Alert.alert('Hello')}
                   bgColor="#ff3f6c"
                   children={
                     <View style={styles.lgContainer}>
@@ -62,14 +73,22 @@ const Login: React.FC<Props> = (props) => {
               </View>
             </View>
             <View style={styles.bottomContainer}>
-              <Text style={styles.bottomTxt}>Don't have an account? <Text style={styles.boldTxt}>Register</Text></Text>
-              <Text style={{ ...styles.bottomTxt, paddingTop: normalize(5) }}>Forget Password? <Text style={{ ...styles.boldTxt, paddingTop: normalize(5) }}>Change Password</Text></Text>
+              <Text style={styles.bottomTxt}>
+                Don't have an account?{' '}
+                <Text style={styles.boldTxt}>Register</Text>
+              </Text>
+              <Text style={{...styles.bottomTxt, paddingTop: normalize(5)}}>
+                Forget Password?{' '}
+                <Text style={{...styles.boldTxt, paddingTop: normalize(5)}}>
+                  Change Password
+                </Text>
+              </Text>
             </View>
           </View>
         </View>
       </KeyboardAwareScrollView>
     </LinearGradient>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

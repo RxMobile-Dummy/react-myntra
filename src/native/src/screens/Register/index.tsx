@@ -21,9 +21,12 @@ import {Props} from './ISignUp';
 import {TextInputField} from '../../components/text_input/TextInputField';
 import CutomButton from '../../components/button/CutomButton';
 import {String} from '../../constants/String';
+import CountryPicker from 'react-native-country-picker-modal';
 
 const RegisterScreen: React.FC<Props> = ({navigation}) => {
   const [isLoading, setLoading] = useState(false);
+  const [isPicker, setCountryPicker] = useState(false);
+  const [country, setCountry] = useState('');
 
   const toastConfig = {
     error: (props: any) => (
@@ -47,6 +50,13 @@ const RegisterScreen: React.FC<Props> = ({navigation}) => {
     gender: '',
     country: '',
   };
+  const onSelect = (country: any) => {
+    // setCountryCode(country.cca2)
+    // setCountry(country)
+    setCountryPicker(!isPicker);
+    console.log(country);
+    setCountry(country.name);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -54,7 +64,7 @@ const RegisterScreen: React.FC<Props> = ({navigation}) => {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <ScrollView>
+          <ScrollView keyboardShouldPersistTaps="handled">
             <View>
               {/* <Animated.View
                 style={{
@@ -67,6 +77,13 @@ const RegisterScreen: React.FC<Props> = ({navigation}) => {
                   resizeMode={'contain'}
                 />
               </Animated.View> */}
+              <Image
+                source={{
+                  uri: 'https://constant.myntassets.com/pwa/assets/img/banner_login_landing_300.jpg',
+                }}
+                style={styles.img}
+                resizeMode="cover"
+              />
               <Formik
                 initialValues={initialValue}
                 validateOnChange={false}
@@ -91,6 +108,18 @@ const RegisterScreen: React.FC<Props> = ({navigation}) => {
                       onBlur={handleBlur('email')}
                       value={values.email}
                     />
+                    <TouchableOpacity
+                      onPress={() => {
+                        setCountryPicker(!isPicker);
+                      }}
+                      style={{width: '100%', alignItems: 'center'}}
+                    >
+                      <TextInputField
+                        placeholder="County"
+                        value={country}
+                        disabled={true}
+                      />
+                    </TouchableOpacity>
                     <TextInputField
                       placeholder="Mobile Number"
                       onTextChange={handleChange('mobileNumber')}
@@ -137,7 +166,11 @@ const RegisterScreen: React.FC<Props> = ({navigation}) => {
                 <Text style={styles.bottomText}>
                   {String.AlreadyRegistered}
                 </Text>
-                <TouchableOpacity onPress={() => {}}>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate('Login');
+                  }}
+                >
                   <Text style={styles.signInBtn}>{String.SignIn}</Text>
                 </TouchableOpacity>
               </View>
@@ -146,6 +179,17 @@ const RegisterScreen: React.FC<Props> = ({navigation}) => {
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
       <Toast config={toastConfig} />
+      <CountryPicker
+        {...{
+          onSelect,
+        }}
+        containerButtonStyle={{display: 'none'}}
+        visible={isPicker}
+        withFilter
+        onClose={() => {
+          setCountryPicker(!isPicker);
+        }}
+      />
     </SafeAreaView>
   );
 };
