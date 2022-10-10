@@ -6,6 +6,7 @@ import {Colors} from '../constants/Color';
 import RegisterScreen from '../screens/Register';
 import {String} from '../constants/String';
 import Login from '../screens/Login';
+import DrawerMenu from './Drawer/DrawerMenu';
 import Home from '../screens/Home';
 
 const Stack = createStackNavigator<NavigationParams>();
@@ -19,7 +20,12 @@ const defaultNavOptions = {
 
 export default function Navigation() {
   return (
-    <Stack.Navigator  screenOptions={defaultNavOptions}>
+    <Stack.Navigator screenOptions={defaultNavOptions}>
+      <Stack.Screen
+        name="Dashboard"
+        component={DrawerMenu}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="Register"
         component={RegisterScreen}
@@ -34,7 +40,7 @@ export default function Navigation() {
           headerShown: true,
         }}
       />
-       <Stack.Screen
+      <Stack.Screen
         name="Home"
         component={Home}
         options={{

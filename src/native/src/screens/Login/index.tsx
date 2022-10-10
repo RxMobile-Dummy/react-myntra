@@ -4,9 +4,9 @@ import {styles} from './LoginStyle';
 import LinearGradient from 'react-native-linear-gradient';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import InputField from '../../components/InputField/InputField';
-import Button from '../../components/Button/Button';
 import {normalize} from '../../utils/commonStyles';
 import {Props} from './ILogin';
+import Button from '../../components/Button';
 
 const Login: React.FC<Props> = props => {
   const [email, setEmail] = useState('');

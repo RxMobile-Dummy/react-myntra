@@ -11,4 +11,5 @@ export const Colors = {
   slide3Color: '#65419B',
   purpleColor: '#A020F0',
   lightGrey: '#D3D3D3',
+  lightPink: '#FEEDF6',
 };
