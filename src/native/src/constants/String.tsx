@@ -1,7 +1,9 @@
 export const String = {
   LogOut: 'Logout',
   LogOutText: 'Are you sure you want to Logout?',
-  Cancel: 'Cancel',
+  Cancel: 'CANCEL',
+  Delete: 'DELETE',
+  Save: 'SAVE',
   Ok: 'OK',
   SignIn: 'Login',
   SignUp: 'Register',
@@ -26,4 +28,18 @@ export const String = {
   SomethingWentWrong: 'Something went wrong, Please try again.',
   IncorrectPassword: 'Incorrect password.',
   UserNotFound: 'User not found.',
+
+  //Cards
+  cardTitle: 'SAVE YOUR CREDIT/ DEBIT CARDS',
+  cardSubTitle:
+    "It's convenient to pay with saved cards \
+  Your card information will be secure, we use 128-bit encryption",
+  addCard: 'ADD CARD',
+  savedCard: 'Saved Cards',
+  cardNumber: 'CARD NUMBER',
+  nameOnCard: 'NAME ON CARD',
+  validity: 'Validity',
+  removeCard: 'Remove Card',
+  deleteCardMsg: 'Are you sure you want to delete this card?',
+  addNewCard: 'Add New Credit/Debit Card',
 };

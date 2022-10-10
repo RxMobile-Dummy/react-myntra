@@ -8,13 +8,14 @@ import {Provider as PaperProvider} from 'react-native-paper';
 import ForgetPassword from './src/screens/ForgetPassword';
 import Home from './src/screens/Home';
 import Login from './src/screens/Login';
+import CardScreen from './src/screens/Cards';
 
 const App = () => {
   return (
     <PaperProvider>
-      {/* <NavigationContainer> */}
-        <Home />
-      {/* </NavigationContainer> */}
+      <NavigationContainer>
+        <Navigation />
+      </NavigationContainer>
     </PaperProvider>
   );
 };

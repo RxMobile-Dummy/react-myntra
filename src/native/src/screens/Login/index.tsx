@@ -6,7 +6,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import InputField from '../../components/InputField/InputField';
 import {normalize} from '../../utils/commonStyles';
 import {Props} from './ILogin';
-import Button from '../../components/Button';
+import Button from '../../components/Button/Button';
 
 const Login: React.FC<Props> = props => {
   const [email, setEmail] = useState('');

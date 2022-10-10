@@ -10,6 +10,8 @@ import CustomDrawer from './CustomDrawer';
 import Login from '../../screens/Login';
 import RegisterScreen from '../../screens/Register';
 import {Props} from '../../screens/Register/ISignUp';
+import Home from '../../screens/Home';
+import CardScreen from '../../screens/Cards';
 
 // let screenStyle = null;
 
@@ -42,8 +44,8 @@ const DrawerMenu = () => {
         }}
       /> */}
       <Drawer.Screen
-        name="Login"
-        component={Login}
+        name="Home"
+        component={Home}
         options={{
           drawerIcon: ({color, size}) => {
             return <Ionicons name="person-outline" size={size} color={color} />;
@@ -51,8 +53,8 @@ const DrawerMenu = () => {
         }}
       />
       <Drawer.Screen
-        name="Register"
-        component={RegisterScreen}
+        name="Cards"
+        component={CardScreen}
         options={{
           drawerIcon: ({color, size}) => {
             return <Ionicons name="timer-outline" size={size} color={color} />;
