@@ -16,7 +16,7 @@ import TransButton from '../../components/Button/TransButton';
 const ProfileScreen: React.FC<Props> = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
+      <ScrollView style={{margin: Platform.OS == 'ios' ? 20 : 0}}>
         <Text style={styles.title}>{String.profileDetails}</Text>
         <View style={styles.line} />
         <View style={styles.dataContainer}>
@@ -38,7 +38,9 @@ const ProfileScreen: React.FC<Props> = ({navigation}) => {
           </View>
         </View>
         <TransButton
-          onPress={() => {}}
+          onPress={() => {
+            navigation.navigate('EditProfile');
+          }}
           text={String.edit}
           containerStyle={styles.editBtn}
           textStyle={styles.btnText}

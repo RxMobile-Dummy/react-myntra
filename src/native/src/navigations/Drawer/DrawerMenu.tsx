@@ -50,7 +50,7 @@ const DrawerMenu = () => {
         component={Home}
         options={{
           drawerIcon: ({color, size}) => {
-            return <Ionicons name="person-outline" size={size} color={color} />;
+            return <Ionicons name="home-outline" size={size} color={color} />;
           },
         }}
       />
@@ -59,7 +59,7 @@ const DrawerMenu = () => {
         component={ProfileScreen}
         options={{
           drawerIcon: ({color, size}) => {
-            return <Ionicons name="timer-outline" size={size} color={color} />;
+            return <Ionicons name="person-outline" size={size} color={color} />;
           },
         }}
       />
@@ -68,7 +68,7 @@ const DrawerMenu = () => {
         component={CardScreen}
         options={{
           drawerIcon: ({color, size}) => {
-            return <Ionicons name="timer-outline" size={size} color={color} />;
+            return <Ionicons name="card-outline" size={size} color={color} />;
           },
         }}
       />

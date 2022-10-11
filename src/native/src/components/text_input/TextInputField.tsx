@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet, Text, ViewStyle} from 'react-native';
 import {TextInput} from 'react-native-paper';
 
 import {
@@ -9,7 +9,6 @@ import {
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-import {Font} from '../../constants/Font';
 import {Colors} from '../../constants/Color';
 
 interface TextFieldProps {
@@ -19,6 +18,7 @@ interface TextFieldProps {
   onBlur: Function;
   value: string;
   disabled?: boolean;
+  inputStyle?: ViewStyle;
 }
 
 export const TextInputField: React.FC<TextFieldProps> = ({
@@ -28,6 +28,7 @@ export const TextInputField: React.FC<TextFieldProps> = ({
   onBlur,
   value,
   disabled = false,
+  inputStyle = {},
 }) => {
   const [isPassword, setIsPassword] = useState(false);
 
@@ -39,24 +40,19 @@ export const TextInputField: React.FC<TextFieldProps> = ({
     <TextInput
       disabled={disabled}
       autoCapitalize="none"
-      label={
-        <Text style={{fontSize: 18, fontFamily: Font.MediumFont}}>
-          {placeholder}
-        </Text>
-      }
+      label={<Text style={{fontSize: 18}}>{placeholder}</Text>}
       mode="outlined"
       secureTextEntry={isPassword}
       onChangeText={text => onTextChange(text)}
       onBlur={text => onBlur(text)}
       value={value}
-      style={styles.textInput}
+      style={[styles.textInput, inputStyle]}
       theme={{
         colors: {
           primary: Colors.accent,
           text: Colors.black,
           placeholder: Colors.lightGrey,
         },
-        roundness: 10,
       }}
       right={
         isSecure ? (
@@ -76,30 +72,11 @@ export const TextInputField: React.FC<TextFieldProps> = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    height: hp('7%'),
-    borderRadius: 10,
-    backgroundColor: '#CBCBCB',
-    justifyContent: 'center',
-    width: wp('80%'),
-    alignItems: 'center',
-    alignSelf: 'center',
-    marginVertical: 10,
-  },
-  textField: {
-    flex: 1,
-    fontSize: hp('2%'),
-    color: '#000',
-    width: '100%',
-    fontFamily: Font.MediumFont,
-  },
   textInput: {
     fontSize: hp('2%'),
     // color: "#000",
     backgroundColor: Colors.primary,
     width: '80%',
     marginVertical: 10,
-    fontFamily: Font.MediumFont,
   },
 });
