@@ -10,6 +10,7 @@ import DrawerMenu from './Drawer/DrawerMenu';
 import Home from '../screens/Home';
 import ProductList from '../screens/ProductList';
 import ProductCheckout from '../screens/ProductCheckout';
+import EditProfileScreen from '../screens/EditProfile';
 
 const Stack = createStackNavigator<NavigationParams>();
 
@@ -31,16 +32,17 @@ export default function Navigation() {
         }}
       />
       <Stack.Screen
+        name="Dashboard"
+        component={DrawerMenu}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
         name="ProductList"
         component={ProductList}
         options={{
           headerShown: true,
+          title: 'Product List',
         }}
-      />
-      <Stack.Screen
-        name="Dashboard"
-        component={DrawerMenu}
-        options={{headerShown: false}}
       />
       <Stack.Screen
         name="Register"
@@ -63,7 +65,14 @@ export default function Navigation() {
           headerShown: true,
         }}
       />
-
+      <Stack.Screen
+        name="EditProfile"
+        component={EditProfileScreen}
+        options={{
+          headerShown: true,
+          title: 'Edit Profile',
+        }}
+      />
     </Stack.Navigator>
   );
 }
