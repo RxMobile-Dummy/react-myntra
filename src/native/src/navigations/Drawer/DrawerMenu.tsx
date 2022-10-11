@@ -12,6 +12,7 @@ import RegisterScreen from '../../screens/Register';
 import {Props} from '../../screens/Register/ISignUp';
 import Home from '../../screens/Home';
 import CardScreen from '../../screens/Cards';
+import AddressScreen from '../../screens/Address';
 
 // let screenStyle = null;
 
@@ -55,6 +56,15 @@ const DrawerMenu = () => {
       <Drawer.Screen
         name="Cards"
         component={CardScreen}
+        options={{
+          drawerIcon: ({color, size}) => {
+            return <Ionicons name="timer-outline" size={size} color={color} />;
+          },
+        }}
+      />
+      <Drawer.Screen
+        name="Addresses"
+        component={AddressScreen}
         options={{
           drawerIcon: ({color, size}) => {
             return <Ionicons name="timer-outline" size={size} color={color} />;
