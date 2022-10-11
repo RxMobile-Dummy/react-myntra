@@ -29,14 +29,14 @@ const AppHeader = () => {
         <View style={styles.statusBar}>
             <View style={{ width: "100%", paddingRight: normalize(20), marginTop: normalize(30), flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                 <View style={{ width: "15%" }}>
-                    <Icon name="arrow-back" type="ionicon" size={normalize(28)} />
+                    <Icon name="arrow-back" type="ionicon" size={normalize(28)} tvParallaxProperties />
                 </View>
 
                 <View style={{ width: "40%", flexDirection: "row", justifyContent: "space-between" }}>
                     {
                         listIcon.map((item: any, index: number) => (
                             <View style={{ width: "18%", }} key={index}>
-                                <Icon name={item.name} type={item.type} size={normalize(20)} />
+                                <Icon name={item.name} type={item.type} size={normalize(20)} tvParallaxProperties />
                             </View>
                         ))
                     }

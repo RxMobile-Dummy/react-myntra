@@ -1,4 +1,4 @@
-import {StyleSheet, Platform, PixelRatio, Dimensions} from 'react-native';
+import {StyleSheet, Platform, PixelRatio, Dimensions, NativeModules} from 'react-native';
 
 const scale = Dimensions.get('screen').width / 320;
 
@@ -10,6 +10,12 @@ export function normalize(size: number) {
     return Math.round(PixelRatio.roundToNearestPixel(newSize)) - 2;
   }
 }
+
+const { StatusBarManager } = NativeModules;
+
+const STATUSBAR_HEIGHT = StatusBarManager.HEIGHT;
+
+export const APPBAR_HEIGHT = Platform.OS === 'ios' ? STATUSBAR_HEIGHT + 40 : STATUSBAR_HEIGHT;
 
 export const commonStyles = StyleSheet.create({
   shadow: {

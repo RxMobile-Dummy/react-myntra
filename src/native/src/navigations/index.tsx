@@ -8,6 +8,7 @@ import {String} from '../constants/String';
 import Login from '../screens/Login';
 import DrawerMenu from './Drawer/DrawerMenu';
 import Home from '../screens/Home';
+import ProductList from '../screens/ProductList';
 
 const Stack = createStackNavigator<NavigationParams>();
 
@@ -21,6 +22,13 @@ const defaultNavOptions = {
 export default function Navigation() {
   return (
     <Stack.Navigator screenOptions={defaultNavOptions}>
+      <Stack.Screen
+        name="ProductList"
+        component={ProductList}
+        options={{
+          headerShown: true,
+        }}
+      />
       <Stack.Screen
         name="Dashboard"
         component={DrawerMenu}
@@ -47,6 +55,7 @@ export default function Navigation() {
           headerShown: true,
         }}
       />
+
     </Stack.Navigator>
   );
 }
