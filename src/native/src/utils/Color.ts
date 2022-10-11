@@ -14,5 +14,6 @@ export const Colors = {
   cyan: '#00CED1',
   pink : "#FF3F6B",
   bgColor : "#fffafc",
-  lightGrey : "#D3D3D3"
+  lightGrey : "#D3D3D3",
+  grey: '#808080',
 };

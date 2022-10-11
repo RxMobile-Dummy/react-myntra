@@ -87,7 +87,7 @@ const ProductList = () => {
     const [isFilter, setIsFilter] = useState(0)
     const [isProduct, setIsProduct] = useState(0)
     const [isSortBy, setIsSortBy] = useState(false)
-    const [sortTitle, setSortByTitle] = useState("Sort By :Recommended")
+    const [sortTitle, setSortByTitle] = useState("Sort By : Recommended")
 
     const numberOfColumn = 2
 
@@ -125,7 +125,7 @@ const ProductList = () => {
 
     const closeMenu = () => setIsSortBy(false);
 
-    const onSortBy = (name : string) => {
+    const onSortBy = (name: string) => {
         setSortByTitle(name)
         setIsSortBy(false)
     }
@@ -134,22 +134,22 @@ const ProductList = () => {
         <View style={styles.container}>
 
             <View style={styles.center}>
-                <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginLeft: normalize(5) }}>
+                <View style={styles.menuContainer}>
                     <Menu
                         visible={isSortBy}
                         onDismiss={closeMenu}
                         anchor={
-                            <TouchableOpacity onPress={openMenu} style={{ height: normalize(30),  borderWidth: 1, borderColor: Colors.lightGrey, alignItems: "center", justifyContent: "space-between", flexDirection: "row", paddingRight: normalize(5) }}>
-                                <Text style={{ fontSize: normalize(14), color: Colors.grey, paddingLeft: normalize(8) }}>{sortTitle}</Text>
-                                <Icon name="caretdown" type="antdesign" size={normalize(15)} color={Colors.black} style={{paddingLeft : normalize(10)}} />
+                            <TouchableOpacity onPress={openMenu} style={styles.touchMenu}>
+                                <Text style={styles.sortTitle}>{sortTitle}</Text>
+                                <Icon name="caretdown" type="antdesign" size={normalize(15)} color={Colors.black} style={{ paddingLeft: normalize(10) }} />
                             </TouchableOpacity>
                         }>
-                        <View style={{  width: Dimensions.get("screen").width / 2, backgroundColor: Colors.white, }}>
+                        <View style={styles.sortContainer}>
                             <FlatList
                                 data={sortBy}
                                 renderItem={({ item, index }) => (
-                                    <TouchableOpacity key={index} onPress={() => onSortBy(item.title)} style={{ height: normalize(25), width: "100%", borderBottomColor: Colors.lightGrey, borderBottomWidth: 1, justifyContent : "center" }}>
-                                        <Text style={{paddingLeft : normalize(8), fontSize : normalize(14), color : Colors.black}}>{item.title}</Text>
+                                    <TouchableOpacity key={index} onPress={() => onSortBy(item.title)} style={styles.sortTouch}>
+                                        <Text style={{ paddingLeft: normalize(8), ...styles.titleTxt }}>{item.title}</Text>
                                     </TouchableOpacity>
                                 )}
                             />
