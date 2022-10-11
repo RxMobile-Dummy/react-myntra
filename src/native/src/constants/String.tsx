@@ -64,4 +64,10 @@ export const String = {
   location: 'Location',
 
   edit: 'EDIT',
+  changePassword: 'CHANGE PASSWORD',
+  saveDetails: 'SAVE DETAILS',
+  changePasswordTitle: 'Change Password',
+  oldPassword: 'Old Password',
+  newPassword: 'New Password',
+  confirmPassword: 'Confirm Password',
 };

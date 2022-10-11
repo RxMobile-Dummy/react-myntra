@@ -18,10 +18,15 @@ const CustomDrawer = props => {
         {...props}
         contentContainerStyle={styles.conContainer}
       >
-        <View style={styles.imgBg}>
+        <TouchableOpacity
+          style={styles.imgBg}
+          onPress={() => {
+            props.navigation.navigate('Login');
+          }}
+        >
           <Image source={Images.ProfileDummy} style={styles.profile} />
-          <Text style={styles.userName}>Arjun Patidar</Text>
-        </View>
+          <Text style={styles.userName}>Login / Signup</Text>
+        </TouchableOpacity>
         <View style={styles.drawerItem}>
           <DrawerItemList {...props} />
         </View>

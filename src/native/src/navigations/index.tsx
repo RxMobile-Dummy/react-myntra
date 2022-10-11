@@ -9,6 +9,7 @@ import Login from '../screens/Login';
 import DrawerMenu from './Drawer/DrawerMenu';
 import Home from '../screens/Home';
 import ProductList from '../screens/ProductList';
+import EditProfileScreen from '../screens/EditProfile';
 
 const Stack = createStackNavigator<NavigationParams>();
 
@@ -23,16 +24,17 @@ export default function Navigation() {
   return (
     <Stack.Navigator screenOptions={defaultNavOptions}>
       <Stack.Screen
+        name="Dashboard"
+        component={DrawerMenu}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
         name="ProductList"
         component={ProductList}
         options={{
           headerShown: true,
+          title: 'Product List',
         }}
-      />
-      <Stack.Screen
-        name="Dashboard"
-        component={DrawerMenu}
-        options={{headerShown: false}}
       />
       <Stack.Screen
         name="Register"
@@ -55,7 +57,14 @@ export default function Navigation() {
           headerShown: true,
         }}
       />
-
+      <Stack.Screen
+        name="EditProfile"
+        component={EditProfileScreen}
+        options={{
+          headerShown: true,
+          title: 'Edit Profile',
+        }}
+      />
     </Stack.Navigator>
   );
 }
