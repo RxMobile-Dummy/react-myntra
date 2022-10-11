@@ -42,4 +42,15 @@ export const String = {
   removeCard: 'Remove Card',
   deleteCardMsg: 'Are you sure you want to delete this card?',
   addNewCard: 'Add New Credit/Debit Card',
+
+  //Address
+  addressTitle: 'SAVE YOUR ADDRESSES NOW',
+  addressSubTitle:
+    'Add your home and office addresses and enjoy faster checkout',
+  addAddress: '+ ADD ADDRESS',
+  defaultAddress: 'DEFAULT ADDRESS',
+  otherAddress: 'OTHER ADDRESS',
+  savedAddress: 'Saved Address',
+  addNewAddress: 'ADD NEW ADDRESS',
+  typeAddress: 'Type of address *',
 };

@@ -5,7 +5,6 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
-  Button,
   TouchableWithoutFeedback,
   Keyboard,
   KeyboardAvoidingView,
@@ -14,16 +13,14 @@ import {
 import React, {useState} from 'react';
 import styles from './CardStyle';
 import {Props} from './ICards';
-import {images} from '../../assets/images';
 import {String} from '../../constants/String';
 import TransButton from '../../components/Button/TransButton';
 import {CardsDummy} from '../../constants/CardsDummy';
 import CardData from '../../components/Card/CardData';
 import Modal from 'react-native-modal';
 import {Colors} from '../../constants/Color';
-import {TextInput} from 'react-native-paper';
 import {CardInputField} from '../../components/text_input/CardInput';
-import {colors} from 'react-native-elements';
+import {Images} from '../../assets/images';
 
 const CardScreen: React.FC<Props> = ({navigation}) => {
   const [isCardAvailable, setCardAvailable] = useState(true);
@@ -81,19 +78,6 @@ const CardScreen: React.FC<Props> = ({navigation}) => {
       </Modal>
     );
   }
-  if (!isCardAvailable) {
-    return (
-      <SafeAreaView style={styles.container}>
-        <View style={styles.addCardCon}>
-          <Image source={images.CardImage} />
-          <Text style={styles.title}>{String.cardTitle}</Text>
-          <Text style={styles.subTitle}>{String.cardSubTitle}</Text>
-          <TransButton onPress={onAddCardClick} text={String.addCard} />
-        </View>
-      </SafeAreaView>
-    );
-  }
-
   if (isAddCardVisible) {
     return (
       <SafeAreaView style={styles.container}>
@@ -154,6 +138,18 @@ const CardScreen: React.FC<Props> = ({navigation}) => {
             </View>
           </View>
         </TouchableWithoutFeedback>
+      </SafeAreaView>
+    );
+  }
+  if (!isCardAvailable) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.addCardCon}>
+          <Image source={Images.CardImage} />
+          <Text style={styles.title}>{String.cardTitle}</Text>
+          <Text style={styles.subTitle}>{String.cardSubTitle}</Text>
+          <TransButton onPress={onAddCardClick} text={String.addCard} />
+        </View>
       </SafeAreaView>
     );
   }
