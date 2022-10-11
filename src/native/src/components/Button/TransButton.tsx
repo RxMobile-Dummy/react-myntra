@@ -14,12 +14,14 @@ interface Props {
   disabled?: boolean;
   onPress?: () => void;
   containerStyle?: ViewStyle;
+  textStyle?: ViewStyle;
 }
 
 const TransButton: React.FC<Props> = ({
   text,
   onPress = () => null,
   containerStyle = {},
+  textStyle = {},
   disabled = false,
 }) => {
   return (
@@ -28,7 +30,7 @@ const TransButton: React.FC<Props> = ({
       style={[styles.addCardbtn, containerStyle]}
       disabled={disabled}
     >
-      <Text style={styles.text}>{text}</Text>
+      <Text style={[styles.text, textStyle]}>{text}</Text>
     </TouchableOpacity>
   );
 };

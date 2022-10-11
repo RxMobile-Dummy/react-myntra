@@ -53,4 +53,15 @@ export const String = {
   savedAddress: 'Saved Address',
   addNewAddress: 'ADD NEW ADDRESS',
   typeAddress: 'Type of address *',
+
+  //Profile
+  profileDetails: 'Profile Details',
+  fullName: 'Full Name',
+  mobileNumber: 'Mobile Number',
+  email: 'Email',
+  gender: 'Gender',
+  dob: 'Date of Birth',
+  location: 'Location',
+
+  edit: 'EDIT',
 };

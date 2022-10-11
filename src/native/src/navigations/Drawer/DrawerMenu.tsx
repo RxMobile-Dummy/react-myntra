@@ -13,6 +13,7 @@ import {Props} from '../../screens/Register/ISignUp';
 import Home from '../../screens/Home';
 import CardScreen from '../../screens/Cards';
 import AddressScreen from '../../screens/Address';
+import ProfileScreen from '../../screens/Profile';
 
 // let screenStyle = null;
 
@@ -50,6 +51,15 @@ const DrawerMenu = () => {
         options={{
           drawerIcon: ({color, size}) => {
             return <Ionicons name="person-outline" size={size} color={color} />;
+          },
+        }}
+      />
+      <Drawer.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          drawerIcon: ({color, size}) => {
+            return <Ionicons name="timer-outline" size={size} color={color} />;
           },
         }}
       />
