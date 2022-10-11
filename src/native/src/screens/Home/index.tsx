@@ -37,15 +37,15 @@ type ICard = {
 
 const Card = (props: ICard) => {
     return (
-        <TouchableOpacity style={{ width: Dimensions.get("window").width / 2.2, backgroundColor: Colors.white, ...commonStyles.shadow, margin: normalize(8), borderRadius: normalize(6) }}>
+        <TouchableOpacity style={styles.touch}>
             <Image
                 source={{ uri: props.img }}
                 style={{ width: "100%", height: normalize(100), borderRadius: normalize(6) }}
             />
-            <View style={{ padding: normalize(10), }}>
-                <Text style={{ fontSize: normalize(14), color: Colors.black }}>{props.name}</Text>
-                <Text style={{ fontSize: normalize(14), color: Colors.black, paddingTop: normalize(5) }}>{props.desc}</Text>
-                <Text style={{ fontSize: normalize(14), color: Colors.black, paddingTop: normalize(5) }}>{props.discount}</Text>
+            <View style={styles.div}>
+                <Text style={styles.txt}>{props.name}</Text>
+                <Text style={{ ...styles.txt, paddingTop: normalize(5) }}>{props.desc}</Text>
+                <Text style={{ ...styles.txt, paddingTop: normalize(5) }}>{props.discount}</Text>
             </View>
         </TouchableOpacity>
     )
@@ -65,42 +65,9 @@ const Home = () => {
         }
     ]
 
-    const listIcon = [
-        {
-            name : "search1",
-            type : "antdesign"
-        },
-        {
-            name : "bells",
-            type : "antdesign"
-        },
-        {
-            name : "hearto",
-            type : "antdesign"
-        },
-
-    ]
-
     return (
         <View style={styles.container}>
-            {/* <View style={styles.statusBar}>
-                <View style={{ width: "100%",  paddingRight: normalize(20), marginTop: normalize(30), flexDirection: "row", alignItems: "center", justifyContent : "space-between" }}>
-                    <View style={{ width: "15%" }}>
-                        <Icon name="arrow-back" type="ionicon" size={normalize(28)} />
-                    </View>
 
-                    <View style={{ width: "40%", flexDirection: "row", justifyContent : "space-between"  }}>
-                        {
-                            listIcon.map((item,index) => (
-                                <View style={{ width: "18%", }}>
-                                <Icon name={item.name} type={item.type} size={normalize(20)} />
-                            </View>
-                            ))
-                        }
-                    </View>
-                </View>
-            </View> */}
-            <AppHeader/>
             <ScrollView style={{marginBottom : normalize(20)}}>
                 <View style={{ width: "90%", alignSelf: "center", }}>
                     <ImageSlider
@@ -111,7 +78,7 @@ const Home = () => {
                         caroselImageStyle={{ resizeMode: 'contain' }}
                     />
                     <View style={{ marginTop: normalize(15) }}>
-                        <Text style={{ fontSize: normalize(16), color: Colors.black, fontWeight: "bold" }}>DEALS OF THE DAY</Text>
+                        <Text style={styles.titleTxt}>DEALS OF THE DAY</Text>
                         <FlatList
                             data={deals}
                             renderItem={({ item, index }) => <Card img={item.img} name={item.name} desc={item.desc} discount={item.discount} />}
@@ -120,7 +87,7 @@ const Home = () => {
                         />
                     </View>
                     <View style={{ marginTop: normalize(15) }}>
-                        <Text style={{ fontSize: normalize(16), color: Colors.black, fontWeight: "bold" }}>BEST OF MYNTRA EXCLUSIVE BRANDS</Text>
+                        <Text style={styles.titleTxt}>BEST OF MYNTRA EXCLUSIVE BRANDS</Text>
                         <FlatList
                             data={deals}
                             renderItem={({ item, index }) => <Card img={item.img} name={item.name} desc={item.desc} discount={item.discount} />}
@@ -129,7 +96,7 @@ const Home = () => {
                         />
                     </View>
                     <View style={{ marginTop: normalize(15) }}>
-                        <Text style={{ fontSize: normalize(16), color: Colors.black, fontWeight: "bold" }}>TOP PICKS</Text>
+                        <Text style={styles.titleTxt}>TOP PICKS</Text>
                         <FlatList
                             data={deals}
                             renderItem={({ item, index }) => <Card img={item.img} name={item.name} desc={item.desc} discount={item.discount} />}
