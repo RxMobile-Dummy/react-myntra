@@ -67,15 +67,15 @@ const Home = () => {
 
     return (
         <View style={styles.container}>
-
             <ScrollView style={{marginBottom : normalize(20)}}>
                 <View style={{ width: "90%", alignSelf: "center", }}>
                     <ImageSlider
                         data={imgData}
-                        autoPlay={false}
+                        autoPlay={true}
                         // onItemChanged={(item) => console.log("item", item)}
                         closeIconColor="#fff"
                         caroselImageStyle={{ resizeMode: 'contain' }}
+
                     />
                     <View style={{ marginTop: normalize(15) }}>
                         <Text style={styles.titleTxt}>DEALS OF THE DAY</Text>
