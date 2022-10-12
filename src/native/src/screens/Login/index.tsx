@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {SafeAreaView, Text, View, Image, Alert} from 'react-native';
+import {
+  SafeAreaView,
+  Text,
+  View,
+  Image,
+  Alert,
+  TouchableOpacity,
+} from 'react-native';
 import {styles} from './LoginStyle';
 import LinearGradient from 'react-native-linear-gradient';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -12,6 +19,14 @@ const Login: React.FC<Props> = props => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
+
+  const onRegisterPress = () => {
+    props.navigation.navigate('Register');
+  };
+
+  const onForgotPasswordClick = () => {
+    props.navigation.navigate('ForgotPassword');
+  };
   return (
     <LinearGradient colors={['#FEEDF6', '#FCEEE5']} style={{flex: 1}}>
       <KeyboardAwareScrollView
@@ -77,13 +92,27 @@ const Login: React.FC<Props> = props => {
             <View style={styles.bottomContainer}>
               <Text style={styles.bottomTxt}>
                 Don't have an account?{' '}
-                <Text style={styles.boldTxt}>Register</Text>
+                <TouchableOpacity onPress={onRegisterPress}>
+                  <Text style={styles.boldTxt}>Register</Text>
+                </TouchableOpacity>
               </Text>
-              <Text style={{...styles.bottomTxt, paddingTop: normalize(5)}}>
+              <Text
+                style={{
+                  ...styles.bottomTxt,
+                  paddingTop: normalize(5),
+                }}
+              >
                 Forget Password?{' '}
-                <Text style={{...styles.boldTxt, paddingTop: normalize(5)}}>
-                  Change Password
-                </Text>
+                <TouchableOpacity onPress={onForgotPasswordClick}>
+                  <Text
+                    style={{
+                      ...styles.boldTxt,
+                      paddingTop: normalize(5),
+                    }}
+                  >
+                    Change Password
+                  </Text>
+                </TouchableOpacity>
               </Text>
             </View>
           </View>

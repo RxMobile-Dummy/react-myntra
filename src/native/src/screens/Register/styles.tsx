@@ -4,7 +4,6 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {Font} from '../../constants/Font';
 import {normalize} from '../../utils/commonStyles';
 
 const styles = StyleSheet.create({
@@ -32,7 +31,6 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 22,
     color: Colors.white,
-    fontFamily: Font.BoldFont,
     alignSelf: 'center',
     marginTop: hp('10%'),
   },
@@ -42,8 +40,8 @@ const styles = StyleSheet.create({
     marginTop: 15,
     justifyContent: 'center',
   },
-  bottomText: {color: Colors.black, marginEnd: 5, fontFamily: Font.MediumFont},
-  signInBtn: {color: Colors.accent, fontFamily: Font.BoldFont},
+  bottomText: {color: Colors.black, marginEnd: 5},
+  signInBtn: {color: Colors.accent},
   btn: {alignSelf: 'center'},
   logo: {
     height: 150,

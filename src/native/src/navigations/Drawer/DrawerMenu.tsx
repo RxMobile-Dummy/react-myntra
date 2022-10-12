@@ -1,9 +1,11 @@
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 // import {Images} from './../../Constants';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import {Colors} from '../../constants/Color';
 import CustomDrawer from './CustomDrawer';
@@ -29,11 +31,39 @@ const DrawerMenu = () => {
         //   marginLeft: -25,
         // },
         headerStyle: {
-          backgroundColor: Colors.accent,
+          backgroundColor: 'transparent',
+          borderBottomColor: Colors.lightGrey,
+          borderBottomWidth: 1,
         },
-        headerTintColor: Colors.white,
+        headerTintColor: Colors.black,
         drawerActiveBackgroundColor: Colors.lightPink,
         drawerActiveTintColor: Colors.black,
+        headerRight: () => (
+          <View style={styles.iconContainer}>
+            <TouchableOpacity style={styles.iconStyle}>
+              <AntDesign name="search1" size={26} color={'black'} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.iconStyle}>
+              <SimpleLineIcons name="heart" size={24} color={'black'} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.iconStyle}
+              onPress={() => {
+                console.log('drawer');
+              }}
+            >
+              <SimpleLineIcons name="bell" size={24} color="black" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.iconStyle}
+              onPress={() => {
+                console.log('drawer');
+              }}
+            >
+              <SimpleLineIcons name="bag" size={24} color="black" />
+            </TouchableOpacity>
+          </View>
+        ),
       }}
     >
       {/* <Drawer.Screen
@@ -61,6 +91,9 @@ const DrawerMenu = () => {
           drawerIcon: ({color, size}) => {
             return <Ionicons name="person-outline" size={size} color={color} />;
           },
+          headerRight: () => {
+            return <></>;
+          },
         }}
       />
       <Drawer.Screen
@@ -70,6 +103,9 @@ const DrawerMenu = () => {
           drawerIcon: ({color, size}) => {
             return <Ionicons name="card-outline" size={size} color={color} />;
           },
+          headerRight: () => {
+            return <></>;
+          },
         }}
       />
       <Drawer.Screen
@@ -77,12 +113,22 @@ const DrawerMenu = () => {
         component={AddressScreen}
         options={{
           drawerIcon: ({color, size}) => {
-            return <Ionicons name="timer-outline" size={size} color={color} />;
+            return (
+              <Ionicons name="location-outline" size={size} color={color} />
+            );
+          },
+          headerRight: () => {
+            return <></>;
           },
         }}
       />
     </Drawer.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  iconStyle: {marginHorizontal: 5},
+  iconContainer: {flexDirection: 'row', marginEnd: 10},
+});
 
 export default DrawerMenu;
