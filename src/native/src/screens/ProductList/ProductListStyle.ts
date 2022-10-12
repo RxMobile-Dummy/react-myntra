@@ -104,5 +104,36 @@ export const styles = StyleSheet.create({
         width: 1,
         borderWidth: .7,
         borderColor: Colors.lightGrey
+    },
+    menuContainer : {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        marginLeft: normalize(5)
+    },
+    touchMenu : {
+        height: normalize(30),
+        borderWidth: 1,
+        borderColor: Colors.lightGrey,
+        alignItems: "center",
+        justifyContent: "space-between",
+        flexDirection: "row",
+        paddingRight: normalize(5)
+    },
+    sortTitle : {
+        fontSize: normalize(14),
+        color: Colors.grey,
+        paddingLeft: normalize(8)
+    },
+    sortContainer : {
+        width: Dimensions.get("screen").width / 2,
+        backgroundColor: Colors.white,
+    },
+    sortTouch : {
+        height: normalize(25),
+        width: "100%",
+        borderBottomColor: Colors.lightGrey,
+        borderBottomWidth: 1,
+        justifyContent : "center"
     }
 })
