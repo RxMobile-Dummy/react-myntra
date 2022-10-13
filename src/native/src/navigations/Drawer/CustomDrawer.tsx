@@ -9,9 +9,24 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Images} from '../../assets/images';
 import {Colors} from '../../constants/Color';
 import {Props} from './IDrawer';
+import {ExpandableListView} from 'react-native-expandable-listview';
+import {MenuData} from '../../constants/MenuData';
 
 const CustomDrawer = props => {
   // const CustomDrawer: React.FC<Props> = ({props}) => {
+
+  function handleItemClick({index}: any) {
+    console.log(index);
+  }
+
+  function handleInnerItemClick(itemData: any) {
+    const {innerItemIndex, itemIndex, item} = itemData;
+    // console.log(itemData);
+    console.log(innerItemIndex);
+    console.log(itemIndex);
+    console.log(item.subCategory[innerItemIndex].id);
+    props.navigation.navigate('ProductList');
+  }
   return (
     <View style={styles.mainContainer}>
       <DrawerContentScrollView
@@ -24,9 +39,25 @@ const CustomDrawer = props => {
             props.navigation.navigate('Login');
           }}
         >
-          <Image source={Images.ProfileDummy} style={styles.profile} />
-          <Text style={styles.userName}>Login / Signup</Text>
+          <View>
+            <Image source={Images.ProfileDummy} style={styles.profile} />
+            <Text style={styles.userName}>Login / Signup</Text>
+          </View>
+          <View>
+            <Ionicons name="chevron-forward" size={24} color="white" />
+          </View>
         </TouchableOpacity>
+        <ExpandableListView
+          data={MenuData} // required
+          onInnerItemClick={handleInnerItemClick}
+          onItemClick={handleItemClick}
+          itemContainerStyle={{backgroundColor: Colors.white}}
+          innerItemContainerStyle={{
+            backgroundColor: Colors.white,
+            marginStart: 20,
+          }}
+          innerItemLabelStyle={{paddingVertical: 3}}
+        />
         <View style={styles.drawerItem}>
           <DrawerItemList {...props} />
         </View>
@@ -62,16 +93,19 @@ const styles = StyleSheet.create({
   },
   imgBg: {
     padding: 20,
-    backgroundColor: Colors.lightPink,
+    backgroundColor: '#3f3947',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
   },
   profile: {
-    height: 80,
-    width: 80,
-    borderRadius: 40,
+    height: 70,
+    width: 70,
+    borderRadius: 10,
     marginBottom: 10,
   },
   userName: {
-    color: Colors.black,
+    color: Colors.btnPink,
   },
   drawerItem: {
     flex: 1,

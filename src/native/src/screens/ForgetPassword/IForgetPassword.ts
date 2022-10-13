@@ -1,3 +1,3 @@
 export type Props = {
-    navigation ?: any;
+  navigation?: any;
 };

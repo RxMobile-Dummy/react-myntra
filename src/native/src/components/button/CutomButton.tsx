@@ -8,7 +8,6 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {Colors} from '../../constants/Color';
-import {Font} from '../../constants/Font';
 
 interface Props {
   text: string | number;
@@ -64,7 +63,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     color: Colors.primary,
-    fontFamily: Font.MediumFont,
   },
 });
 export default CutomButton;

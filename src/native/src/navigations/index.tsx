@@ -11,14 +11,18 @@ import Home from '../screens/Home';
 import ProductList from '../screens/ProductList';
 import ProductCheckout from '../screens/ProductCheckout';
 import EditProfileScreen from '../screens/EditProfile';
+import ForgetPassword from '../screens/ForgetPassword';
 
 const Stack = createStackNavigator<NavigationParams>();
 
 const defaultNavOptions = {
   headerStyle: {
-    backgroundColor: Colors.accent,
+    backgroundColor: 'transparent',
+    borderBottomColor: Colors.lightGrey,
+    borderBottomWidth: 1,
+    elevation: 10,
   },
-  headerTintColor: Colors.primary,
+  headerTintColor: Colors.black,
 };
 
 export default function Navigation() {
@@ -56,6 +60,14 @@ export default function Navigation() {
         component={Login}
         options={{
           headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name="ForgotPassword"
+        component={ForgetPassword}
+        options={{
+          headerShown: true,
+          title: 'Forgot Password',
         }}
       />
       <Stack.Screen
