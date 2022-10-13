@@ -12,6 +12,7 @@ import ProductList from '../screens/ProductList';
 import ProductCheckout from '../screens/ProductCheckout';
 import EditProfileScreen from '../screens/EditProfile';
 import ForgetPassword from '../screens/ForgetPassword';
+import WishList from '../screens/Wishlist';
 
 const Stack = createStackNavigator<NavigationParams>();
 
@@ -28,6 +29,20 @@ const defaultNavOptions = {
 export default function Navigation() {
   return (
     <Stack.Navigator screenOptions={defaultNavOptions}>
+       {/* <Stack.Screen
+        name="Bag"
+        component={Bag}
+        options={{
+          headerShown: false,
+        }}
+      /> */}
+      <Stack.Screen
+        name="WishList"
+        component={WishList}
+        options={{
+          headerShown: false,
+        }}
+      />
        <Stack.Screen
         name="ProductCheckout"
         component={ProductCheckout}

@@ -67,7 +67,7 @@ const Home = () => {
 
     return (
         <View style={styles.container}>
-            <ScrollView style={{marginBottom : normalize(20)}}>
+            <ScrollView style={{ marginBottom: normalize(20) }}>
                 <View style={{ width: "90%", alignSelf: "center", }}>
                     <ImageSlider
                         data={imgData}
@@ -84,6 +84,7 @@ const Home = () => {
                             renderItem={({ item, index }) => <Card img={item.img} name={item.name} desc={item.desc} discount={item.discount} />}
                             horizontal={true}
                             style={{ marginTop: normalize(15) }}
+                            showsHorizontalScrollIndicator={false}
                         />
                     </View>
                     <View style={{ marginTop: normalize(15) }}>
@@ -93,6 +94,7 @@ const Home = () => {
                             renderItem={({ item, index }) => <Card img={item.img} name={item.name} desc={item.desc} discount={item.discount} />}
                             horizontal={true}
                             style={{ marginTop: normalize(15) }}
+                            showsHorizontalScrollIndicator={false}
                         />
                     </View>
                     <View style={{ marginTop: normalize(15) }}>
@@ -102,6 +104,7 @@ const Home = () => {
                             renderItem={({ item, index }) => <Card img={item.img} name={item.name} desc={item.desc} discount={item.discount} />}
                             horizontal={true}
                             style={{ marginTop: normalize(15) }}
+                            showsHorizontalScrollIndicator={false}
                         />
                     </View>
                 </View>

@@ -141,7 +141,7 @@ const ProductList = () => {
                         anchor={
                             <TouchableOpacity onPress={openMenu} style={styles.touchMenu}>
                                 <Text style={styles.sortTitle}>{sortTitle}</Text>
-                                <Icon name="caretdown" type="antdesign" size={normalize(15)} color={Colors.black} style={{ paddingLeft: normalize(10) }} />
+                                <Icon name="caretdown" type="antdesign" size={normalize(15)} color={Colors.black} style={{ paddingLeft: normalize(10) }} tvParallaxProperties={undefined} />
                             </TouchableOpacity>
                         }>
                         <View style={styles.sortContainer}>
@@ -156,7 +156,7 @@ const ProductList = () => {
 
                         </View>
                     </Menu>
-                    <Icon name="filter" type="antdesign" size={normalize(25)} onPress={() => setIsVisible(!isVisible)} />
+                    <Icon name="filter" type="antdesign" size={normalize(25)} onPress={() => setIsVisible(!isVisible)} tvParallaxProperties={undefined} />
                 </View>
                 <FlatList
                     data={formateData(product, numberOfColumn)}
@@ -190,7 +190,7 @@ const ProductList = () => {
                                         data={shirtTypes}
                                         renderItem={({ item, index }) => (
                                             <TouchableOpacity key={index} onPress={() => setIsProduct(index)} style={styles.secondTouch}>
-                                                <Icon name="check" type="antdesign" size={normalize(15)} color={index === isProduct ? Colors.accent : Colors.grey} />
+                                                <Icon name="check" type="antdesign" size={normalize(15)} color={index === isProduct ? Colors.accent : Colors.grey} tvParallaxProperties={undefined} />
                                                 <Text style={{ paddingLeft: normalize(8), fontSize: normalize(14), color: index === isProduct ? Colors.accent : Colors.black }}>T-shirt</Text>
                                             </TouchableOpacity>
                                         )}
