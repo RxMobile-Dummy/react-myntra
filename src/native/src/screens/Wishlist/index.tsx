@@ -7,7 +7,7 @@ import { IWishlist } from "./IWishlist";
 import { styles } from "./WishlistStyle";
 
 const WishList = (props: IWishlist) => {
-    const [isEmpty, setIsEmpty] = useState(false)
+    const [isEmpty, setIsEmpty] = useState(true)
     const numberOfColumn = 2;
     const treandingList = [
         {
