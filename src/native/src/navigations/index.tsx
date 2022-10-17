@@ -29,12 +29,17 @@ const defaultNavOptions = {
 export default function Navigation() {
   return (
     <Stack.Navigator screenOptions={defaultNavOptions}>
-       <Stack.Screen
+      <Stack.Screen
         name="Bag"
         component={Bag}
         options={{
           headerShown: false,
         }}
+      />
+      <Stack.Screen
+        name="Dashboard"
+        component={DrawerMenu}
+        options={{headerShown: false}}
       />
       <Stack.Screen
         name="WishList"
@@ -43,17 +48,12 @@ export default function Navigation() {
           headerShown: false,
         }}
       />
-       <Stack.Screen
+      <Stack.Screen
         name="ProductCheckout"
         component={ProductCheckout}
         options={{
           headerShown: true,
         }}
-      />
-      <Stack.Screen
-        name="Dashboard"
-        component={DrawerMenu}
-        options={{headerShown: false}}
       />
       <Stack.Screen
         name="ProductList"

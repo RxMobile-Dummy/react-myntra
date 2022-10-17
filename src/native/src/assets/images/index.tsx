@@ -11,4 +11,5 @@ export const Images = {
   MyntraLogo: require('./myntra-logo.png'),
   SecureImg: require('./secure.png'),
   ProfileDummy: require('./profile_dummy.jpeg'),
+  delieveryBoy: require('./delieveryBoy.png'),
 };

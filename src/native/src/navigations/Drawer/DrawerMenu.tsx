@@ -16,6 +16,7 @@ import Home from '../../screens/Home';
 import CardScreen from '../../screens/Cards';
 import AddressScreen from '../../screens/Address';
 import ProfileScreen from '../../screens/Profile';
+import OrdersScreen from '../../screens/Orders';
 
 // let screenStyle = null;
 
@@ -115,6 +116,24 @@ const DrawerMenu = () => {
           drawerIcon: ({color, size}) => {
             return (
               <Ionicons name="location-outline" size={size} color={color} />
+            );
+          },
+          headerRight: () => {
+            return <></>;
+          },
+        }}
+      />
+      <Drawer.Screen
+        name="Orders"
+        component={OrdersScreen}
+        options={{
+          drawerIcon: ({color, size}) => {
+            return (
+              <Ionicons
+                name="md-reorder-four-outline"
+                size={size}
+                color={color}
+              />
             );
           },
           headerRight: () => {

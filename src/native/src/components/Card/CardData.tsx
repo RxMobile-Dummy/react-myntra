@@ -2,7 +2,6 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {Colors} from '../../constants/Color';
 import {String} from '../../constants/String';
-import {Font} from '../../constants/Font';
 
 export type Props = {
   data: string;
