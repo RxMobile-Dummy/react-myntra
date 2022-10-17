@@ -15,4 +15,5 @@ export const Colors = {
   lightBlue: '#6177D4',
   green: '#14CDA8',
   btnPink: '#ff3f6c',
+  transparentGrey: '#f2f2f2',
 };

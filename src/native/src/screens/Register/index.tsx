@@ -53,7 +53,7 @@ const RegisterScreen: React.FC<Props> = ({navigation}) => {
   const onSelect = (country: any) => {
     // setCountryCode(country.cca2)
     // setCountry(country)
-    setCountryPicker(!isPicker);
+    setCountryPicker(false);
     console.log(country);
     setCountry(country.name);
   };
@@ -110,7 +110,7 @@ const RegisterScreen: React.FC<Props> = ({navigation}) => {
                     />
                     <TouchableOpacity
                       onPress={() => {
-                        setCountryPicker(!isPicker);
+                        setCountryPicker(true);
                       }}
                       style={{width: '100%', alignItems: 'center'}}
                     >
@@ -182,12 +182,15 @@ const RegisterScreen: React.FC<Props> = ({navigation}) => {
       <CountryPicker
         {...{
           onSelect,
+          onClose: () => {
+            setCountryPicker(false);
+          },
         }}
         containerButtonStyle={{display: 'none'}}
         visible={isPicker}
         withFilter
         onClose={() => {
-          setCountryPicker(!isPicker);
+          setCountryPicker(false);
         }}
       />
     </SafeAreaView>

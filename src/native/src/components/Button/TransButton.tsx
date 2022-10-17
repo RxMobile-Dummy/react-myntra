@@ -1,6 +1,7 @@
 import {
   StyleSheet,
   Text,
+  TextStyle,
   TouchableOpacity,
   View,
   ViewStyle,
@@ -14,7 +15,7 @@ interface Props {
   disabled?: boolean;
   onPress?: () => void;
   containerStyle?: ViewStyle;
-  textStyle?: ViewStyle;
+  textStyle?: TextStyle;
 }
 
 const TransButton: React.FC<Props> = ({
@@ -42,6 +43,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     borderColor: Colors.lightGrey,
     borderWidth: 1,
+    borderRadius: 2,
     paddingHorizontal: 15,
     paddingVertical: 10,
   },

@@ -70,4 +70,12 @@ export const String = {
   oldPassword: 'Old Password',
   newPassword: 'New Password',
   confirmPassword: 'Confirm Password',
+
+  //orders
+  searchInOrder: 'Search in orders',
+  ordersTitle: "You haven't placed any order yet!",
+  ordersSubTitle:
+    'Order selection is empty, After placing order. You can track them from here!',
+  startShopping: 'START SHOPPING',
+  filter: 'FILTER',
 };
