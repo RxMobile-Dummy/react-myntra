@@ -4,7 +4,6 @@ import {NavigationParams} from './NavigationParams';
 
 import {Colors} from '../constants/Color';
 import RegisterScreen from '../screens/Register';
-import {String} from '../constants/String';
 import Login from '../screens/Login';
 import DrawerMenu from './Drawer/DrawerMenu';
 import Home from '../screens/Home';
@@ -13,6 +12,7 @@ import ProductCheckout from '../screens/ProductCheckout';
 import EditProfileScreen from '../screens/EditProfile';
 import ForgetPassword from '../screens/ForgetPassword';
 import WishList from '../screens/Wishlist';
+import Bag from '../screens/Bag';
 
 const Stack = createStackNavigator<NavigationParams>();
 
@@ -29,13 +29,13 @@ const defaultNavOptions = {
 export default function Navigation() {
   return (
     <Stack.Navigator screenOptions={defaultNavOptions}>
-      {/* <Stack.Screen
+      <Stack.Screen
         name="Bag"
         component={Bag}
         options={{
           headerShown: false,
         }}
-      /> */}
+      />
       <Stack.Screen
         name="Dashboard"
         component={DrawerMenu}
