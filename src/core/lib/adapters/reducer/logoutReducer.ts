@@ -10,11 +10,10 @@ type UserState = {
 const initialState = {
   logoutData: undefined,
   logoutError: undefined,
+  logoutState : true
 };
 
 const logoutReducer = (state: UserState = initialState, action: LogoutAction): any => {
-  console.log("action payload:", action.payload);
-  
   switch (action.type) {
     case LogoutActionType.LOGOUT_SUCCESS:
       return {
@@ -32,6 +31,12 @@ const logoutReducer = (state: UserState = initialState, action: LogoutAction): a
           logoutData: action.payload,
           logoutError: action.payload,
         };
+        case LogoutActionType.IS_LOGOUT:
+          return {
+            ...state,
+            logoutState : action.payload
+          };
+
     default:
       return state;
   }

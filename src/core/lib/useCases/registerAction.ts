@@ -15,4 +15,10 @@ export interface RegisterReset {
   payload: any;
 }
 
-export type RegisterAction =  Register | RegisterError | RegisterReset;
+export interface RegisterCheck {
+  readonly type: RegisterActionType.IS_REGISTER;
+  payload: any;
+}
+
+
+export type RegisterAction =  Register | RegisterError | RegisterReset | RegisterCheck;

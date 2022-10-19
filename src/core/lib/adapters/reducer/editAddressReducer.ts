@@ -13,7 +13,6 @@ const initialState = {
 };
 
 const editAddressReducer = (state: UserState = initialState, action: EditAddressAction): any => {
-  console.log("action payload:", action.payload);
   switch (action.type) {
     case EditAddressActionType.EDIT_ADDRESS_SUCCESS:
       return {

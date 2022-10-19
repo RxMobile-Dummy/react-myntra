@@ -1,11 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
-  SafeAreaView,
   Text,
   View,
   Image,
-  Alert,
-  TouchableOpacity,
 } from 'react-native';
 import {styles} from './LoginStyle';
 import LinearGradient from 'react-native-linear-gradient';
@@ -14,11 +11,65 @@ import InputField from '../../components/InputField/InputField';
 import {normalize} from '../../utils/commonStyles';
 import {Props} from './ILogin';
 import Button from '../../components/Button/Button';
+import { useDispatch, useSelector } from 'react-redux';
+import {emailValidation, isLoggedIn, isLogout, Login, passwordValidation, RootState} from "core"
+import showToast from '../../components/Toast';
+import Loader from '../../components/Loader';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Login: React.FC<Props> = props => {
-  const [email, setEmail] = useState('');
+const LoginScreen: React.FC<Props> = props => {
+  const dispatch = useDispatch()
+
+  const { loginData, error, token } = useSelector((state: RootState) => state.auth);
+  const { logoutData, logoutError, logoutState } = useSelector(
+    (state: RootState) => state.logoutReducer
+  );
+
+
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('');
+  const [isLoading, setIsLoading] = useState(false)
+  const [isToken, setIsToken] = useState(false)
+
+  const onLogin = async () =>{
+    console.log("Inside login")
+    setIsLoading(true)
+    if(emailValidation(email)){
+      showToast({type : "error", message : emailValidation(email)})
+      setIsLoading(false)
+        return
+    }
+    else if(passwordValidation(password)){
+      showToast({type : error, message : passwordValidation(password)})
+      setIsLoading(false)
+      return
+    }
+    else{
+      let userParams = {
+        email : email,
+        password : password,
+        fcmToken : "",
+        deviceId : "",
+        role : "user"
+      }
+
+     await dispatch<any>(Login(userParams)).then((result:any)=>{
+      if(result.status){
+        showToast({type : "success", message : "User login successfully"})
+        setIsLoading(false)
+        dispatch<any>(isLoggedIn(false))
+        props.navigation.navigate("Dashboard")
+
+        // dispatch<any>(isLoggedIn(true))
+      }
+      // else{
+      //   showToast()
+      // }
+     })
+    //  console.log("", response)
+
+    }
+  }
 
   const onRegisterPress = () => {
     props.navigation.navigate('Register');
@@ -29,6 +80,9 @@ const Login: React.FC<Props> = props => {
   };
   return (
     <LinearGradient colors={['#FEEDF6', '#FCEEE5']} style={{flex: 1}}>
+      {
+        isLoading && <Loader/>
+      }
       <KeyboardAwareScrollView
         enableOnAndroid
         contentContainerStyle={{flex: 1, width: '100%'}}
@@ -77,7 +131,7 @@ const Login: React.FC<Props> = props => {
               <View style={styles.top}>
                 <Button
                   height={normalize(45)}
-                  onPress={() => Alert.alert('Hello')}
+                  onPress={() => onLogin()}
                   bgColor="#ff3f6c"
                   children={
                     <View style={styles.lgContainer}>
@@ -90,12 +144,13 @@ const Login: React.FC<Props> = props => {
               </View>
             </View>
             <View style={styles.bottomContainer}>
+              <View style={{justifyContent : "center"}}>
               <Text style={styles.bottomTxt}>
                 Don't have an account?{' '}
-                <TouchableOpacity onPress={onRegisterPress}>
-                  <Text style={styles.boldTxt}>Register</Text>
-                </TouchableOpacity>
+                  <Text onPress={onRegisterPress} style={styles.boldTxt}>Register</Text>
               </Text>
+              </View>
+
               <Text
                 style={{
                   ...styles.bottomTxt,
@@ -103,8 +158,9 @@ const Login: React.FC<Props> = props => {
                 }}
               >
                 Forget Password?{' '}
-                <TouchableOpacity onPress={onForgotPasswordClick}>
+                {/* <TouchableOpacity onPress={onForgotPasswordClick}> */}
                   <Text
+                    onPress={onForgotPasswordClick}
                     style={{
                       ...styles.boldTxt,
                       paddingTop: normalize(5),
@@ -112,7 +168,7 @@ const Login: React.FC<Props> = props => {
                   >
                     Change Password
                   </Text>
-                </TouchableOpacity>
+                {/* </TouchableOpacity> */}
               </Text>
             </View>
           </View>
@@ -122,4 +178,4 @@ const Login: React.FC<Props> = props => {
   );
 };
 
-export default Login;
+export default LoginScreen;

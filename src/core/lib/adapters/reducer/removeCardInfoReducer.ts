@@ -13,7 +13,6 @@ const initialState = {
 };
 
 const removeCardInfoReducer = (state: UserState = initialState, action: RemoveCardInfoAction): any => {
-  console.log("action payload:", action.payload);
   switch (action.type) {
     case RemoveCardInfoActionType.REMOVE_CARD_INFO_SUCCESS:
       return {

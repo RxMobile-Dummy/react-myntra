@@ -13,7 +13,6 @@ const initialState = {
 };
 
 const changePasswordReducer = (state: UserState = initialState, action: ChangePasswordAction): any => {
-  console.log("action payload:", action.payload);
   switch (action.type) {
     case ChangePasswordActionType.CHANGE_PASSWORD_SUCCESS:
       return {

@@ -14,6 +14,10 @@ interface LogoutReset {
   type: LogoutActionType.LOGOUT_RESET;
   payload: any;
 }
+interface isLogout {
+  type: LogoutActionType.IS_LOGOUT;
+  payload: any;
+}
 
-export type LogoutAction =  LogoutSuccess | LogoutError | LogoutReset;
+export type LogoutAction =  LogoutSuccess | LogoutError | LogoutReset | isLogout;
 

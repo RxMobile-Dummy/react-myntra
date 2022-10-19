@@ -16,4 +16,5 @@ export const Colors = {
   bgColor : "#fffafc",
   lightGrey : "#D3D3D3",
   grey: '#808080',
+  loaderColor : "#DCDCDC"
 };

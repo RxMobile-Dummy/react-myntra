@@ -13,7 +13,6 @@ const initialState = {
 };
 
 const getAddressListReducer = (state: UserState = initialState, action: GetAddressListAction): any => {
-  console.log("action payload:", action.payload);
   switch (action.type) {
     case GetAddressListActionType.GET_ADDRESS_LIST_SUCCESS:
       return {

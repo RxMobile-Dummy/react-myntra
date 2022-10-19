@@ -13,7 +13,6 @@ const initialState = {
 };
 
 const editProfileReducer = (state: UserState = initialState, action: EditProfileAction): any => {
-  console.log("action payload:", action.payload);
   switch (action.type) {
     case EditProfileActionType.EDIT_PROFILE_SUCCESS:
       return {

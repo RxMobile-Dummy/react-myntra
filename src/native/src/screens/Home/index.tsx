@@ -1,11 +1,8 @@
-import React from "react";
-import { Text, View, TouchableOpacity, Dimensions, Image, FlatList, ScrollView, } from 'react-native'
+import React, { useEffect } from "react";
+import { Text, View, TouchableOpacity, Image, FlatList, ScrollView, } from 'react-native'
 import { styles } from "./HomeStyle";
 import { ImageSlider } from 'react-native-image-slider-banner'
-import { commonStyles, normalize } from "../../utils/commonStyles";
-import { Colors } from "../../utils/Color";
-import { Icon } from "react-native-elements"
-import AppHeader from "../../components/Header";
+import {  normalize } from "../../utils/commonStyles";
 
 const deals = [
     {
@@ -70,8 +67,8 @@ const Home = () => {
             <ScrollView style={{ marginBottom: normalize(20) }}>
                 <View style={{ width: "90%", alignSelf: "center", }}>
                     <ImageSlider
-                        data={imgData}
                         autoPlay={true}
+                        data={imgData}
                         // onItemChanged={(item) => console.log("item", item)}
                         closeIconColor="#fff"
                         caroselImageStyle={{ resizeMode: 'contain' }}
