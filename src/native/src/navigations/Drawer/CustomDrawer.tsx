@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import {
   DrawerContentScrollView,
@@ -11,13 +11,30 @@ import {Colors} from '../../constants/Color';
 import {Props} from './IDrawer';
 import {ExpandableListView} from 'react-native-expandable-listview';
 import {MenuData} from '../../constants/MenuData';
+import { useDispatch, useSelector } from 'react-redux';
+import { isLoggedIn, isLogout, Login, Logout, RootState } from 'core';
+import Loader from '../../components/Loader';
+import showToast from '../../components/Toast';
+import { CommonActions, useNavigation } from '@react-navigation/native';
+import  AsyncStorage  from '@react-native-async-storage/async-storage';
 
-const CustomDrawer = props => {
-  // const CustomDrawer: React.FC<Props> = ({props}) => {
+const CustomDrawer = (props : any) => {
+    const dispatch = useDispatch()
+    const navigation = useNavigation()
+    const { loginData, error, token } = useSelector((state: RootState) => state.auth);
+    const { data, registerData } = useSelector(
+      (state: RootState) => state.registerReducer
+    );
+    const [isLoading, setIsLoading] = useState(false)
 
   function handleItemClick({index}: any) {
     console.log(index);
   }
+
+  useEffect(() => {
+    const route = props.state
+    console.log("Routes", route)
+  },[])
 
   function handleInnerItemClick(itemData: any) {
     const {innerItemIndex, itemIndex, item} = itemData;
@@ -27,8 +44,37 @@ const CustomDrawer = props => {
     console.log(item.subCategory[innerItemIndex].id);
     props.navigation.navigate('ProductList');
   }
+
+  const onSignout = async () => {
+    setIsLoading(true)
+    let signoutParams = {
+      userId : registerData ? data._id : loginData._id,
+      authToken : registerData ? data.token : loginData.token
+    }
+    console.log("Logout request", token, signoutParams)
+    dispatch<any>(Logout(signoutParams)).then((result : any) => {
+      console.log("Result issssss", result)
+      if(result.status){
+        console.log("Result issssss222222222", result)
+        showToast({type : "success", message : "User logout successfully"})
+        dispatch<any>(isLoggedIn(true))
+        props.navigation.dispatch(
+          CommonActions.reset({
+            routes: [
+              { name: 'Login' },
+            ],
+          })
+        );
+      }
+    })
+    setIsLoading(false)
+  }
+
   return (
     <View style={styles.mainContainer}>
+      {
+        isLoading && <Loader/>
+      }
       <DrawerContentScrollView
         {...props}
         contentContainerStyle={styles.conContainer}
@@ -73,7 +119,7 @@ const CustomDrawer = props => {
             <Text style={styles.shareText}>Tell a friend</Text>
           </View>
         </TouchableOpacity> */}
-        <TouchableOpacity style={styles.shareBtn}>
+        <TouchableOpacity onPress={() => onSignout()} style={styles.shareBtn}>
           <View style={styles.shareView}>
             <Ionicons name="exit-outline" size={22} color={Colors.grey} />
             <Text style={styles.shareText}>Signout</Text>

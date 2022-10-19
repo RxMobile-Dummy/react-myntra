@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView, Text, View, Image, Alert} from 'react-native';
 import InputField from '../../components/InputField/InputField';
 import {styles} from './ForgetPasswordStyle';
@@ -6,11 +6,56 @@ import LinearGradient from 'react-native-linear-gradient';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import Button from '../../components/Button/Button';
 import {normalize} from '../../utils/commonStyles';
+import { useDispatch, useSelector } from 'react-redux';
+import { emailValidation, ForgotPassword, RootState } from 'core';
+import showToast from '../../components/Toast';
+import Loader from '../../components/Loader';
+import { IForgetPassword } from './IForgetPassword';
 
-const ForgetPassword = () => {
+const ForgetPasswordScreen = (props : IForgetPassword) => {
+  const dispatch = useDispatch()
+
+  let { data, error } = useSelector(
+    (state: RootState) => state.forgotPasswordReducer
+  );
+
   const [email, setEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    console.log("Forget password is", data)
+    if(data !== undefined){
+      if(data){
+        props.navigation.navigate("ChangePassword",{
+          email : email
+        })
+      }
+    }
+  },[data])
+
+
+  const onForgetPassword = async () => {
+    setIsLoading(true)
+    if(emailValidation(email)){
+      showToast({type : "error", message : emailValidation(email)})
+      setIsLoading(false)
+      return
+    }
+    else{
+      let forgetReq = {
+        email : email
+      }
+      await dispatch<any>(ForgotPassword(forgetReq));
+      setIsLoading(false)
+      showToast({type : "success", message : "OTP sent on your email address"})
+    }
+  }
+
   return (
     <LinearGradient colors={['#FEEDF6', '#FCEEE5']} style={{flex: 1}}>
+      {
+        isLoading && <Loader/>
+      }
       <KeyboardAwareScrollView
         enableOnAndroid
         contentContainerStyle={{flex: 1}}
@@ -37,7 +82,7 @@ const ForgetPassword = () => {
               <View style={styles.top}>
                 <Button
                   height={normalize(45)}
-                  onPress={() => Alert.alert('Hello')}
+                  onPress={() => onForgetPassword()}
                   bgColor="#ff3f6c"
                   children={
                     <View style={styles.lgContainer}>
@@ -56,4 +101,4 @@ const ForgetPassword = () => {
   );
 };
 
-export default ForgetPassword;
+export default ForgetPasswordScreen;

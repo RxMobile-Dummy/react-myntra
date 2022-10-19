@@ -16,6 +16,15 @@ interface Props {
   platform: string;
 }
 
+export const isRegister = (payload : boolean) => {
+  return async (dispatch : Dispatch<RegisterAction>) => {
+    dispatch({
+      type : RegisterActionType.IS_REGISTER,
+      payload : payload
+    })
+  }
+}
+
 export const Register = (user : Props) => {
 
   const query = `mutation registerUserCall($fullName: String!, $email: String!, $mobileNo: String!, $gender: String!, $dob: String!, $country: String!, $password: String!, $role: String!, $isVerified: Boolean!, $fcmToken: String!, $deviceId: String!, $platform: String!) {
@@ -57,24 +66,29 @@ export const Register = (user : Props) => {
     console.log("Register called .....");
     try {
     const data = await postRequestGraphQL(query, requestData)
+    console.log("Value of response is", data)
     const response = data.registerUser
-    console.log("Value of response is", response)
+
     if(response && response.statusCode === 200){
       dispatch({
         type: RegisterActionType.REGISTER,
         payload: response.data
       });
+      return {status : true, responseData : response.data}
     }else{
       dispatch({
         type: RegisterActionType.REGISTER_FAILED,
         payload: response.message,
       });
+      return {status : false, responseData : response.data}
     }
   } catch (error) {
+    console.log("Errror is", error)
     dispatch({
       type: RegisterActionType.REGISTER_FAILED,
       payload: error,
     });
+    return {status : false, responseData : error}
   }
   };
 };

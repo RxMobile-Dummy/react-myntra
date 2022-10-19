@@ -6,5 +6,12 @@
 
     /* Completeness */
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
-  }
+  },
+  "include": [
+    "src",
+    "./node_modules/redux-persist/types"
+  ],
+  "files": [
+    "./node_modules/redux-persist/types/integration/react.d.ts"
+  ]
 }

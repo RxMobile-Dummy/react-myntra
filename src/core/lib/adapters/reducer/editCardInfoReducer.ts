@@ -13,7 +13,6 @@ const initialState = {
 };
 
 const editCardInfoReducer = (state: UserState = initialState, action: EditCardInfoAction): any => {
-  console.log("action payload:", action.payload);
   switch (action.type) {
     case EditCardInfoActionType.EDIT_CARD_INFO_SUCCESS:
       return {

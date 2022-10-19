@@ -10,10 +10,10 @@ type UserState = {
 const initialState = {
   data: undefined,
   error: undefined,
+  registerData : false
 };
 
 const registerReducer = (state: UserState = initialState, action: RegisterAction): any => {
-  console.log("action payload:", action.payload);
   switch (action.type) {
     case RegisterActionType.REGISTER:
       return {
@@ -31,6 +31,11 @@ const registerReducer = (state: UserState = initialState, action: RegisterAction
           data: action.payload,
           error: action.payload,
         };
+        case RegisterActionType.IS_REGISTER:
+          return {
+            ...state,
+            registerData : action.payload
+          };
     default:
       return state;
   }

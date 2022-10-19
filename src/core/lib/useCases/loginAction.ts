@@ -14,5 +14,10 @@ interface LoginReset {
   payload: any;
 }
 
-export type Action =  Login | LoginError | LoginReset;
+interface Logintoekn {
+  type: ActionType.LOGIN_TOKEN;
+  payload: boolean;
+}
+
+export type Action =  Login | LoginError | LoginReset | Logintoekn;
 

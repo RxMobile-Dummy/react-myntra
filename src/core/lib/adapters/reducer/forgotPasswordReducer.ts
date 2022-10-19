@@ -13,7 +13,6 @@ const initialState = {
 };
 
 const forgotPasswordReducer = (state: UserState = initialState, action: ForgotPasswordAction): any => {
-  console.log("action payload:", action.payload);
   switch (action.type) {
     case ForgotPasswordActionType.FORGOT_PASSWORD_SUCCESS:
       return {

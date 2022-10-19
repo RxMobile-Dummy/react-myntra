@@ -13,7 +13,6 @@ const initialState = {
 };
 
 const addAddressReducer = (state: UserState = initialState, action: AddAddressAction): any => {
-  console.log("action payload:", action.payload);
   switch (action.type) {
     case AddAddressActionType.ADD_ADDRESS_SUCCESS:
       return {

@@ -13,7 +13,6 @@ const initialState = {
 };
 
 const removeAddressReducer = (state: UserState = initialState, action: RemoveAddressAction): any => {
-  console.log("action payload:", action.payload);
   switch (action.type) {
     case RemoveAddressActionType.REMOVE_ADDRESS_SUCCESS:
       return {

@@ -13,7 +13,6 @@ const initialState = {
 };
 
 const getCardInfoListReducer = (state: UserState = initialState, action: GetCardInfoListAction): any => {
-  console.log("action payload:", action.payload);
   switch (action.type) {
     case GetCardInfoListActionType.GET_CARD_INFO_LIST_SUCCESS:
       return {

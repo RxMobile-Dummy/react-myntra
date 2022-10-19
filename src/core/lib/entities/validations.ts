@@ -12,6 +12,7 @@ export const nameValidation = (fieldName: string, fieldValue: string) => {
     return null;
   };
 
+
   export const emailValidation = (email: string) => {
     if (
       /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
