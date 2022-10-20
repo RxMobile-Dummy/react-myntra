@@ -5,13 +5,15 @@ import { Action } from "../../useCases/";
 type UserState = {
   loginData: any;
   error: string | undefined;
-  token : boolean
+  token: boolean,
+  user: any
 };
 
 const initialState = {
   loginData: undefined,
   error: undefined,
-  token: false
+  token: false,
+  user: {}
 };
 
 const loginReducer = (state: UserState = initialState, action: Action): any => {
@@ -33,10 +35,16 @@ const loginReducer = (state: UserState = initialState, action: Action): any => {
         loginData: action.payload,
       };
     case ActionType.LOGIN_TOKEN:
-      console.log("Value in reducers is",action.payload)
+      // console.log("Value in reducers is",action.payload)
       return {
         ...state,
-        token : action.payload
+        token: action.payload
+      };
+    case ActionType.LOGIN_USER:
+      // console.log("Value in reducers is",action.payload)
+      return {
+        ...state,
+        user: action.payload
       };
     default:
       return state;

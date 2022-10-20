@@ -21,6 +21,15 @@ export const isLoggedIn = (payload : boolean) => {
   }
 }
 
+export const userData = (payload : any) => {
+  return async (dispatch : Dispatch<Action>) => {
+    dispatch({
+      type : ActionType.LOGIN_USER,
+      payload : payload
+    })
+  }
+}
+
 export const Login = (user : Props) => {
   const query = `mutation loginUserCall($email: String!, $password: String!, $fcmToken: String!, $deviceId: String!, $role: String!) {
     loginUser(email: $email, password: $password, fcmToken: $fcmToken, deviceId: $deviceId, role: $role) {
@@ -57,8 +66,6 @@ export const Login = (user : Props) => {
     const response = data.loginUser
     console.log("Value of response is", response)
     if(response && response.statusCode === 200){
-      // let responseData = response.data
-      // const newResponse = Object.assign(responseData, {isLoginFlag: true});
       dispatch({
         type: ActionType.LOGIN,
         payload: response.data

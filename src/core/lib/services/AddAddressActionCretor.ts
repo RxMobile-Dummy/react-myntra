@@ -57,17 +57,20 @@ export const AddAddress = (address : Props) => {
         type: AddAddressActionType.ADD_ADDRESS_SUCCESS,
         payload: response.message
       });
+      return {status : true, resultData : response.data}
     }else{
       dispatch({
         type: AddAddressActionType.ADD_ADDRESS_FAILED,
         payload: response.message,
       });
+      return {status : false, resultData : response.data}
     }
   } catch (error) {
     dispatch({
       type: AddAddressActionType.ADD_ADDRESS_FAILED,
       payload: error,
     });
+    return {status : false, resultData : error}
   }
   };
 };

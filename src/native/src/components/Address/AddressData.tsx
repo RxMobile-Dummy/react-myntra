@@ -22,7 +22,7 @@ const AddressData: React.FC<Props> = ({
 }) => {
   const {
     name,
-    address,
+    billingAddress,
     locality,
     city,
     pinCode,
@@ -51,7 +51,7 @@ const AddressData: React.FC<Props> = ({
           </View>
           <Text style={[styles.title, {marginTop: 15}]}>{locality}</Text>
           <Text style={styles.title}>{`${city} - ${pinCode}`}</Text>
-          <Text style={styles.title}>{`${address} ${state}`}</Text>
+          <Text style={styles.title}>{`${billingAddress} ${state}`}</Text>
           <Text
             style={[styles.title, {marginTop: 15}]}
           >{`Mobile: ${mobileNo}`}</Text>

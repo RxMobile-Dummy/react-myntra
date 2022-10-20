@@ -56,17 +56,20 @@ export const EditAddress = (address : Props) => {
         type: EditAddressActionType.EDIT_ADDRESS_SUCCESS,
         payload: response.message
       });
+      return { status : true, resultData : response.data }
     }else{
       dispatch({
         type: EditAddressActionType.EDIT_ADDRESS_FAILED,
         payload: response.message,
       });
+      return { status : false , resultData : response.data }
     }
   } catch (error) {
     dispatch({
       type: EditAddressActionType.EDIT_ADDRESS_FAILED,
       payload: error,
     });
+    return { status : false, resultData : error }
   }
   };
 };

@@ -12,7 +12,7 @@ import {Props} from './IDrawer';
 import {ExpandableListView} from 'react-native-expandable-listview';
 import {MenuData} from '../../constants/MenuData';
 import { useDispatch, useSelector } from 'react-redux';
-import { isLoggedIn, isLogout, Login, Logout, RootState } from 'core';
+import { isLoggedIn,  Login, Logout, RootState, userData } from 'core';
 import Loader from '../../components/Loader';
 import showToast from '../../components/Toast';
 import { CommonActions, useNavigation } from '@react-navigation/native';
@@ -20,11 +20,8 @@ import  AsyncStorage  from '@react-native-async-storage/async-storage';
 
 const CustomDrawer = (props : any) => {
     const dispatch = useDispatch()
-    const navigation = useNavigation()
-    const { loginData, error, token } = useSelector((state: RootState) => state.auth);
-    const { data, registerData } = useSelector(
-      (state: RootState) => state.registerReducer
-    );
+    const { loginData, user, token} = useSelector((state: RootState) => state.auth);
+
     const [isLoading, setIsLoading] = useState(false)
 
   function handleItemClick({index}: any) {
@@ -32,9 +29,8 @@ const CustomDrawer = (props : any) => {
   }
 
   useEffect(() => {
-    const route = props.state
-    console.log("Routes", route)
-  },[])
+    console.log("user", token)
+  },[token])
 
   function handleInnerItemClick(itemData: any) {
     const {innerItemIndex, itemIndex, item} = itemData;
@@ -48,16 +44,15 @@ const CustomDrawer = (props : any) => {
   const onSignout = async () => {
     setIsLoading(true)
     let signoutParams = {
-      userId : registerData ? data._id : loginData._id,
-      authToken : registerData ? data.token : loginData.token
+      userId : user._id,
+      authToken : user.token
     }
-    console.log("Logout request", token, signoutParams)
     dispatch<any>(Logout(signoutParams)).then((result : any) => {
-      console.log("Result issssss", result)
+      console.log("Value isssssss", result)
       if(result.status){
-        console.log("Result issssss222222222", result)
         showToast({type : "success", message : "User logout successfully"})
-        dispatch<any>(isLoggedIn(true))
+        dispatch<any>(isLoggedIn(false))
+        dispatch<any>(userData({}))
         props.navigation.dispatch(
           CommonActions.reset({
             routes: [
