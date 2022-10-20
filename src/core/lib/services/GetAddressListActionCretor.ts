@@ -47,17 +47,20 @@ export const GetAddressList = (address: Props) => {
           type: GetAddressListActionType.GET_ADDRESS_LIST_SUCCESS,
           payload: response.data
         });
+        return { status : true, resultData : response.data }
       } else {
         dispatch({
           type: GetAddressListActionType.GET_ADDRESS_LIST_FAILED,
           payload: response.message,
         });
+        return { status : false, resultData : response.data }
       }
     } catch (error) {
       dispatch({
         type: GetAddressListActionType.GET_ADDRESS_LIST_FAILED,
         payload: error,
       });
+      return { status : false, resultData : error }
     }
   };
 };

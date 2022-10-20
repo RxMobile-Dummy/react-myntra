@@ -12,10 +12,9 @@ import {normalize} from '../../utils/commonStyles';
 import {Props} from './ILogin';
 import Button from '../../components/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import {emailValidation, isLoggedIn, isLogout, Login, passwordValidation, RootState} from "core"
+import {emailValidation, isLoggedIn, Login, passwordValidation, RootState, userData} from "core"
 import showToast from '../../components/Toast';
 import Loader from '../../components/Loader';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen: React.FC<Props> = props => {
   const dispatch = useDispatch()
@@ -53,18 +52,18 @@ const LoginScreen: React.FC<Props> = props => {
         role : "user"
       }
 
-     await dispatch<any>(Login(userParams)).then((result:any)=>{
+     await dispatch<any>(Login(userParams)).then((result: any)=>{
+      console.log("result", result)
       if(result.status){
         showToast({type : "success", message : "User login successfully"})
         setIsLoading(false)
-        dispatch<any>(isLoggedIn(false))
+        dispatch<any>(userData(result.data))
+        dispatch<any>(isLoggedIn(true))
         props.navigation.navigate("Dashboard")
-
-        // dispatch<any>(isLoggedIn(true))
       }
-      // else{
-      //   showToast()
-      // }
+      else{
+        setIsLoading(false)
+      }
      })
     //  console.log("", response)
 

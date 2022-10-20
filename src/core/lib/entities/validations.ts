@@ -122,3 +122,7 @@ export const nameValidation = (fieldName: string, fieldValue: string) => {
       return `Invalid Year`
     }
   };
+
+  export const isEmpty = (value : any) => {
+    return value.trim() === "";
+  }

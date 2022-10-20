@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {Colors} from '../../constants/Color';
+import { normalize } from '../../utils/commonStyles';
 
 const styles = StyleSheet.create({
   container: {
@@ -110,5 +111,13 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   bottomButtonText: {fontSize: 16, color: Colors.black, fontWeight: '400'},
+  elContainer: {
+    marginTop: normalize(10),
+    height: normalize(65),
+  },
+  elTxt: {
+    fontSize: normalize(14),
+    color: '#585757',
+  },
 });
 export default styles;

@@ -19,15 +19,6 @@ export const isLoggedIn = (payload: boolean) => {
   }
 }
 
-export const isLogout = (payload: boolean) => {
-  console.log("Is Payload logout", payload)
-  return async (dispatch: Dispatch<LogoutAction>) => {
-    dispatch({
-      type: LogoutActionType.IS_LOGOUT,
-      payload: payload
-    })
-  }
-}
 
 export const Logout = (address: Props) => {
 

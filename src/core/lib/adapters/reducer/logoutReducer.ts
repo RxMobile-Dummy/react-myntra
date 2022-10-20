@@ -30,12 +30,7 @@ const logoutReducer = (state: UserState = initialState, action: LogoutAction): a
           ...state,
           logoutData: action.payload,
           logoutError: action.payload,
-        };
-        case LogoutActionType.IS_LOGOUT:
-          return {
-            ...state,
-            logoutState : action.payload
-          };
+      };
 
     default:
       return state;

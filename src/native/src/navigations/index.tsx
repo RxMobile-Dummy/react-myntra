@@ -40,7 +40,7 @@ export default function Navigation() {
 
   console.log("Token value is", token)
 
-  if (!token) {
+  if (token) {
     return (
       <Stack.Navigator screenOptions={defaultNavOptions}>
         <Stack.Screen

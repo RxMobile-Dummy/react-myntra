@@ -25,7 +25,7 @@ import CutomButton from '../../components/Button/CutomButton';
 import { normalize } from '../../utils/commonStyles';
 import { Colors } from '../../constants/Color';
 import { useDispatch, useSelector } from 'react-redux';
-import { confirmPasswordValidation, contactNumberValidation, dobValidation, emailValidation, isLoggedIn, isLogout, isRegister, nameValidation, passwordValidation, Register, RootState } from 'core';
+import { confirmPasswordValidation, contactNumberValidation, dobValidation, emailValidation, isLoggedIn, isRegister, nameValidation, passwordValidation, Register, RootState, userData } from 'core';
 import showToast from '../../components/Toast';
 import Loader from '../../components/Loader';
 
@@ -136,7 +136,8 @@ const RegisterScreen: React.FC<Props> = ({navigation}) => {
         if(result.status){
           showToast({type : "success", message : "User Register successfully"})
           setLoading(false)
-          dispatch<any>(isLoggedIn(false))
+          dispatch<any>(userData(result.data))
+          dispatch<any>(isLoggedIn(true))
           dispatch<any>(isRegister(true))
           navigation.navigate("Dashboard")
         }
