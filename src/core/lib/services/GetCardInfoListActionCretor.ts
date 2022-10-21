@@ -41,17 +41,20 @@ export const GetCardInfoList = (address: Props) => {
           type: GetCardInfoListActionType.GET_CARD_INFO_LIST_SUCCESS,
           payload: response.data
         });
+        return {status : true, resultData : response.data}
       } else {
         dispatch({
           type: GetCardInfoListActionType.GET_CARD_INFO_LIST_FAILED,
           payload: response.message,
         });
+        return {status : false, resultData : response.message}
       }
     } catch (error) {
       dispatch({
         type: GetCardInfoListActionType.GET_CARD_INFO_LIST_FAILED,
         payload: error,
       });
+      return {status : false, resultData : error}
     }
   };
 };

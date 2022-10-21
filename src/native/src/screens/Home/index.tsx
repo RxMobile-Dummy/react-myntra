@@ -3,6 +3,8 @@ import { Text, View, TouchableOpacity, Image, FlatList, ScrollView, } from 'reac
 import { styles } from "./HomeStyle";
 import { ImageSlider } from 'react-native-image-slider-banner'
 import {  normalize } from "../../utils/commonStyles";
+import { useSelector } from "react-redux";
+import { RootState } from "core";
 
 const deals = [
     {
@@ -32,6 +34,8 @@ type ICard = {
     discount: string
 }
 
+
+
 const Card = (props: ICard) => {
     return (
         <TouchableOpacity style={styles.touch}>
@@ -49,6 +53,12 @@ const Card = (props: ICard) => {
 }
 
 const Home = () => {
+
+    const {user} = useSelector((state: RootState) => state.auth);
+
+    useEffect(() => {
+        console.log("::::::::::",user)
+    },[])
 
     const imgData: any = [
         {

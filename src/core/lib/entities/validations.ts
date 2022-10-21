@@ -101,8 +101,8 @@ export const nameValidation = (fieldName: string, fieldValue: string) => {
   export const cardNumberValidation = (input: any) => {
     if (input.trim() === "") {
       return `Card number is required`;
-    }else if (input.trim().length < 14){
-      return `Card number is invalid`
+    }else if (input.trim().length < 11 && input.trim().length > 13){
+      return `Card number contain 12 characters`
     }
   };
 
@@ -118,7 +118,7 @@ export const nameValidation = (fieldName: string, fieldValue: string) => {
   export const cardYearValidation = (input: any) => {
     if (input.trim() === "") {
       return `Year is required`;
-    }else if (input.trim().length < 4) {
+    }else if (input.trim().length < 3) {
       return `Invalid Year`
     }
   };

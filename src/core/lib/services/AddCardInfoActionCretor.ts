@@ -41,17 +41,20 @@ export const AddCardInfo = (card : Props) => {
         type: AddCardInfoActionType.ADD_CARD_INFO_SUCCESS,
         payload: response.message
       });
+      return { status : true, resultData : response.message }
     }else{
       dispatch({
         type: AddCardInfoActionType.ADD_CARD_INFO_FAILED,
         payload: response.message,
       });
+      return { status : false, resultData : response.message }
     }
   } catch (error) {
     dispatch({
       type: AddCardInfoActionType.ADD_CARD_INFO_FAILED,
       payload: error,
     });
+    return { status : false, resultData : error }
   }
   };
 };
