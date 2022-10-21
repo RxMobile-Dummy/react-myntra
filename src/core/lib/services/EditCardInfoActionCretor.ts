@@ -43,17 +43,20 @@ export const EditCardInfo = (card : Props) => {
         type: EditCardInfoActionType.EDIT_CARD_INFO_SUCCESS,
         payload: response.message
       });
+      return { status : true, resultData : response.message }
     }else{
       dispatch({
         type: EditCardInfoActionType.EDIT_CARD_INFO_SUCCESS,
         payload: response.message,
       });
+      return { status : false, resultData : response.message }
     }
   } catch (error) {
     dispatch({
       type: EditCardInfoActionType.EDIT_CARD_INFO_SUCCESS,
       payload: error,
     });
+    return { status : false, resultData : error }
   }
   };
 };

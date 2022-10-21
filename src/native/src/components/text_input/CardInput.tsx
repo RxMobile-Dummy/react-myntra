@@ -12,7 +12,7 @@ import {Colors} from '../../constants/Color';
 
 interface TextFieldProps {
   placeholder: string;
-  onTextChange: Function;
+  onTextChange: any;
   onBlur: Function;
   value: string;
   disabled?: boolean;
@@ -38,7 +38,7 @@ export const CardInputField: React.FC<TextFieldProps> = ({
       }
       mode="flat"
       onChangeText={text => onTextChange(text)}
-      onBlur={(text: any) => onBlur(text)}
+      // onBlur={(text: any) => onBlur(text)}
       value={value}
       style={[styles.textInput, containerStyle]}
       theme={{

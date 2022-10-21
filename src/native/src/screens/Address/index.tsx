@@ -285,7 +285,6 @@ const AddressScreen: React.FC<Props> = (props : any) => {
  }
 
   function removeDialog(ind: any) {
-    console.log("Index value is", ind)
     return (
       <Modal isVisible={isEditModalVisible} animationOut="fadeOutDown">
         <View style={styles.dialogStyle}>
