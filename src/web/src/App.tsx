@@ -21,6 +21,7 @@ import ProductDetails from "./pages/productdetails/ProductDetails";
 import { NotificationContainer } from "react-notifications";
 import "react-notifications/lib/notifications.css";
 import ForgetPasswordPage from "./pages/forgotpassword/ForgetPasswordPage";
+import Orders from "./pages/orders/Orders";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
           <Route path="editprofile" element={<EditProfile />} />
           <Route path="cards" element={<SavedCards />} />
           <Route path="cards/addcard/:id" element={<AddCard />} />
+          <Route path="orders" element={<Orders />} />
         </Route>
       </Routes>
       <Footer />
