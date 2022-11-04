@@ -1,0 +1,120 @@
+.order-container {
+  width: 50vw;
+  height: 80vh;
+  padding: 0rem 6rem;
+  justify-content: center;
+  flex: 1;
+  overflow: auto;
+  position: relative;
+  scrollbar-width: none; 
+  /* border: 1px solid var(--borderGray); */
+}
+
+.card-header {
+  width: inherit;
+  padding: 5px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-search {
+  width: 23vw;
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.input-group-prepend {
+  width: 17vw;
+  height: 5vh;
+  padding: 5px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: white;
+  color: rgb(136, 136, 136);
+  border: 1px solid var(--borderGray);
+  border-radius: 3px;
+}
+.filter-button {
+  padding: 7px 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: white;
+  color: rgb(99, 99, 99);
+  border: 1px solid var(--borderGray);
+  border-radius: 3px;
+}
+.order-list {
+  width: 50vw;
+  background-color: rgb(242, 242, 242);
+  border-radius: 5px;
+  padding: 20px 25px;
+  padding-left: 0px;
+  box-sizing: border-box;
+}
+
+.order-detail-box {
+  height: 40vh;
+  border-radius: 5px;
+  background-color: white;
+  padding: 1rem 1.5rem;
+  margin-bottom: 15px;
+
+}
+
+.sec1 {
+  height: 9vh;
+  display: flex;
+  align-items: center;
+}
+.delivered-icon {
+  width: 45px;
+  height: 45px;
+  background-color: black;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.delivery-status {
+  margin-left: 20px;
+}
+.icon {
+  width: 33px;
+}
+.sec2 {
+  height: 28vh;
+  background-color: rgb(242, 242, 242);
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+.sub-sec2 {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid white;
+}
+.sec2 > :nth-child(3) {
+  height: 5vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
+  color: var(--borderPink);
+  border: none;
+}
+.prdc-image {
+  width: 5vw;
+  height: 13vh;
+  overflow: hidden;
+  margin-right: 30px;
+  border-radius: 5px;
+  /* background-color: yellow; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

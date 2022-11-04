@@ -155,7 +155,7 @@ const Navbaar = () => {
                         className="dropdown-menu"
                         aria-labelledby="dropdownMenuButton"
                       >
-                        <Link className="dropdown-item" to="/orders">
+                        <Link className="dropdown-item" to="/profile/orders">
                           Orders
                         </Link>
                         <Link className="dropdown-item" to="/profile">

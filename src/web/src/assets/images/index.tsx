@@ -10,4 +10,7 @@ export const images = {
   AllPaymentImg: require("./allpaymentimage.png"),
   MyntraLogo: require("./myntra-logo.png"),
   SecureImg: require("./secure.png"),
+  DeliveredIcon: require("./delivered.png"),
+  ExchangeIcon: require("./exchange.png"),
+  BagImage: require("./bag.jpg"),
 };

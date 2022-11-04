@@ -28,7 +28,16 @@ body {
 a {
   text-decoration: none;
 }
+p{
+  font-weight: 200;
+  line-height: 10px;
+}
+h6{
+  font-weight: 600;
+  letter-spacing: .5px;
+  line-height: 30px;
 
+}
 .deals_header {
   font-weight: 500;
   font-size: 30px;
