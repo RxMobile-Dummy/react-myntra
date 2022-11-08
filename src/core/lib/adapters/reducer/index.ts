@@ -14,6 +14,7 @@ import getCardInfoListReducer from "./getCardInfoListReducer";
 import removeCardInfoReducer from "./removeCardInfoReducer";
 import editCardInfoReducer from "./editCardInfoReducer";
 import editProfileReducer from "./editProfileReducer";
+import getAllProductsReducer from "./getAllProductsReducer";
 
 const reducers = combineReducers({
   auth: authReducer,
@@ -31,6 +32,7 @@ const reducers = combineReducers({
   removeCardInfoReducer: removeCardInfoReducer,
   editCardInfoReducer: editCardInfoReducer,
   editProfileReducer: editProfileReducer,
+  getAllProductsReducer: getAllProductsReducer
 });
 
 export default reducers;
