@@ -46,7 +46,8 @@ export const GetAllProducts = (user: Props) => {
             const data = await postRequestGraphQLAuth(query, requestData, user.authToken)
             const response = data.getAllProducts
             console.log("Value of getpoducts response is", response)
-            if (response && response.statusCode === 200) {
+            if ((response && response.statusCode === 200) ||
+                response.statusCode === 201) {
                 dispatch({
                     type: GetAllProductsActionType.GET_ALL_PRODUCTS_SUCCESS,
                     payload: response.data
