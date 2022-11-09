@@ -18,7 +18,7 @@ export const GetAllProducts = (user: Props) => {
         Productname
         Returnable
         Productdetails
-        ProductImage        
+        ProductImage
         Deliverable
         Maincategory {
             _id
