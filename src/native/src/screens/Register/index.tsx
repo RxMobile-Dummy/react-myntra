@@ -235,6 +235,25 @@ const RegisterScreen: React.FC<Props> = ({navigation}) => {
                         )}
                       </View>
                     </TouchableOpacity>
+                    {/* <TouchableOpacity style={{ width: "100%", height: normalize(40), borderWidth: .6, borderColor: "#585757", borderRadius: normalize(4), marginTop: 10, justifyContent: "center", paddingLeft: normalize(10) }}>
+                      <View style={{ flexDirection: "row", alignItems: "center" }}>
+                        <CountryPicker
+                          {...{
+                            countryCode,
+                            withFilter,
+                            withFlag,
+                            withCountryNameButton,
+                            withAlphaFilter,
+                            withCallingCode,
+                            withEmoji,
+                            onSelect,
+                          }}
+                        />
+                        {country !== null && (
+                          <Text style={{ fontSize: normalize(15), }}>{country == undefined ? "India" : JSON.stringify(country?.name)}</Text>
+                        )}
+                      </View>
+                    </TouchableOpacity> */}
                     <TextInputField
                       placeholder="Mobile Number"
                       onTextChange={(mobileNo : string) => setMobileNo(mobileNo)}
@@ -288,7 +307,6 @@ const RegisterScreen: React.FC<Props> = ({navigation}) => {
           </ScrollView>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
-
       {/* <CountryPicker
         {...{
           onSelect,

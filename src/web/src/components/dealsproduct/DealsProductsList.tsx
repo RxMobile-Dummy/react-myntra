@@ -6,6 +6,7 @@ interface Props {
   products: any;
 }
 export default function DealsProductsList(props: Props) {
+ console.log("Product props::", props)
   if (props.products.length < 1) {
     return (
       <div className="container-fluid">
