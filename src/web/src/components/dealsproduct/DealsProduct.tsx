@@ -1,15 +1,15 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-// import { hostName } from "../../utils/Global";
 import "./Deals.css";
 
 interface Props {
-  product: any;
+  allproduct: any;
 }
 
 export default function DealsProduct(props: Props) {
-  const { _id: id, imgurls, productName, brand, offer } = props.product;
+  // console.log(props.allproduct);
+  const { _id: id, ProductImage, Productname, Brand, offer } = props.allproduct;
   return (
     // <div className="col-6 col-md-4 col-lg-2">
     //   <Link to={`/product/${id}`} className="card-link">
@@ -19,21 +19,21 @@ export default function DealsProduct(props: Props) {
     //           <img
     //             className="img-fluid rounded"
     //             // src={`${hostName}/${imgurls[0]}`}
-    //             src={imgurls}
-    //             alt={productName}
+    //             src="https://source.unsplash.com/user/c_v_r/180x120"
+    //             alt={Productname}
     //             width="100%"
     //           />
     //         </div>
     //       </div>
     //       <div className="text-center">
     //         <h5 className="font-weight-bold text-capitalize">
-    //           {brand.brandName}
+    //           {Brand.brandName}
     //         </h5>
     //         <span className="h5 font-weight-bold text-orange">
     //           {offer > 0 ? `${offer} % OFF` : null}
     //         </span>
     //         <div className="text-muted line-2 text-capitalize mb-2">
-    //           {productName}
+    //           {Productname}
     //         </div>
     //       </div>
     //     </div>
@@ -44,11 +44,15 @@ export default function DealsProduct(props: Props) {
       style={{ marginRight: "0.5rem " }}
     >
       <Link to={`/product/${id}`} className="card-link">
-        <img src={imgurls} className="card-img-top" alt="..." />
+        <img
+          src="https://source.unsplash.com/user/c_v_r/180x120"
+          className="card-img-top"
+          alt="..."
+        />
         <div className="card-body">
-          <p className="fw-semibold">{brand}</p>
-          <p className="text-start">{productName}.</p>
-          <p className="card-text">{offer}</p>
+          <p className="fw-semibold">{Brand.brandname}</p>
+          <p className="text-start">{Productname}.</p>
+          <p className="card-text">12</p>
         </div>
       </Link>
     </div>

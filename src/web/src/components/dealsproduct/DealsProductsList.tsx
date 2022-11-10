@@ -3,11 +3,11 @@ import DealsProduct from "./DealsProduct";
 import "./Deals.css";
 
 interface Props {
-  products: any;
+  allproducts: any[];  
 }
 export default function DealsProductsList(props: Props) {
- console.log("Product props::", props)
-  if (props.products.length < 1) {
+//  console.log("Product props::", props.allproducts)
+  if (props.allproducts.length < 1) {
     return (
       <div className="container-fluid">
         <div className="error-container my-5 text-center p-5 mx-auto">
@@ -22,8 +22,8 @@ export default function DealsProductsList(props: Props) {
   return (
     <div className="">
       <div className="card-row">
-        {props.products.map((product: any, index: number) => {
-          return <DealsProduct key={index} product={product} />;
+        {props.allproducts.map((allproduct: any, index: number) => {
+          return <DealsProduct key={index} allproduct={allproduct} />;
         })}
       </div>
     </div>
