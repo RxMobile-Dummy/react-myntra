@@ -11,7 +11,7 @@ import {
   removeUserSession,
 } from "../../utils/Storage";
 import { useNavigate } from "react-router-dom";
-import { RootState, Logout } from "core";
+import { RootState, Logout, ResetLogoutState } from "core";
 import { useDispatch, useSelector } from "react-redux";
 import { NotificationManager } from "react-notifications";
 
@@ -28,30 +28,46 @@ const Navbaar = () => {
     (state: RootState) => state.logoutReducer
   );
 
-  useEffect(() => {
-    if (logoutData) {
-      console.log("data:::us: ", logoutData);
-      removeUserSession();
-      navigate("/login");
-      window.location.reload();
-    } else if (logoutError) {
-      console.log("error:::us: ", logoutError);
-      NotificationManager.error(logoutError, "", 2000);
-    }
-  }, [logoutData, logoutError]);
+  // useEffect(() => {
+  //   if (logoutData) {
+  //     console.log("data:::us: ", logoutData);
+  //     removeUserSession();
+  //     navigate("/login");
+  //     window.location.reload();
+  //   } else if (logoutError) {
+  //     console.log("error:::us: ", logoutError);
+  //     NotificationManager.error(logoutError, "", 2000);
+  //   }
+  // }, [logoutData, logoutError]);
 
   useEffect(() => {
     if (isUserSessions()) {
       setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
     }
   });
 
-  const onLogoutPress = () => {
-    const reqData = {
-      userId: getUserId() || "",
-      authToken: getToken() || "",
-    };
-    dispatch<any>(Logout(reqData));
+  const onLogoutPress = async () => {
+    try {
+      const reqData: any = {
+        userId: localStorage.getItem("userId") || "",
+        authToken: localStorage.getItem("token") || "",
+      };
+      const logoutData2 = await dispatch<any>(Logout(reqData));
+      // console.log("logoutData:::", logoutData2);
+
+      if (logoutData2.status) {
+        navigate("/login");
+        removeUserSession();
+        window.location.reload();
+      } else if (logoutError) {
+        // console.log("error:::us: ", logoutError);
+        NotificationManager.error(logoutError, "", 2000);
+      }
+    } catch (error: any) {
+      console.log("error::", error);
+    }
   };
 
   const setNewNavExpanded = (expanded: any) => {
