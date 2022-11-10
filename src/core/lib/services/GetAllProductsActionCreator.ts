@@ -22,15 +22,23 @@ export const GetAllProducts = (user: Props) => {
       Returnable      
       Maincategory {
         _id
-        mainCategory
-      }
-      Category {
-        _id
-        Categoryname
-      }
-      Brand {
-        _id
-        brandname
+        Productname
+        Returnable
+        Productdetails
+        ProductImage
+        Deliverable
+        Maincategory {
+            _id
+            mainCategory
+          }
+        Category {
+            _id
+          Categoryname
+        }
+        Brand {
+            _id
+          brandname
+        }
       }
     }
   }
