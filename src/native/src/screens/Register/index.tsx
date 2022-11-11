@@ -136,7 +136,7 @@ const RegisterScreen: React.FC<Props> = ({navigation}) => {
         if(result.status){
           showToast({type : "success", message : "User Register successfully"})
           setLoading(false)
-          dispatch<any>(userData(result.data))
+          dispatch<any>(userData(result.responseData))
           dispatch<any>(isLoggedIn(true))
           dispatch<any>(isRegister(true))
           navigation.navigate("Dashboard")
