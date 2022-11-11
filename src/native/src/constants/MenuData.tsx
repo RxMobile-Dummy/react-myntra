@@ -82,25 +82,10 @@ export const MenuData = [
     id: '/',
     subCategory: [
       {
-        name: 'Bedsheets',
-        id: '/main-category/home&living/bedsheets',
+        name: '',
+        id: '',
       },
-      {
-        name: 'Bedding sets',
-        id: '/main-category/home&living/bedding-sets',
-      },
-      {
-        name: 'Blankets, Quilts & Dohars',
-        id: '/main-category/home&living/blankets-quits-and-dohars',
-      },
-      {
-        name: 'Bath Towels',
-        id: '/main-category/home&living/towels',
-      },
-      {
-        name: 'Carpets',
-        id: '/main-category/home&living/carpets',
-      },
+
     ],
   },
 ];

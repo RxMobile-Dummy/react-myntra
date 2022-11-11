@@ -11,47 +11,118 @@ import {
   removeUserSession,
 } from "../../utils/Storage";
 import { useNavigate } from "react-router-dom";
-import { RootState, Logout } from "core";
+import { RootState, Logout, ResetLogoutState, GetAllMainCategory } from "core";
 import { useDispatch, useSelector } from "react-redux";
 import { NotificationManager } from "react-notifications";
+import { GetCategoryListActionCreator } from "core";
 
 const Navbaar = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [mnCategory, setMnCategory] = useState([]);
   const [navExpanded, setNavExpanded] = useState(false);
   const [bagItems, setBagItems] = useState(0);
-
-  const dispatch = useDispatch();
 
   let { logoutData, logoutError } = useSelector(
     (state: RootState) => state.logoutReducer
   );
 
-  useEffect(() => {
-    if (logoutData) {
-      console.log("data:::us: ", logoutData);
-      removeUserSession();
-      navigate("/login");
-      window.location.reload();
-    } else if (logoutError) {
-      console.log("error:::us: ", logoutError);
-      NotificationManager.error(logoutError, "", 2000);
+  let { categoryList, categoryError } = useSelector(
+    (state: RootState) => state.getCategoryListReducer
+  );
+  // console.log("Category List state::", categoryList);
+
+  const allMainCategory = async () => {
+    setIsLoading(true);
+    let userRequest: any = {
+      authToken: localStorage.getItem("token"),
+    };
+    let allMainResponse = await dispatch<any>(
+      GetCategoryListActionCreator(userRequest)
+    );
+
+    if (allMainResponse.status) {
+      NotificationManager.success(
+        "Maincategory fetched successfully",
+        "",
+        2000
+      );
+      let arrayObj = allMainResponse.resultData.map((item: any) => {
+        if (item.category.length <= 0) {
+          let obj = {
+            id: item._id,
+            categoryName: item.mainCategory,
+            subCategory: item.category.concat({
+              name: "",
+              id: "",
+            }),
+          };
+          return obj;
+        } else {
+          return {
+            id: item._id,
+            categoryName: item.mainCategory,
+            subCategory: item.category.map((cur: any) => {
+              return {
+                name: cur.Categoryname,
+                id: cur._id,
+              };
+            }),
+          };
+        }
+      });
+      setMnCategory(categoryList);
+      setIsLoading(false);
     }
-  }, [logoutData, logoutError]);
+  };
+
+  useEffect(() => {
+    allMainCategory();
+  }, []);
+
+  // useEffect(() => {
+  //   if (logoutData) {
+  //     console.log("data:::us: ", logoutData);
+  //     removeUserSession();
+  //     navigate("/login");
+  //     window.location.reload();
+  //   } else if (logoutError) {
+  //     console.log("error:::us: ", logoutError);
+  //     NotificationManager.error(logoutError, "", 2000);
+  //   }
+  // }, [logoutData, logoutError]);
 
   useEffect(() => {
     if (isUserSessions()) {
       setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
     }
   });
 
-  const onLogoutPress = () => {
-    const reqData = {
-      userId: getUserId() || "",
-      authToken: getToken() || "",
-    };
-    dispatch<any>(Logout(reqData));
+  const onLogoutPress = async () => {
+    try {
+      const reqData: any = {
+        userId: localStorage.getItem("userId") || "",
+        authToken: localStorage.getItem("token") || "",
+      };
+      const logoutData2 = await dispatch<any>(Logout(reqData));
+      // console.log("logoutData:::", logoutData2);
+
+      if (logoutData2.status) {
+        navigate("/login");
+        removeUserSession();
+        window.location.reload();
+      } else if (logoutError) {
+        // console.log("error:::us: ", logoutError);
+        NotificationManager.error(logoutError, "", 2000);
+      }
+    } catch (error: any) {
+      console.log("error::", error);
+    }
   };
 
   const setNewNavExpanded = (expanded: any) => {
@@ -87,27 +158,32 @@ const Navbaar = () => {
               className="navbar-nav px-3 navbar-left-link-container"
               style={{ fontWeight: "400" }}
             >
-              {MenuData.map((menu, index) => {
+              {categoryList.map((menu, index) => {
                 return (
                   <li key={index} className="nav-item px-2">
                     <div className="nav-link" data-toggle="dropdown">
                       <div className="dropdown navbar-dropdown-container menu-dropdown">
                         <div aria-haspopup="true" aria-expanded="false">
-                          {menu.menuName}
+                          {menu.mainCategory}
                         </div>
                         <div
                           className="dropdown-menu"
                           aria-labelledby="dropdownMenuButton"
                         >
-                          {menu.subMenuList.map((subMenu, index) => {
+                          {menu.category.map((subMenu, index) => {
                             return (
                               <Link
                                 key={index}
-                                to={subMenu.link}
+                                to={
+                                  "/main-category/" +
+                                  menu.mainCategory +
+                                  "/" +
+                                  subMenu.Categoryname
+                                }
                                 className="text-capitalize dropdown-item"
                                 onClick={closeNav}
                               >
-                                {subMenu.subMenuName}
+                                {subMenu.Categoryname}
                               </Link>
                             );
                           })}

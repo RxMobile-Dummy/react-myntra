@@ -13,33 +13,8 @@ import {
 } from "../../utils/Storage";
 
 export default function LoginPage() {
-  let navigate = useNavigate();
-
-  useEffect(() => {
-    if (isUserSessions()) {
-      navigate("/");
-    }
-  });
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  let { loginData, error } = useSelector((state: RootState) => state.auth);
-
-  console.log("data:::", loginData);
-  console.log("error:::", error);
-
-  useEffect(() => {
-    if (loginData) {
-      console.log("data:::us: ", loginData);
-      setUserSession(loginData.token, loginData._id);
-      setUserData(loginData);
-      navigate("/");
-    } else if (error) {
-      console.log("error:::us: ", error);
-      NotificationManager.error(error, "", 2000);
-      dispatch<any>(ResetLoginState());
-    }
-  }, [loginData, error]);
 
   const [user, setUser] = useState({
     email: "",
@@ -48,16 +23,42 @@ export default function LoginPage() {
     deviceId: "234423423",
     role: "user",
   });
+  // console.log("data:::", loginData);
+  // console.log("error:::", error);
+
+  let { loginData, error } = useSelector((state: RootState) => state.auth);
+
+  useEffect(() => {
+    if (loginData) {
+      // console.log("data:::us: ", loginData);
+      setUserSession(loginData.token, loginData._id);
+      setUserData(loginData);
+      // navigate("/");
+    } else if (error) {
+      // console.log("error:::us: ", error);
+      NotificationManager.error(error, "", 2000);
+      dispatch<any>(ResetLoginState());
+    }
+  }, [loginData, error]);
+
+  // useEffect(() => {
+  //   if (isUserSessions()) {
+  //     navigate("/");
+  //   }
+  // });
 
   const handleChange = (event: any) => {
     event.preventDefault();
     setUser({ ...user, [event.target.name]: event.target.value });
   };
 
-  const handleSubmit = (event: any) => {
-    console.log("handleSubmit called");
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
-    dispatch<any>(Login(user));
+    const loginResponse = await dispatch<any>(Login(user));
+    console.log(loginResponse);
+    if (loginResponse.status) {
+      navigate("/");
+    }
   };
 
   return (

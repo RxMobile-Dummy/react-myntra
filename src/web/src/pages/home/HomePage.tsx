@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./HomePage.css";
 import OfferSlider from "../../components/offerslider/OfferSlider";
 import Title from "../../components/text/Title";
