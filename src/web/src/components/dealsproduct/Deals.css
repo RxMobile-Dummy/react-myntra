@@ -9,6 +9,9 @@
     border-radius: 0px;
     border-color: 0.1px solid navajowhite;
 }
+.card-img-top{
+    width: 11vw;
+}
 @media screen and (max-width: 980px){
     .card-body>*{
         font-size: 10px;
