@@ -12,25 +12,25 @@ interface Props {
   role: string;
 }
 
-export const isLoggedIn = (payload : boolean) => {
-  return async (dispatch : Dispatch<Action>) => {
+export const isLoggedIn = (payload: boolean) => {
+  return async (dispatch: Dispatch<Action>) => {
     dispatch({
-      type : ActionType.LOGIN_TOKEN,
-      payload : payload
-    })
-  }
-}
+      type: ActionType.LOGIN_TOKEN,
+      payload: payload,
+    });
+  };
+};
 
-export const userData = (payload : any) => {
-  return async (dispatch : Dispatch<Action>) => {
+export const userData = (payload: any) => {
+  return async (dispatch: Dispatch<Action>) => {
     dispatch({
-      type : ActionType.LOGIN_USER,
-      payload : payload
-    })
-  }
-}
+      type: ActionType.LOGIN_USER,
+      payload: payload,
+    });
+  };
+};
 
-export const Login = (user : Props) => {
+export const Login = (user: Props) => {
   const query = `mutation loginUserCall($email: String!, $password: String!, $fcmToken: String!, $deviceId: String!, $role: String!) {
     loginUser(email: $email, password: $password, fcmToken: $fcmToken, deviceId: $deviceId, role: $role) {
     statusCode
@@ -49,43 +49,43 @@ export const Login = (user : Props) => {
      platform
     }
     }
-  }`
+  }`;
 
   const requestData = {
-    "email": user.email,
-    "password": user.password,
-    "fcmToken": user.fcmToken,
-    "deviceId": user.deviceId,
-    "role": user.role,
-  }
+    email: user.email,
+    password: user.password,
+    fcmToken: user.fcmToken,
+    deviceId: user.deviceId,
+    role: user.role,
+  };
 
   return async (dispatch: Dispatch<Action>) => {
-    console.log("Login called .....", requestData);
+    // console.log("Login called .....", requestData);
     try {
-    const data = await postRequestGraphQL(query, requestData)
-    const response = data.loginUser
-    console.log("Value of response is", response)
-    if(response && response.statusCode === 200){
-      dispatch({
-        type: ActionType.LOGIN,
-        payload: response.data
-      });
-      return {status : true, data: response.data};
-    }else{
+      const data = await postRequestGraphQL(query, requestData);
+      const response = data.loginUser;
+      // console.log("Value of response is", response)
+      if (response && response.statusCode === 200) {
+        dispatch({
+          type: ActionType.LOGIN,
+          payload: response.data,
+        });
+        return { status: true, data: response.data };
+      } else {
+        dispatch({
+          type: ActionType.LOGIN_FAILED,
+          payload: response.message,
+        });
+        return { status: false, data: response.message };
+      }
+    } catch (error) {
       dispatch({
         type: ActionType.LOGIN_FAILED,
-        payload: response.message,
+        payload: error,
       });
-      return {status : false, data: response.message};
+      return { status: false, data: error };
     }
-  } catch (error) {
-    dispatch({
-      type: ActionType.LOGIN_FAILED,
-      payload: error,
-    });
-    return {status:false, data: error};
-  }
-};
+  };
 };
 
 export const ResetLoginState = () => {
@@ -94,5 +94,5 @@ export const ResetLoginState = () => {
       type: ActionType.LOGIN_RESET,
       payload: undefined,
     });
-  }
-}
+  };
+};

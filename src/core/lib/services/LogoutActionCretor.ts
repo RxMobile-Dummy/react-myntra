@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { LogoutActionType } from "../adapters/actionType/logoutActionTypes";
-import { ActionType } from "../adapters/actionType/loginActionTypes"
+import { ActionType } from "../adapters/actionType/loginActionTypes";
 import { LogoutAction } from "../useCases/logoutAction";
 import { postRequestGraphQLAuth } from "../network/ApiCall";
 import { Action } from "../useCases";
@@ -14,55 +14,60 @@ export const isLoggedIn = (payload: boolean) => {
   return async (dispatch: Dispatch<Action>) => {
     dispatch({
       type: ActionType.LOGIN_TOKEN,
-      payload: payload
-    })
-  }
-}
-
+      payload: payload,
+    });
+  };
+};
 
 export const Logout = (address: Props) => {
-
-  const query = `mutation logoutUserCall($userId: String!, $authToken: String!){
+  const query = `mutation LogoutUser($userId: String!, $authToken: String!) {
     logoutUser(userId: $userId, authToken: $authToken) {
-      message
       statusCode
+      message
       data {
-      token
-     }
+        _id
+        email
+        fullName
+        token
+      }
     }
-  }`
+  }`;
 
   const requestData = {
-    "userId": address.userId,
-    "authToken": address.authToken,
-  }
+    userId: address.userId,
+    authToken: address.authToken,
+  };
 
   return async (dispatch: Dispatch<LogoutAction>) => {
-    console.log("Add address called .....");
+    // console.log("Add address called .....", requestData);
     try {
-      const data = await postRequestGraphQLAuth(query, requestData, address.authToken)
-      const response = data.logoutUser
-      let responseData = response.data
+      const data = await postRequestGraphQLAuth(
+        query,
+        requestData,
+        address.authToken
+      );
+      const response = data.logoutUser;
+      let responseData = response.data;
       // const newResponse = Object.assign(responseData, {isLoginFlag: false});
       if (response && response.statusCode == 200) {
         dispatch({
           type: LogoutActionType.LOGOUT_SUCCESS,
-          payload: response.message
+          payload: response.message,
         });
-        return { status: true, data: response.data }
+        return { status: true, data: response.data };
       } else {
         dispatch({
           type: LogoutActionType.LOGOUT_FAILED,
           payload: response.message,
         });
-        return { status: false, data: response.data }
+        return { status: false, data: response.data };
       }
     } catch (error) {
       dispatch({
         type: LogoutActionType.LOGOUT_FAILED,
         payload: error,
       });
-      return { status: false, data: error }
+      return { status: false, data: error };
     }
   };
 };
@@ -73,6 +78,5 @@ export const ResetLogoutState = () => {
       type: LogoutActionType.LOGOUT_RESET,
       payload: undefined,
     });
-  }
-}
-
+  };
+};

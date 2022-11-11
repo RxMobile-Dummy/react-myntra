@@ -8,11 +8,9 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Images} from '../../assets/images';
 import {Colors} from '../../constants/Color';
-import {Props} from './IDrawer';
 import {ExpandableListView} from 'react-native-expandable-listview';
-import {MenuData} from '../../constants/MenuData';
 import { useDispatch, useSelector } from 'react-redux';
-import { isLoggedIn,  Login, Logout, RootState, userData } from 'core';
+import { GetCategoryListActionCreator, isLoggedIn, Logout, RootState, userData } from 'core';
 import Loader from '../../components/Loader';
 import showToast from '../../components/Toast';
 import { CommonActions, useNavigation } from '@react-navigation/native';
@@ -23,18 +21,57 @@ const CustomDrawer = (props : any) => {
     const { loginData, user, token} = useSelector((state: RootState) => state.auth);
 
     const [isLoading, setIsLoading] = useState(false)
+    const [mnCategory, setMnCategory] = useState([])
 
   function handleItemClick({index}: any) {
     console.log(index);
   }
 
+  const allMainCategory = async () => {
+    setIsLoading(true)
+    let userRequest = {
+      authToken : user.token
+    }
+    let allMainResponse = await dispatch<any>(GetCategoryListActionCreator(userRequest))
+    if(allMainResponse.status){
+      showToast({type : "success", message : "Main category fetch successfully"})
+     let arrayObj = allMainResponse.resultData.map((item:any) => {
+      if(item.category.length <= 0){
+        let obj = {
+          id : item._id,
+          categoryName : item.mainCategory,
+          subCategory: item.category.concat({
+            name : "",
+            id : ""
+          })
+        }
+        return obj
+      }
+      else{
+        return {
+          id : item._id,
+          categoryName : item.mainCategory,
+          subCategory: item.category.map((cur : any) => {
+            return {
+              name : cur.Categoryname,
+              id : cur._id
+            }
+          })
+        };
+      }
+      });
+      setMnCategory(arrayObj)
+      setIsLoading(false)
+    }
+  }
+
   useEffect(() => {
-    console.log("user", token)
-  },[token])
+    allMainCategory()
+  },[])
 
   function handleInnerItemClick(itemData: any) {
     const {innerItemIndex, itemIndex, item} = itemData;
-    // console.log(itemData);
+     console.log(":Item",itemData);
     console.log(innerItemIndex);
     console.log(itemIndex);
     console.log(item.subCategory[innerItemIndex].id);
@@ -48,7 +85,6 @@ const CustomDrawer = (props : any) => {
       authToken : user.token
     }
     dispatch<any>(Logout(signoutParams)).then((result : any) => {
-      console.log("Value isssssss", result)
       if(result.status){
         showToast({type : "success", message : "User logout successfully"})
         dispatch<any>(isLoggedIn(false))
@@ -77,19 +113,16 @@ const CustomDrawer = (props : any) => {
         <TouchableOpacity
           style={styles.imgBg}
           onPress={() => {
-            props.navigation.navigate('Login');
+            props.navigation.navigate('Profile');
           }}
         >
           <View>
             <Image source={Images.ProfileDummy} style={styles.profile} />
-            <Text style={styles.userName}>Login / Signup</Text>
-          </View>
-          <View>
-            <Ionicons name="chevron-forward" size={24} color="white" />
+            <Text style={styles.userName}>{user.fullName}</Text>
           </View>
         </TouchableOpacity>
         <ExpandableListView
-          data={MenuData} // required
+          data={mnCategory} // required
           onInnerItemClick={handleInnerItemClick}
           onItemClick={handleItemClick}
           itemContainerStyle={{backgroundColor: Colors.white}}
